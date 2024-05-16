@@ -101,6 +101,19 @@ public class Ladang {
         return (Produk) factory.createKartu(entity.getProduk());
     }
 
+    // Next Turn
+    public void tambahUmur() {
+        // Tambah umur semua tanaman dalam ladang
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                Entity currentEntity = this.data.getEl(i, j);
+                if (currentEntity instanceof Tanaman)
+                    currentEntity.addBobot(1);
+                this.data.setEl(i, j, currentEntity);
+            }
+        }
+    }
+
     // TESTING
     public void displayLadang() {
         for (int i = 0; i < 4; i++) {

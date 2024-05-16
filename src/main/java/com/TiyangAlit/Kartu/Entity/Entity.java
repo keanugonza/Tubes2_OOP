@@ -1,5 +1,6 @@
 package com.TiyangAlit.Kartu.Entity;
 
+import com.TiyangAlit.Factory.ItemFactory.ItemFactory;
 import com.TiyangAlit.Kartu.Kartu;
 
 import java.util.HashMap;
@@ -29,7 +30,7 @@ public abstract class Entity extends Kartu implements Harvestable, Target {
         this.effects = new HashMap<>();
         this.produk = produk;
 
-        for (String item : Kartu.listItem)
+        for (String item : ItemFactory.listItem)
             effects.put(item, 0);
     }
 
