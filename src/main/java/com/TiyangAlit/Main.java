@@ -1,5 +1,6 @@
 package com.TiyangAlit;
 
+
 import com.TiyangAlit.Factory.EntityFactory.HewanFactory.KarnivoraFactory;
 import com.TiyangAlit.Factory.KartuFactory;
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukHewanFactory;
