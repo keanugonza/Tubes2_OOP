@@ -7,4 +7,5 @@ public interface Target {
     // Getter & Setter
     HashMap<String, Integer> getEffects();
     void addEffect(String effect);
+    void reduceEffect(String effect);
 }

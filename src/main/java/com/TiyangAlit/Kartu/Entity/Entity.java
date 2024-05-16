@@ -51,6 +51,11 @@ public abstract class Entity extends Kartu implements Harvestable, Target {
         this.bobot += bobot;
         updateStatus();
     }
+    public void reduceEffect(String effect) { this.effects.put(effect, this.effects.get(effect) - 1); }
+    public void reduceBobot(int bobot) {
+        this.bobot -= bobot;
+        updateStatus();
+    }
 
     // Lain-lain
     public void updateStatus() { this.status = (this.bobot >= this.bobotHarvest); }

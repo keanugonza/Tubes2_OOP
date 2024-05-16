@@ -13,6 +13,8 @@ public interface Harvestable {
 
     void setBobot(int bobot);
     void setStatus(boolean status);
+    void addBobot(int bobot);
+    void reduceBobot(int bobot);
 
     // Lain-lain
     void updateStatus();

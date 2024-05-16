@@ -24,7 +24,7 @@ public class Player {
      */
     public Player(String nama) {
         this.nama = nama;
-        this.ladang = new Ladang();
+        this.ladang = new Ladang(this);
         this.uang = 0;
         this.deckAktif = new DeckAktif();
         this.deckPasif = new DeckPasif();
@@ -34,6 +34,8 @@ public class Player {
     public String getNama() { return this.nama; }
     public Ladang getLadang() { return this.ladang; }
     public int getUang() { return this.uang; }
+    public DeckAktif getDeckAktif() { return this.deckAktif; }
+    public DeckPasif getDeckPasif() { return this.deckPasif; }
 
     public void addUang(int amt) { this.uang += amt; }
     public void reduceUang(int amt) { this.uang -= amt; }

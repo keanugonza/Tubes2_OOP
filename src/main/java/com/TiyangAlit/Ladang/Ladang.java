@@ -12,21 +12,23 @@ import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukHewan;
 import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukTanaman;
 import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.LadangExceptions.*;
+import com.TiyangAlit.Player.Player;
 
 // TODO: Kalo tanaman udah siap panen jadiin produk
 //       Produk kena delay balikin jadi tanaman.
-//       Place item, accelerate, delay, destroy, instant harvest, langsung
 public class Ladang {
     /*
      *  ATTRIBUTES
      */
     private final Matrix<Entity> data;
+    private final Player pemilikLadang;
 
     /*
      *  ATTRIBUTES
      */
-    public Ladang() {
+    public Ladang(Player pemilikLadang) {
         this.data = new Matrix<>(4, 5);
+        this.pemilikLadang = pemilikLadang;
     }
 
     // Getter
@@ -70,8 +72,34 @@ public class Ladang {
 
     public void placeItem(int row, int col, Item item) {
         Entity entity = this.data.getEl(row, col);
-        item.apply(entity);
-        this.data.setEl(row, col, entity);
+
+        switch (item.getNama()) {
+            case "Destroy" -> {
+                // Hapus kartu dari ladang jika tidak memiliki efek protect.
+                if (entity.getEffects().get("Protect") >= 1)
+                    entity.reduceEffect("Protect");
+                else
+                    this.data.removeEl(row, col);
+            }
+            case "Instant Harvest" -> {
+                // Panen kartu
+                try {
+                    item.apply(entity);
+                    this.pemilikLadang.panen(row, col);
+                } catch (Exception ignored) { }
+            }
+            case "Delay" -> {
+                // Kurangi bobot kartu jika tidak memiliki efek protek.
+                if (entity.getEffects().get("Protect") >= 1)
+                    entity.reduceEffect("Protect");
+                else
+                    item.apply(entity);
+            }
+            default -> {
+                item.apply(entity);
+                this.data.setEl(row, col, entity);
+            }
+        }
     }
 
     public void placeProduk(int row, int col, Produk obj) throws InvalidKartuException, SalahTipeMakananException {

@@ -43,4 +43,11 @@ public abstract class Deck {
     public boolean deckContains(Kartu kartu) { return this.deck.contains(kartu); }
 
     public boolean isFull() { return this.deck.size() == this.maxSize; }
+
+    // TESTING
+    public void displayDeck() {
+        for (Kartu kartu : this.deck)
+            System.out.print(kartu.getNama() + ", ");
+        System.out.println();
+    }
 }
