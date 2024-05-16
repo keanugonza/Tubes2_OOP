@@ -2,6 +2,7 @@ package com.TiyangAlit.Player;
 
 import com.TiyangAlit.Kartu.Item.Item;
 import com.TiyangAlit.Kartu.Kartu;
+import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.Ladang;
 import com.TiyangAlit.Ladang.LadangExceptions.InvalidKartuException;
 
@@ -47,4 +48,10 @@ public class Player {
         lawan.getLadang().place(row, col, kartu);
     }
 
+    public void panen(int row, int col) throws Exception {
+        // Panen (ladang sendiri)
+        // TODO: add hasilPanen ke deck aktif (QnA no.6)
+        Produk hasilPanen = this.ladang.panen(row, col);
+        System.out.println(hasilPanen.getNama());  // Testing
+    }
 }

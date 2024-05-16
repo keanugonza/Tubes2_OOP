@@ -8,11 +8,10 @@ import com.TiyangAlit.Kartu.Entity.Entity;
 import com.TiyangAlit.Kartu.Entity.Hewan.Hewan;
 import com.TiyangAlit.Kartu.Entity.Tanaman.Tanaman;
 import com.TiyangAlit.Kartu.Kartu;
+import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukHewan;
+import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukTanaman;
 import com.TiyangAlit.Kartu.Produk.Produk;
-import com.TiyangAlit.Ladang.LadangExceptions.LadangInvalidIndexException;
-import com.TiyangAlit.Ladang.LadangExceptions.LadangSlotFullException;
-import com.TiyangAlit.Ladang.LadangExceptions.LadangSlotKosongException;
-import com.TiyangAlit.Ladang.LadangExceptions.InvalidKartuException;
+import com.TiyangAlit.Ladang.LadangExceptions.*;
 
 public class Ladang {
     /*
@@ -37,12 +36,12 @@ public class Ladang {
 
     public boolean isFullSlot(int row, int col) { return !isEmptySlot(row, col); }
 
-    public boolean isIndexValid(int row, int col) { return (row >= 0 && col >= 0 && row < 4 && col < 5); }
+    public boolean isIndexInvalid(int row, int col) { return (row < 0 || col < 0 || row >= 4 || col >= 5); }
 
     // Place
     public void place(int row, int col, Kartu obj) throws Exception {
         // Meletakkan kartu obj ke kolom (row, col) ladang.
-        if (!isIndexValid(row, col))
+        if (isIndexInvalid(row, col))
             throw new LadangInvalidIndexException("Index ("  + row + ", " + col + ") invalid.");
 
         if (obj instanceof Entity) {
@@ -79,6 +78,27 @@ public class Ladang {
 
         Hewan hewan = (Hewan) entity;
         hewan.makan(obj);
+    }
+
+    // Panen
+    public Produk panen(int row, int col) throws Exception {
+        if (isIndexInvalid(row, col))
+            throw new LadangInvalidIndexException("Index ("  + row + ", " + col + ") invalid.");
+        else if (isEmptySlot(row, col))
+            throw new LadangSlotKosongException("Index (" + row + ", " + col + ") kosong.");
+
+        Entity entity = this.data.getEl(row, col);
+        if (!entity.getStatus())
+            throw new InvalidPanenException(entity.getNama() + " belum siap panen.");
+        this.data.removeEl(row, col);
+
+        FoF fof = new FoF();
+        KartuFactory factory;
+        if (entity instanceof Hewan)
+            factory = fof.createFactory(ProdukHewan.class);
+        else
+            factory = fof.createFactory(ProdukTanaman.class);
+        return (Produk) factory.createKartu(entity.getProduk());
     }
 
     // TESTING

@@ -11,6 +11,9 @@ public class OmnivoraFactory extends EntityFactory {
     static {
         mapBobotHarvest.put("Ayam", 5);
         mapBobotHarvest.put("Beruang", 25);
+
+        mapProduk.put("Ayam", "Telur");
+        mapProduk.put("Beruang", "Daging Beruang");
     }
 
     /*
@@ -21,6 +24,6 @@ public class OmnivoraFactory extends EntityFactory {
         if (!mapBobotHarvest.containsKey(nama))
             return null;
 
-        return new Omnivora(nama, 0, mapBobotHarvest.get(nama));
+        return new Omnivora(nama, 0, mapBobotHarvest.get(nama), mapProduk.get(nama));
     }
 }

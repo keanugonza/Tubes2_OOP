@@ -12,6 +12,10 @@ public class TanamanFactory extends EntityFactory {
         mapBobotHarvest.put("Biji Jagung", 3);
         mapBobotHarvest.put("Biji Labu", 5);
         mapBobotHarvest.put("Biji Stroberi", 4);
+
+        mapProduk.put("Biji Jagung", "Jagung");
+        mapProduk.put("Biji Labu", "Labu");
+        mapProduk.put("Biji Stroberi", "Stroberi");
     }
 
     /*
@@ -22,6 +26,6 @@ public class TanamanFactory extends EntityFactory {
         if (!mapBobotHarvest.containsKey(nama))
             return null;
 
-        return new Tanaman(nama, 0, mapBobotHarvest.get(nama));
+        return new Tanaman(nama, 0, mapBobotHarvest.get(nama), mapProduk.get(nama));
     }
 }

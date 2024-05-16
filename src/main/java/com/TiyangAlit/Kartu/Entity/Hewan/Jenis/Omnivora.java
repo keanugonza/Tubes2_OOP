@@ -1,7 +1,6 @@
 package com.TiyangAlit.Kartu.Entity.Hewan.Jenis;
 
 import com.TiyangAlit.Kartu.Entity.Hewan.Hewan;
-import com.TiyangAlit.Kartu.Entity.Hewan.HewanExceptions.SalahTipeMakananException;
 import com.TiyangAlit.Kartu.Produk.Produk;
 
 public class Omnivora extends Hewan {
@@ -12,8 +11,8 @@ public class Omnivora extends Hewan {
     /*
      *   METHODS
      */
-    public Omnivora(String nama, int bobot, int bobotHarvest) {
-        super(nama, bobot, bobotHarvest);
+    public Omnivora(String nama, int bobot, int bobotHarvest, String produk) {
+        super(nama, bobot, bobotHarvest, produk);
     }
 
     // Getter & Setter

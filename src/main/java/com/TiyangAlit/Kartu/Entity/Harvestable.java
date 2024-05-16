@@ -1,18 +1,20 @@
 package com.TiyangAlit.Kartu.Entity;
 
+// Kartu yang dapat dipanen
 public interface Harvestable {
     // Bobot: Tanaman --> umur
     //        Hewan --> berat
 
     // Getter & Setter
-    public int getBobot();
-    public int getBobotHarvest();
-    public boolean getStatus();
+    int getBobot();
+    int getBobotHarvest();
+    boolean getStatus();
+    String getProduk();
 
-    public void setBobot(int bobot);
-    public void setStatus(boolean status);
+    void setBobot(int bobot);
+    void setStatus(boolean status);
 
     // Lain-lain
-    public void updateStatus();
+    void updateStatus();
 
 }

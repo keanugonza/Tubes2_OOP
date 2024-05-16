@@ -12,6 +12,10 @@ public class HerbivoraFactory extends EntityFactory {
         mapBobotHarvest.put("Sapi", 10);
         mapBobotHarvest.put("Domba", 12);
         mapBobotHarvest.put("Kuda", 14);
+
+        mapProduk.put("Sapi", "Susu");
+        mapProduk.put("Domba", "Daging Domba");
+        mapProduk.put("Kuda", "Daging Kuda");
     }
 
     /*
@@ -22,6 +26,6 @@ public class HerbivoraFactory extends EntityFactory {
         if (!mapBobotHarvest.containsKey(nama))
             return null;
 
-        return new Herbivora(nama, 0, mapBobotHarvest.get(nama));
+        return new Herbivora(nama, 0, mapBobotHarvest.get(nama), mapProduk.get(nama));
     }
 }

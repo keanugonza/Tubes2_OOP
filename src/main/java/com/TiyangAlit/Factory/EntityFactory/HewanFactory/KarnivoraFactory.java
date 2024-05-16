@@ -10,6 +10,8 @@ public class KarnivoraFactory extends EntityFactory {
      */
     static {
         mapBobotHarvest.put("Hiu Darat", 20);
+
+        mapProduk.put("Hiu Darat", "Sirip Hiu");
     }
 
     /*
@@ -20,6 +22,6 @@ public class KarnivoraFactory extends EntityFactory {
         if (!mapBobotHarvest.containsKey(nama))
             return null;
 
-        return new Karnivora(nama, 0, mapBobotHarvest.get(nama));
+        return new Karnivora(nama, 0, mapBobotHarvest.get(nama), mapProduk.get(nama));
     }
 }

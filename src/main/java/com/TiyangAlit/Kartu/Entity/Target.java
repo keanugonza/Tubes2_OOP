@@ -2,9 +2,9 @@ package com.TiyangAlit.Kartu.Entity;
 
 import java.util.HashMap;
 
+// Kartu yang dapat dikenai efek oleh Item.
 public interface Target {
     // Getter & Setter
-    public HashMap<String, Integer> getEffects();
-    public void addEffect(String effect);
-    public void removeEffect(String effect);
+    HashMap<String, Integer> getEffects();
+    void addEffect(String effect);
 }

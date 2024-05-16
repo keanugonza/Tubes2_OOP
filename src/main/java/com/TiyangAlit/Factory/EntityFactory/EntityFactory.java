@@ -9,4 +9,5 @@ public abstract class EntityFactory extends KartuFactory {
      *  ATTRIBUTES
      */
     protected final static HashMap<String, Integer> mapBobotHarvest = new HashMap<>();
+    protected final static HashMap<String, String> mapProduk = new HashMap<>();
 }

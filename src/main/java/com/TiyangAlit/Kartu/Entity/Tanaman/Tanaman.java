@@ -10,8 +10,8 @@ public class Tanaman extends Entity {
     /*
      *   METHODS
      */
-    public Tanaman(String nama, int bobot, int bobotHarvest) {
-        super(nama, bobot, bobotHarvest);
+    public Tanaman(String nama, int bobot, int bobotHarvest, String produk) {
+        super(nama, bobot, bobotHarvest, produk);
     }
 
 }

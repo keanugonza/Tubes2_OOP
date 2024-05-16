@@ -12,7 +12,6 @@ import com.TiyangAlit.Kartu.Kartu;
 public class FoF {
     // Factory of Factory
     public KartuFactory createFactory(Class<? extends Kartu> kartuClass) {
-        System.out.println(kartuClass.getName());
         return switch (kartuClass.getName()) {
             case "com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Herbivora" -> new HerbivoraFactory();
             case "com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Karnivora" -> new KarnivoraFactory();
