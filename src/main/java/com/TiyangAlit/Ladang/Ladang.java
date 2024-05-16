@@ -13,6 +13,9 @@ import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukTanaman;
 import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.LadangExceptions.*;
 
+// TODO: Kalo tanaman udah siap panen jadiin produk
+//       Produk kena delay balikin jadi tanaman.
+//       Place item, accelerate, delay, destroy, instant harvest, langsung
 public class Ladang {
     /*
      *  ATTRIBUTES

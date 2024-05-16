@@ -1,5 +1,8 @@
 package com.TiyangAlit.Player;
 
+import com.TiyangAlit.Deck.DeckExceptions.DeckFullException;
+import com.TiyangAlit.Deck.Jenis.DeckAktif;
+import com.TiyangAlit.Deck.Jenis.DeckPasif;
 import com.TiyangAlit.Kartu.Item.Item;
 import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Kartu.Produk.Produk;
@@ -13,7 +16,8 @@ public class Player {
     private final String nama;
     private int uang;
     private final Ladang ladang;
-    // TODO: Deck
+    private final DeckAktif deckAktif;
+    private final DeckPasif deckPasif;
 
     /*
      *  ATTRIBUTES
@@ -22,6 +26,8 @@ public class Player {
         this.nama = nama;
         this.ladang = new Ladang();
         this.uang = 0;
+        this.deckAktif = new DeckAktif();
+        this.deckPasif = new DeckPasif();
     }
 
     // Getter & Setter
@@ -35,7 +41,6 @@ public class Player {
     // Perintah
     public void place(int row, int col, Kartu kartu) throws Exception {
         // Letakkan kartu di ladang sendiri
-        // TODO: Throw exception kalo delay & destroy (?) tanya waktu asistensi
         ladang.place(row, col, kartu);
     }
 
@@ -49,9 +54,23 @@ public class Player {
     }
 
     public void panen(int row, int col) throws Exception {
-        // Panen (ladang sendiri)
-        // TODO: add hasilPanen ke deck aktif (QnA no.6)
+        // Lakukan panen jika terdapat slot kosong pada deck aktif
+        if (this.deckAktif.isFull())
+            throw new DeckFullException("Deck aktif sudah penuh, tidak bisa panen.");
+
         Produk hasilPanen = this.ladang.panen(row, col);
-        System.out.println(hasilPanen.getNama());  // Testing
+        this.deckAktif.addKartu(hasilPanen);
+    }
+
+    public void shuffleKartu() {
+        // TODO: Implement
+    }
+
+    public void beli() {
+        // TODO: Implement
+    }
+
+    public void jual() {
+        // TODO: Implement
     }
 }
