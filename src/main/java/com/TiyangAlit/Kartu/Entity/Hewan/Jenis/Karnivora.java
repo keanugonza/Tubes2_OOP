@@ -1,6 +1,9 @@
 package com.TiyangAlit.Kartu.Entity.Hewan.Jenis;
 
 import com.TiyangAlit.Kartu.Entity.Hewan.Hewan;
+import com.TiyangAlit.Kartu.Entity.Hewan.HewanExceptions.SalahTipeMakananException;
+import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukTanaman;
+import com.TiyangAlit.Kartu.Produk.Produk;
 
 public class Karnivora extends Hewan {
     /*
@@ -14,5 +17,13 @@ public class Karnivora extends Hewan {
         super(nama, bobot, bobotHarvest);
     }
 
-    // Getter & Setter
+    // Lain-lain
+    @Override
+    public void makan(Produk makanan) throws SalahTipeMakananException {
+        if (makanan instanceof ProdukTanaman) {
+            throw new SalahTipeMakananException("Hewan karnivora tidak dapat memakan produk tumbuhan.");
+        }
+
+        addBobot(makanan.getTambahBerat());
+    }
 }
