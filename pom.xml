@@ -24,7 +24,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>org.example.Javafx</mainClass>
+                    <mainClass>com.TiyangAlit.GUI</mainClass>
                 </configuration>
             </plugin>
             <plugin>
