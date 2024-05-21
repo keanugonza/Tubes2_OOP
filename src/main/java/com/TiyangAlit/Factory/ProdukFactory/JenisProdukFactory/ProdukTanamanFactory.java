@@ -4,6 +4,9 @@ import com.TiyangAlit.Factory.ProdukFactory.ProdukFactory;
 import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukTanaman;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class ProdukTanamanFactory extends ProdukFactory {
     /*
      *  ATTRIBUTES
@@ -26,6 +29,9 @@ public class ProdukTanamanFactory extends ProdukFactory {
         if (!mapHarga.containsKey(nama))
             return null;
 
-        return new ProdukTanaman(nama, mapHarga.get(nama), mapBerat.get(nama));
+        Path currRelativePath = Paths.get("src","main", "java", "com", "TiyangAlit", "Resources", "Assets", "Produk", nama + ".png");
+        String currAbsolutePathString = "\"" + currRelativePath.toAbsolutePath() + "\"";
+
+        return new ProdukTanaman(nama, currAbsolutePathString, mapHarga.get(nama), mapBerat.get(nama));
     }
 }

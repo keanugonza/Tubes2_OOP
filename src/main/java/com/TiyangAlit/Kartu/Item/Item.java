@@ -13,8 +13,8 @@ public class Item extends Kartu {
     /*
      *   METHODS
      */
-    public Item(String nama) {
-        super(nama);
+    public Item(String nama, String image) {
+        super(nama, image);
     }
 
     // Lain-lain

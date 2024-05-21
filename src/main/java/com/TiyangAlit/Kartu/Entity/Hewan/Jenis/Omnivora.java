@@ -11,8 +11,8 @@ public class Omnivora extends Hewan {
     /*
      *   METHODS
      */
-    public Omnivora(String nama, int bobot, int bobotHarvest, String produk) {
-        super(nama, bobot, bobotHarvest, produk);
+    public Omnivora(String nama, String image, int bobot, int bobotHarvest, String produk) {
+        super(nama, image, bobot, bobotHarvest, produk);
     }
 
     // Getter & Setter

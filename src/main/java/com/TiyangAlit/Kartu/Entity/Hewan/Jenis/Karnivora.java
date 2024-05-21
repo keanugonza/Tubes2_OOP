@@ -13,8 +13,8 @@ public class Karnivora extends Hewan {
     /*
      *   METHODS
      */
-    public Karnivora(String nama, int bobot, int bobotHarvest, String produk) {
-        super(nama, bobot, bobotHarvest, produk);
+    public Karnivora(String nama, String image, int bobot, int bobotHarvest, String produk) {
+        super(nama, image, bobot, bobotHarvest, produk);
     }
 
     // Lain-lain
