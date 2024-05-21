@@ -1,16 +1,15 @@
-package com.TiyangAlit;
+package com.TiyangAlit.GUI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Objects;
 
 
 public class GUI  extends Application{
@@ -22,14 +21,19 @@ public class GUI  extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         try{
-            InputStream fxmlUrl = new FileInputStream("src/main/java/com/TiyangAlit/GUI.fxml");
-            InputStream stream  = new FileInputStream("src/main/java/com/TiyangAlit/StardewValley.png");
+            InputStream stream  = new FileInputStream("src/main/java/com/TiyangAlit/Resources/StardewValley.png");
             Image image = new Image(stream);
             stage.getIcons().add(image);
+            stage.setTitle("Stardew Valley");
+
+            InputStream fxmlUrl = new FileInputStream("src/main/java/com/TiyangAlit/GUI/GUI.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(fxmlUrl);
-            stage.setTitle("Stardew Valley");
-            stage.setScene(new Scene(root));
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
+
+            stage.setScene(scene);
             stage.show();
         }catch (Exception e){
             throw new Exception("ERROR");

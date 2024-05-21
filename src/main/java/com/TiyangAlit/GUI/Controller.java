@@ -1,9 +1,7 @@
-package com.TiyangAlit;
+package com.TiyangAlit.GUI;
 
 import javafx.fxml.FXML;
 import javafx.scene.shape.Circle;
-
-import java.awt.event.ActionEvent;
 
 public class Controller {
 
