@@ -22,8 +22,8 @@ public abstract class Entity extends Kartu implements Harvestable, Target {
     /*
      *   METHODS
      */
-    public Entity(String nama, int bobot, int bobotHarvest, String produk) {
-        super(nama);
+    public Entity(String nama, String image, int bobot, int bobotHarvest, String produk) {
+        super(nama, image);
         this.bobotHarvest = bobotHarvest;
         this.bobot = bobot;
         this.status = (this.bobot >= this.bobotHarvest);

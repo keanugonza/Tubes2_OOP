@@ -10,7 +10,7 @@ public class ProdukTanaman extends Produk {
     /*
      *   METHODS
      */
-    public ProdukTanaman(String nama, int harga, int tambahBerat) {
-        super(nama, harga, tambahBerat);
+    public ProdukTanaman(String nama, String image, int harga, int tambahBerat) {
+        super(nama, image, harga, tambahBerat);
     }
 }

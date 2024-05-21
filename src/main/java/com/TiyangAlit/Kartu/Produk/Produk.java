@@ -12,8 +12,8 @@ public abstract class Produk extends Kartu {
     /*
      *   METHODS
      */
-    public Produk(String nama, int harga, int tambahBerat) {
-        super(nama);
+    public Produk(String nama, String image, int harga, int tambahBerat) {
+        super(nama, image);
         this.harga = harga;
         this.tambahBerat = tambahBerat;
     }

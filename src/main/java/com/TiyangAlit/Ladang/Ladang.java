@@ -14,8 +14,6 @@ import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.LadangExceptions.*;
 import com.TiyangAlit.Player.Player;
 
-// TODO: Kalo tanaman udah siap panen jadiin produk
-//       Produk kena delay balikin jadi tanaman.
 public class Ladang {
     /*
      *  ATTRIBUTES
@@ -89,7 +87,7 @@ public class Ladang {
                 } catch (Exception ignored) { }
             }
             case "Delay" -> {
-                // Kurangi bobot kartu jika tidak memiliki efek protek.
+                // Kurangi bobot kartu jika tidak memiliki efek protect.
                 if (entity.getEffects().get("Protect") >= 1)
                     entity.reduceEffect("Protect");
                 else

@@ -12,8 +12,8 @@ public abstract class Hewan extends Entity {
     /*
      *   METHODS
      */
-    public Hewan(String nama, int bobot, int bobotHarvest, String produk) {
-        super(nama, bobot, bobotHarvest, produk);
+    public Hewan(String nama, String image, int bobot, int bobotHarvest, String produk) {
+        super(nama, image, bobot, bobotHarvest, produk);
     }
 
     public abstract void makan(Produk makanan) throws SalahTipeMakananException;
