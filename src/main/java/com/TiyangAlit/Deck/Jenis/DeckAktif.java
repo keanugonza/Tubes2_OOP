@@ -1,6 +1,10 @@
 package com.TiyangAlit.Deck.Jenis;
 
+import java.util.Scanner;
 import com.TiyangAlit.Deck.Deck;
+import com.TiyangAlit.Deck.DeckExceptions.DeckFullException;
+import com.TiyangAlit.Factory.KartuFactory;
+import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukHewanFactory;
 import com.TiyangAlit.Kartu.Kartu;
 
 import java.util.ArrayList;
@@ -16,23 +20,35 @@ public class DeckAktif extends Deck {
     public DeckAktif() { super(6); }
 
     // Getter & Setter
-
-    // Lain-lain
-    public ArrayList<Kartu> shuffleKartu(DeckPasif deck) {
-        // TODO: Implement
-
-        return null;
+    public void getFromDeckPasif(DeckPasif pasif, int idx) {
+        Kartu sekopasif = pasif.getKartu(idx);
+        try {
+            this.addKartu(sekopasif);
+            pasif.removeKartu(sekopasif);
+        } catch (DeckFullException e) {
+            System.out.println("FULL NDES");
+        }
     }
 
-    public void finishShuffle(ArrayList<Kartu> kartuShuffle, DeckPasif deckPasif) {
-        // Keluarin kartu dari deck pasif &
-        // masukin kartu dari shuffleKartu ke deck aktif.
-        // Asumsi: jumlah kartu dalam deck aktif + kartu shuffle <= 6.
-        for (Kartu kartu : kartuShuffle) {
-            try {
-                deckPasif.removeKartu(kartu);
-                addKartu(kartu);
-            } catch (Exception ignored) { }
+    public void mlebuBarDikocok(DeckPasif pasif) throws Exception {
+        pasif.shuffleKartu(); //ndegbug
+        pasif.displayDeck(); // ngge ndebug
+        pasif.displayBarNgocok(); // ndebug
+        System.out.print("Pilih ndes : ");
+        try
+        {
+            Scanner maca = new Scanner(System.in);
+            int ndi = maca.nextInt();
+            if (ndi < 0 || ndi > 3) {
+                throw new Exception("Input harus antara 0-3");
+            }
+            this.getFromDeckPasif(pasif, ndi);
+            this.displayDeck();
+        }
+        catch (Exception exe)
+        {
+            System.out.println(exe);
+            return;
         }
     }
 }
