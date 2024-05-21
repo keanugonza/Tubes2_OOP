@@ -69,10 +69,10 @@ public class Player {
     }
 
     public void beli() {
-        // TODO: Implement
+        // TODO: Implement (Gonza)
     }
 
     public void jual() {
-        // TODO: Implement
+        // TODO: Implement (Gonza)
     }
 }

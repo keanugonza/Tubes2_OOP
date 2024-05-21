@@ -27,4 +27,9 @@ public abstract class Kartu {
 
         return k.getNama().equals(this.getNama());
     }
+
+    @Override
+    public int hashCode() {
+        return this.getNama().hashCode();
+    }
 }
