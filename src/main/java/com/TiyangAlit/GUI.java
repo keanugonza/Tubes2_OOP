@@ -22,7 +22,7 @@ public class GUI  extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         try{
-            InputStream fxmlUrl = new FileInputStream("src/GUI.fxml");
+            InputStream fxmlUrl = new FileInputStream("src/main/java/com/TiyangAlit/GUI.fxml");
             InputStream stream  = new FileInputStream("src/StardewValley.png");
             Image image = new Image(stream);
             stage.getIcons().add(image);
