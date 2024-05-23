@@ -8,6 +8,11 @@ import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.Ladang;
 import com.TiyangAlit.Ladang.LadangExceptions.InvalidKartuException;
+import com.TiyangAlit.Player.PlayerException.InvalidCardException;
+import com.TiyangAlit.Player.PlayerException.NotEnoughMoneyException;
+import com.TiyangAlit.Toko.Toko;
+import com.TiyangAlit.Toko.TokoException.InvalidProdukTokoException;
+import com.TiyangAlit.Toko.TokoException.NoSuchProdukOnToko;
 
 public class Player {
     /*
@@ -25,7 +30,7 @@ public class Player {
     public Player(String nama) {
         this.nama = nama;
         this.ladang = new Ladang(this);
-        this.uang = 0;
+        this.uang = 100000;
         this.deckAktif = new DeckAktif();
         this.deckPasif = new DeckPasif();
     }
@@ -68,11 +73,38 @@ public class Player {
         // TODO: Implement
     }
 
-    public void beli() {
-        // TODO: Implement (Gonza)
+    public void beli(Produk produk, Toko toko) throws Exception{
+        if(produk.getHarga() > this.uang){
+            throw new NotEnoughMoneyException("Uang Kurang");
+        }
+        try{
+            this.deckAktif.addKartu(produk);
+            toko.ambilKartu(produk);
+            this.uang -= produk.getHarga();
+        }catch (InvalidProdukTokoException e){
+            System.out.println();
+        } catch (NoSuchProdukOnToko e){
+            System.out.println("Produk tidak ada di toko");
+            this.deckAktif.removeKartu(produk);
+        } catch (DeckFullException e){
+            System.out.println("Deck penuh");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void jual() {
-        // TODO: Implement (Gonza)
+    public void jual(Kartu kartu, Toko toko) throws Exception {
+        if(kartu instanceof Produk){
+            toko.tambahKartu(kartu);
+            this.deckAktif.removeKartu(kartu);
+            this.uang += ((Produk) kartu).getHarga();
+        } else{
+            throw new InvalidCardException("Bukan Produk, tiak bisa dijual");
+        }
+    }
+
+    //TESTING
+    public void printDeckAktif(){
+        this.deckAktif.displayDeck();
     }
 }
