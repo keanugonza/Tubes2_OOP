@@ -1,29 +1,36 @@
-//package com.TiyangAlit.GUI;
-//
-//import javafx.fxml.FXML;
-//import javafx.scene.shape.Circle;
-//
-//public class Controller {
-//
-//    @FXML
-//
-//    private Circle myCircle;
-//    private double x;
-//    private double y;
-//
-//    public void down(javafx.event.ActionEvent actionEvent){
-//        myCircle.setCenterY(y+=30);
-//    }
-//
-//    public void left(javafx.event.ActionEvent actionEvent){
-//        myCircle.setCenterX(x-=30);
-//    }
-//
-//    public void right(javafx.event.ActionEvent actionEvent){
-//        myCircle.setCenterX(x+=30);
-//    }
-//
-//    public void up(javafx.event.ActionEvent actionEvent) {
-//        myCircle.setCenterY(y-=30);
-//    }
-//}
+package com.TiyangAlit.GUI;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable {
+
+    @FXML
+    public Text player1Text;
+    public  Text player2Text;
+    public  Text player1Coin;
+    public  Text player2Coin;
+    public Text turnNumber;
+    public Button nextButton;
+    public Button ladangkuButton;
+    public Button ladangLawanButton;
+    public Button tokoButton;
+    public Button saveStateButton;
+    public Button loadStateButton;
+    public Button loadPluginButton;
+    public GridPane cardGrid;
+    public GridPane activeDeck;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+//        System.out.println("Hello World");
+    }
+}

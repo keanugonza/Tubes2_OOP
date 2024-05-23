@@ -1,3 +1,6 @@
 AnchorPane{
     -fx-background-color: yellow;
+    -fx-alignment: center;
+    -fx-background-image: url("/StardewValley.png");
+    -fx-background-size: cover;
 }
