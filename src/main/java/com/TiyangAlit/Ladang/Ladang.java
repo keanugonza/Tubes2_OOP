@@ -41,6 +41,10 @@ public class Ladang {
 
     public boolean isIndexInvalid(int row, int col) { return (row < 0 || col < 0 || row >= 4 || col >= 5); }
 
+    public void remove(int row, int col){
+        this.data.removeEl(row, col);
+    }
+
     // Place
     public void place(int row, int col, Kartu obj) throws Exception {
         // Meletakkan kartu obj ke kolom (row, col) ladang.
