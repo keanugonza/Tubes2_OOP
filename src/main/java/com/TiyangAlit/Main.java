@@ -9,11 +9,14 @@ import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukHewanFactor
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Karnivora;
 import com.TiyangAlit.Kartu.Entity.Tanaman.Tanaman;
 import com.TiyangAlit.Kartu.Item.Item;
+import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukHewan;
 import com.TiyangAlit.Player.Player;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  *  CARA RUN:
@@ -72,6 +75,17 @@ public class Main {
             player1.getDeckAktif().displayDeck();
 
             player1.getLadang().displayLadang();
+
+            System.out.print("DECK AKTIV : ");
+            player1.getDeckAktif().displayDeck();
+            System.out.print("DECK PASIV : ");
+            player1.getDeckPasif().displayDeck();
+
+            List<Kartu> lisCard = new ArrayList<>();
+
+            lisCard = player1.shuffleKartu(4);
+            player1.moveFromShuffle_to_Aktif(lisCard, lisCard.get(0));
+            player1.getDeckAktif().displayDeck();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -14,6 +14,8 @@ import com.TiyangAlit.Toko.Toko;
 import com.TiyangAlit.Toko.TokoException.InvalidProdukTokoException;
 import com.TiyangAlit.Toko.TokoException.NoSuchProdukOnToko;
 
+import java.util.List;
+
 public class Player {
     /*
      *  ATTRIBUTES
@@ -58,6 +60,17 @@ public class Player {
             throw new InvalidKartuException("Hanya kartu [Destroy] dan [Delay] yang dapat diletakkan di ladang lawan.");
 
         lawan.getLadang().place(row, col, kartu);
+    }
+
+    public List<Kartu> shuffleKartu(int jumlah) {
+        List<Kartu> list = this.deckPasif.shuffleKartu();
+        return list.subList(0, jumlah);
+    }
+
+    public void moveFromShuffle_to_Aktif(List<Kartu> list, Kartu kartu) throws Exception {
+        this.deckAktif.addKartu(kartu);
+        this.deckPasif.removeKartu(kartu);
+        list.remove(kartu);
     }
 
     public void panen(int row, int col) throws Exception {

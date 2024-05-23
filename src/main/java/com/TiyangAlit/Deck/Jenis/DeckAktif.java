@@ -30,25 +30,25 @@ public class DeckAktif extends Deck {
         }
     }
 
-    public void mlebuBarDikocok(DeckPasif pasif) throws Exception {
-        pasif.shuffleKartu(); //ndegbug
-        pasif.displayDeck(); // ngge ndebug
-        pasif.displayBarNgocok(); // ndebug
-        System.out.print("Pilih ndes : ");
-        try
-        {
-            Scanner maca = new Scanner(System.in);
-            int ndi = maca.nextInt();
-            if (ndi < 0 || ndi > 3) {
-                throw new Exception("Input harus antara 0-3");
-            }
-            this.getFromDeckPasif(pasif, ndi);
-            this.displayDeck();
-        }
-        catch (Exception exe)
-        {
-            System.out.println(exe);
-            return;
-        }
-    }
+//    public void mlebuBarDikocok(DeckPasif pasif) throws Exception {
+//        pasif.shuffleKartu(); //ndegbug
+//        pasif.displayDeck(); // ngge ndebug
+////        pasif.displayBarNgocok(); // ndebug
+//        System.out.print("Pilih ndes : ");
+//        try
+//        {
+//            Scanner maca = new Scanner(System.in);
+//            int ndi = maca.nextInt();
+//            if (ndi < 0 || ndi > 3) {
+//                throw new Exception("Input harus antara 0-3");
+//            }
+//            this.getFromDeckPasif(pasif, ndi);
+//            this.displayDeck();
+//        }
+//        catch (Exception exe)
+//        {
+//            System.out.println(exe);
+//            return;
+//        }
+//    }
 }

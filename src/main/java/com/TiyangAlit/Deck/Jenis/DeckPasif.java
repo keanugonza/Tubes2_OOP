@@ -13,6 +13,7 @@ import com.TiyangAlit.Kartu.Kartu;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class DeckPasif extends Deck {
     /*
@@ -30,16 +31,17 @@ public class DeckPasif extends Deck {
     // Getter & Setter
     public Kartu getKartu(int idx) { return getDeck().get(idx); }
 
-    public void displayBarNgocok() {
-        for (int i = 0; i < 4; i++) {
-            Kartu kartu = getKartu(i);
-            System.out.println(kartu.getNama());
-        }
-    }
+//    public void displayBarNgocok() {
+//        for (int i = 0; i < 4; i++) {
+//            Kartu kartu = getKartu(i);
+//            System.out.println(kartu.getNama());
+//        }
+//    }
 
-    public void shuffleKartu() {
-        // TODO: Implement
-        Collections.shuffle(this.getDeck());
+    public List<Kartu> shuffleKartu() {
+        List<Kartu> copyDeck = new ArrayList<Kartu>(getDeck());
+        Collections.shuffle(copyDeck);
+        return copyDeck.subList(0, 4);
     }
 
     // Lain-lain
