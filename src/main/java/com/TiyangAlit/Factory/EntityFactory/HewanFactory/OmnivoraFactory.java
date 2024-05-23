@@ -4,9 +4,6 @@ import com.TiyangAlit.Factory.EntityFactory.EntityFactory;
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Omnivora;
 import com.TiyangAlit.Kartu.Kartu;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class OmnivoraFactory extends EntityFactory {
     /*
      *  ATTRIBUTES
@@ -27,8 +24,10 @@ public class OmnivoraFactory extends EntityFactory {
         if (!mapBobotHarvest.containsKey(nama))
             return null;
 
-        Path currRelativePath = Paths.get("src","main", "java", "com", "TiyangAlit", "Resources", "Assets", "Hewan", nama + ".png");
-        String currAbsolutePathString = "\"" + currRelativePath.toAbsolutePath() + "\"";
+//        Path currRelativePath = Paths.get("src","main", "java", "com", "TiyangAlit", "Resources", "Assets", "Hewan", nama + ".png");
+//        String currAbsolutePathString = "\"" + currRelativePath.toAbsolutePath() + "\"";
+
+        String currAbsolutePathString = "/Assets/Hewan/" + nama + ".png";
 
         return new Omnivora(nama, currAbsolutePathString, 0, mapBobotHarvest.get(nama), mapProduk.get(nama));
     }

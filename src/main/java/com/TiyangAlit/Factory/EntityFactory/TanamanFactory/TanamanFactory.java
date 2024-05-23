@@ -4,9 +4,6 @@ import com.TiyangAlit.Factory.EntityFactory.EntityFactory;
 import com.TiyangAlit.Kartu.Entity.Tanaman.Tanaman;
 import com.TiyangAlit.Kartu.Kartu;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class TanamanFactory extends EntityFactory {
     /*
      *  ATTRIBUTES
@@ -29,8 +26,10 @@ public class TanamanFactory extends EntityFactory {
         if (!mapBobotHarvest.containsKey(nama))
             return null;
 
-        Path currRelativePath = Paths.get("src","main", "java", "com", "TiyangAlit", "Resources", "Assets", "Tanaman", nama + ".png");
-        String currAbsolutePathString = "\"" + currRelativePath.toAbsolutePath() + "\"";
+//        Path currRelativePath = Paths.get("src","main", "java", "com", "TiyangAlit", "Resources", "Assets", "Tanaman", nama + ".png");
+//        String currAbsolutePathString = "\"" + currRelativePath.toAbsolutePath() + "\"";
+
+        String currAbsolutePathString = "/Assets/Tanaman/" + nama + ".png";
 
         return new Tanaman(nama, currAbsolutePathString, 0, mapBobotHarvest.get(nama), mapProduk.get(nama));
     }

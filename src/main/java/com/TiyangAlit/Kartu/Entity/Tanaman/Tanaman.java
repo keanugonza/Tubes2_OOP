@@ -2,9 +2,6 @@ package com.TiyangAlit.Kartu.Entity.Tanaman;
 
 import com.TiyangAlit.Kartu.Entity.Entity;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 public class Tanaman extends Entity {
     /*
      *   ATTRIBUTES
@@ -22,12 +19,15 @@ public class Tanaman extends Entity {
     public void updateStatus() {
         super.updateStatus();
 
-        Path currRelativePath;
+//        Path currRelativePath;
+        String currAbsolutePathString;
         if (this.status)
-            currRelativePath = Paths.get("GUI", "Assets", "Produk", getProduk() + ".png");
+//          currRelativePath = Paths.get("GUI", "Assets", "Produk", getProduk() + ".png");
+            currAbsolutePathString = "/Assets/Produk/" + getProduk() + ".png";
         else
-            currRelativePath = Paths.get("GUI", "Assets", "Tanaman", nama + ".png");
-        String currAbsolutePathString = "\"" + currRelativePath.toAbsolutePath() + "\"";
+//          currRelativePath = Paths.get("GUI", "Assets", "Tanaman", nama + ".png");
+            currAbsolutePathString = "/Assets/Tanaman/" + this.nama + ".png";
+//        String currAbsolutePathString = "\"" + currRelativePath.toAbsolutePath() + "\"";
         setImage(currAbsolutePathString);
     }
 }

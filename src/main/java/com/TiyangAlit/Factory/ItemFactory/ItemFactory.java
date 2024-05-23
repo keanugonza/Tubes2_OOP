@@ -4,8 +4,6 @@ import com.TiyangAlit.Factory.KartuFactory;
 import com.TiyangAlit.Kartu.Item.Item;
 import com.TiyangAlit.Kartu.Kartu;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class ItemFactory extends KartuFactory {
@@ -22,8 +20,10 @@ public class ItemFactory extends KartuFactory {
         if (!Arrays.asList(listItem).contains(nama))
             return null;
 
-        Path currRelativePath = Paths.get("src","main", "java", "com", "TiyangAlit", "Resources", "Assets", "Item", nama + ".png");
-        String currAbsolutePathString = "\"" + currRelativePath.toAbsolutePath() + "\"";
+//        Path currRelativePath = Paths.get("src","main", "java", "com", "TiyangAlit", "Resources", "Assets", "Item", nama + ".png");
+//        String currAbsolutePathString = "\"" + currRelativePath.toAbsolutePath() + "\"";
+
+        String currAbsolutePathString = "/Assets/Item/" + nama + ".png";
 
         return new Item(nama, currAbsolutePathString);
     }
