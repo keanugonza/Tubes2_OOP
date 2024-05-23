@@ -62,9 +62,16 @@ public class Player {
         lawan.getLadang().place(row, col, kartu);
     }
 
-    public List<Kartu> shuffleKartu(int jumlah) {
+    public List<Kartu> shuffleKartu(int jumlah) throws Exception{
         List<Kartu> list = this.deckPasif.shuffleKartu();
-        return list.subList(0, jumlah);
+        if (jumlah > list.size()){
+            throw new Exception("Terlalu banyak jumlahnya");
+        }
+        if (this.deckAktif.getSLotKosong() < list.size()){
+            return list.subList(0, this.deckAktif.getSLotKosong());
+        }else{
+            return list.subList(0, jumlah);
+        }
     }
 
     public void moveFromShuffle_to_Aktif(List<Kartu> list, Kartu kartu) throws Exception {
@@ -80,10 +87,6 @@ public class Player {
 
         Produk hasilPanen = this.ladang.panen(row, col);
         this.deckAktif.addKartu(hasilPanen);
-    }
-
-    public void shuffleKartu() {
-        // TODO: Implement
     }
 
     public void beli(Produk produk, Toko toko) throws Exception{

@@ -30,6 +30,10 @@ public class DeckAktif extends Deck {
         }
     }
 
+    public int getSLotKosong(){
+        return this.getMaxSize() - this.getSize();
+    }
+
 //    public void mlebuBarDikocok(DeckPasif pasif) throws Exception {
 //        pasif.shuffleKartu(); //ndegbug
 //        pasif.displayDeck(); // ngge ndebug

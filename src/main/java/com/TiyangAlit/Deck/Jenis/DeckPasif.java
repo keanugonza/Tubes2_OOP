@@ -41,7 +41,11 @@ public class DeckPasif extends Deck {
     public List<Kartu> shuffleKartu() {
         List<Kartu> copyDeck = new ArrayList<Kartu>(getDeck());
         Collections.shuffle(copyDeck);
-        return copyDeck.subList(0, 4);
+        if(getDeck().size() < 4){
+            return copyDeck.subList(0, getDeck().size());
+        } else{
+            return copyDeck.subList(0, 4);
+        }
     }
 
     // Lain-lain
