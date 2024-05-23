@@ -40,7 +40,7 @@ public class Ladang {
     public boolean isFullSlot(int row, int col) { return !isEmptySlot(row, col); }
 
     public boolean isIndexInvalid(int row, int col) { return (row < 0 || col < 0 || row >= 4 || col >= 5); }
-
+    
     public void remove(int row, int col){
         this.data.removeEl(row, col);
     }
@@ -55,12 +55,21 @@ public class Ladang {
             if (isFullSlot(row, col))
                 throw new LadangSlotFullException("Slot ladang (" + row + ", " + col + ") sudah penuh.");
 
+            int oldBobot = ((Entity) obj).getBobot();
+
             FoF fof = new FoF();
             KartuFactory factory = fof.createFactory(obj.getClass());
 
-            Entity entity = (Entity) factory.createKartu(obj.getNama());
-            if (entity != null)
+            Entity entity;
+            if (obj instanceof Tanaman)
+                entity = (Entity) factory.createKartu(((Tanaman) obj).getNameAwal());
+            else
+                entity = (Entity) factory.createKartu(obj.getNama());
+
+            if (entity != null) {
+                entity.setBobot(oldBobot);
                 this.data.setEl(row, col, entity);
+            }
         } else {
             if (isEmptySlot(row, col))
                 throw new LadangSlotKosongException("Slot ladang (" + row + ", " + col + ") kosong.");
