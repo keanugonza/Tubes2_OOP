@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TiyangAlit.GUI.Controller">
+   <children>
+      <Button fx:id="btnPlayer1" layoutX="242.0" layoutY="176.0" mnemonicParsing="false" onAction="#handlebtnPlayer1" prefHeight="48.0" prefWidth="117.0" text="PLAYER 2" />
+      <Label layoutX="269.0" layoutY="93.0" text="PLAYER 1" />
+      <Button fx:id="btnToko" layoutX="512.0" layoutY="20.0" mnemonicParsing="false" onAction="#handlebtnToko" text="TOKO" />
+   </children>
+</AnchorPane>

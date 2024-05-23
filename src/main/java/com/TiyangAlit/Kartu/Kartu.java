@@ -4,7 +4,7 @@ public abstract class Kartu {
     /*
      *   ATTRIBUTES
      */
-    protected final String nama;
+    protected String nama;
     protected String image;
 
     /*
@@ -20,6 +20,7 @@ public abstract class Kartu {
     public String getImage() { return this.image; }
 
     public void setImage(String image) { this.image = image; }
+    public void setNama(String nama) { this.nama = nama; }
 
     // Lain-lain
     @Override

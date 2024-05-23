@@ -15,9 +15,9 @@ public class Controller implements Initializable {
 
     @FXML
     public Text player1Text;
-    public  Text player2Text;
-    public  Text player1Coin;
-    public  Text player2Coin;
+    public Text player2Text;
+    public Text player1Coin;
+    public Text player2Coin;
     public Text turnNumber;
     public Button nextButton;
     public Button ladangkuButton;
