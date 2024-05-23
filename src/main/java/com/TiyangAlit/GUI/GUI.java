@@ -16,9 +16,11 @@ import com.TiyangAlit.Ladang.Ladang;
 import com.TiyangAlit.Player.Player;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -45,15 +47,14 @@ public class GUI extends Application{
             InputStream fxmlUrl = new FileInputStream("src/main/java/com/TiyangAlit/GUI/GUI.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(fxmlUrl);
-
-
+//
+//
             Scene scene = new Scene(root);
             scene.getStylesheets().add(Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm());
-
-
+//
+//
             Controller controller1 = fxmlLoader.getController();
-//            GridController.FillLadang(controller1.cardGrid,1,5);
-
+//
             Player player1 = new Player("player1");
 
             // Bikin factory
@@ -95,6 +96,8 @@ public class GUI extends Application{
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
+            Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         }catch (Exception e){
             throw new Exception("ERROR");
         }

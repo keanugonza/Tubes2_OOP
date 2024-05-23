@@ -71,8 +71,6 @@ public class GridController {
                     Entity card = ladang.getData().getEl(i, j);
                     CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, ladang, deck, card, i,j);
                     newCard.setOnMouseReleased(e -> {
-
-                        System.out.println("Ladang");
                         int[] Position = new GridController().getColRowFromPosition(GridLadang, e.getSceneX(), e.getSceneY());
                         int finalRowCount = Position[0];
                         int finalColCount = Position[1];
@@ -106,8 +104,6 @@ public class GridController {
                 CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, ladang, deck, card, i, 0);
                 GridDeck.add(newCard, i,0);
                 newCard.setOnMouseReleased(e -> {
-
-                    System.out.println("Deck");
                     int[] Position = new GridController().getColRowFromPosition(GridLadang, e.getSceneX(), e.getSceneY());
                     int finalRowCount = Position[0];
                     int finalColCount = Position[1];
