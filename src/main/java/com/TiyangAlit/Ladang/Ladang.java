@@ -31,6 +31,7 @@ public class Ladang {
 
     // Getter
     public Matrix<Entity> getData() { return this.data; }
+    public Player getPemilikLadang() { return this.pemilikLadang; }
 
     // Setter
 

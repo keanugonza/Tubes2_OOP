@@ -103,11 +103,11 @@ public class MainGUI extends Application{
             try {
                 System.out.println("helo");
                 // Player 1
-                player1.place(0, 0, hiuDarat);  // Hiu1
-                player1.place(0, 1, hiuDarat);  // Hiu2
-                player1.place(0, 2, bijiJagung);
-                player1.place(0, 3, bijiJagung);
-                player1.place(0, 4, kuda);
+                player1.place(0, 0, hiuDarat, player1.getLadang());  // Hiu1
+                player1.place(0, 1, hiuDarat, player1.getLadang());  // Hiu2
+                player1.place(0, 2, bijiJagung, player1.getLadang());
+                player1.place(0, 3, bijiJagung, player1.getLadang());
+                player1.place(0, 4, kuda, player1.getLadang());
                 player1.getDeckAktif().addKartu(acc);
                 player1.getDeckAktif().addKartu(acc);
                 player1.getDeckAktif().addKartu(acc);
@@ -116,11 +116,11 @@ public class MainGUI extends Application{
                 player1.getDeckAktif().addKartu(del);
 
                 // Player 2
-                player2.place(0, 0, hiuDarat);  // Hiu1
-                player2.place(0, 1, hiuDarat);  // Hiu2
-                player2.place(0, 2, bijiJagung);
-                player2.place(0, 3, bijiJagung);
-                player2.place(0, 4, kuda);
+                player2.place(0, 0, hiuDarat, player1.getLadang());  // Hiu1
+                player2.place(0, 1, hiuDarat, player1.getLadang());  // Hiu2
+                player2.place(0, 2, bijiJagung, player1.getLadang());
+                player2.place(0, 3, bijiJagung, player1.getLadang());
+                player2.place(0, 4, kuda, player1.getLadang());
                 player2.getDeckAktif().addKartu(acc);
                 player2.getDeckAktif().addKartu(acc);
                 player2.getDeckAktif().addKartu(acc);

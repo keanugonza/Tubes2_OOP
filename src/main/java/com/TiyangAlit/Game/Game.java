@@ -1,6 +1,7 @@
 package com.TiyangAlit.Game;
 
 import com.TiyangAlit.Player.Player;
+import com.TiyangAlit.Toko.Toko;
 
 
 import java.util.Scanner;
@@ -16,6 +17,7 @@ public class Game {
     private int currentPlayerIdx;
     private Player currentPlayer;
     private int turnCnt;
+    private Toko toko;
 
     /*
      *  ATTRIBUTES
@@ -24,6 +26,7 @@ public class Game {
         this.currentPlayerIdx = 0;
         this.currentPlayer = this.players[this.currentPlayerIdx];
         this.turnCnt = 1;
+        this.toko = new Toko();
     }
 
     // Getter & Setter
@@ -31,6 +34,7 @@ public class Game {
     public int getCurrentPlayerIdx() { return this.currentPlayerIdx; }
     public Player getCurrentPlayer() { return this.currentPlayer; }
     public int getTurnCnt() { return this.turnCnt; }
+    public Toko getToko() { return this.toko; }
 
     public void setCurrentPlayerIdx(int currentPlayerIdx) { this.currentPlayerIdx = currentPlayerIdx; }
     public void setCurrentPlayer(Player currentPlayer) { this.currentPlayer = currentPlayer; }

@@ -51,17 +51,17 @@ public class Main {
         Item trap = (Item) itemFactory.createKartu("Trap");
 
         try {
-            player1.place(0, 0, hiuDarat);  // Hiu1
-            player1.place(1, 0, hiuDarat);  // Hiu2
-            player1.place(2, 0, jagung); // Biji Jagung
+            player1.place(0, 0, hiuDarat, player1.getLadang());  // Hiu1
+            player1.place(1, 0, hiuDarat, player1.getLadang());  // Hiu2
+            player1.place(2, 0, jagung, player1.getLadang()); // Biji Jagung
 //            player1.getLadang().displayLadang();
             for (int i = 0; i < 7; i++)
-                player1.place(0, 0, susu);  // Kasih 7 susu ke Hiu1
-            player1.place(1, 0, accelerate);    // Accelerate hiu2
-            player1.place(1, 0, protect);       // Protect hiu2
-            player1.place(1, 0, destroy);       // Destroy hiu2 (gagal karena ada protect)
-            player1.place(1, 0, delay);         // Delay hiu2
-            player1.place(1, 0, trap);          // Trap hiu2
+                player1.place(0, 0, susu,player1.getLadang());  // Kasih 7 susu ke Hiu1
+            player1.place(1, 0, accelerate, player1.getLadang());    // Accelerate hiu2
+            player1.place(1, 0, protect, player1.getLadang());       // Protect hiu2
+            player1.place(1, 0, destroy, player1.getLadang());       // Destroy hiu2 (gagal karena ada protect)
+            player1.place(1, 0, delay, player1.getLadang());         // Delay hiu2
+            player1.place(1, 0, trap, player1.getLadang());          // Trap hiu2
 
             // Display the locations and details of cards in the ladang
             System.out.println(player1.getLadang().getLocationCardNameBobotItemsApplied());

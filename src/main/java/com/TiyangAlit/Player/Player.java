@@ -47,19 +47,28 @@ public class Player {
     public void addUang(int amt) { this.uang += amt; }
     public void reduceUang(int amt) { this.uang -= amt; }
 
-    // Perintah
-    public void place(int row, int col, Kartu kartu) throws Exception {
-        // Letakkan kartu di ladang sendiri
-        ladang.place(row, col, kartu);
+    // Lain-lain
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (obj == this)
+            return true;
+        if (!(obj instanceof Player p)) return false;
+
+        return p.getNama().equals(this.getNama());
     }
 
-    public void place(int row, int col, Kartu kartu, Player lawan) throws Exception {
-        // Letakkan kartu di ladang lawan
-        String nama = kartu.getNama();
-        if (!(kartu instanceof Item) || (!nama.equals("Destroy") && !nama.equals("Delay")))
-            throw new InvalidKartuException("Hanya kartu [Destroy] dan [Delay] yang dapat diletakkan di ladang lawan.");
+    // Perintah
+    public void place(int row, int col, Kartu kartu, Ladang ladang) throws Exception {
+        if (!ladang.getPemilikLadang().equals(this)) {
+            // Place di ladang musuh
+            String nama = kartu.getNama();
+            if (!(kartu instanceof Item) || (!nama.equals("Destroy") && !nama.equals("Delay")))
+                throw new InvalidKartuException("Hanya kartu [Destroy] dan [Delay] yang dapat diletakkan di ladang lawan.");
+        }
 
-        lawan.getLadang().place(row, col, kartu);
+        ladang.place(row, col, kartu);
     }
 
     public List<Kartu> shuffleKartu(int jumlah) throws Exception{
@@ -115,7 +124,7 @@ public class Player {
             this.deckAktif.removeKartu(kartu);
             this.uang += ((Produk) kartu).getHarga();
         } else{
-            throw new InvalidCardException("Bukan Produk, tiak bisa dijual");
+            throw new InvalidCardException("Bukan Produk, tidak bisa dijual");
         }
     }
 
