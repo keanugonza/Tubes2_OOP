@@ -31,4 +31,16 @@ public class Game {
     public static void setCurrentPlayerIdx(int val) { currentPlayerIdx = val; }
     public static void setCurrentPlayer(Player val) { currentPlayer = val; }
     public static void incTurnCnt() { turnCnt++; }
+
+    // Perintah
+    public static void NEXT() {
+        // Ganti giliran
+        setCurrentPlayerIdx(currentPlayerIdx == 0 ? 1 : 0);
+        setCurrentPlayer(players[currentPlayerIdx]);
+        incTurnCnt();
+
+        // Tambah umur tanaman
+        for (Player player : players)
+            player.getLadang().tambahUmur();
+    }
 }
