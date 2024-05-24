@@ -5,6 +5,7 @@ import com.TiyangAlit.Kartu.Entity.Entity;
 import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Ladang.Ladang;
 import com.TiyangAlit.Ladang.Matrix;
+import com.TiyangAlit.Toko.Toko;
 import javafx.scene.layout.GridPane;
 
 public class GridController {
@@ -132,5 +133,9 @@ public class GridController {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public static void fillToko(GridPane GridToko, Toko toko){
+
     }
 }

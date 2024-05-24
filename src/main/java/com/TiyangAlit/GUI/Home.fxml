@@ -13,11 +13,11 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TiyangAlit.GUI.Controller">
+<AnchorPane prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TiyangAlit.GUI.HomeController">
    <children>
       <Pane layoutX="14.0" layoutY="131.0" prefHeight="816.0" prefWidth="666.0">
          <children>
-            <GridPane fx:id="cardGrid" gridLinesVisible="true" hgap="5.0" layoutX="35.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="500.0" style="-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 2;" vgap="10.0">
+            <GridPane fx:id="cardGrid" hgap="5.0" layoutX="35.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="500.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-background-color: navy;" vgap="10.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -36,7 +36,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </GridPane>
-            <GridPane fx:id="activeDeck" gridLinesVisible="true" hgap="5.0" layoutX="34.0" layoutY="640.0" prefHeight="147.0" prefWidth="599.0" style="-fx-background-color: lightgray; -fx-border-color: black; -fx-border-width: 2;" vgap="10.0">
+            <GridPane fx:id="activeDeck" gridLinesVisible="true" hgap="5.0" layoutX="34.0" layoutY="640.0" prefHeight="147.0" prefWidth="599.0" style="-fx-background-color: navy;" vgap="10.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -77,13 +77,13 @@
          <font>
             <Font size="22.0" />
          </font></Text>
-      <Button fx:id="nextButton" layoutX="707.0" layoutY="57.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" text="Next" />
-      <Button fx:id="ladangkuButton" layoutX="707.0" layoutY="158.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" text="Ladangku" />
-      <Button fx:id="ladangLawanButton" layoutX="708.0" layoutY="218.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" text="Ladang Lawan" />
-      <Button fx:id="tokoButton" layoutX="707.0" layoutY="278.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" text="Toko" />
-      <Button fx:id="saveStateButton" layoutX="707.0" layoutY="338.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" text="Save State" />
-      <Button fx:id="loadStateButton" layoutX="710.0" layoutY="398.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="136.0" text="Load State" />
-      <Button fx:id="loadPluginButton" layoutX="709.0" layoutY="458.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="136.0" text="Load Plugin" />
+      <Button fx:id="nextButton" layoutX="680.0" layoutY="54.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Next" textAlignment="CENTER" />
+      <Button fx:id="ladangkuButton" layoutX="680.0" layoutY="162.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Ladangku" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="ladangLawanButton" layoutX="666.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="198.0" text="Ladang Lawan" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="tokoButton" layoutX="680.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#ToShop" prefHeight="40.0" prefWidth="170.0" text="Toko" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="saveStateButton" layoutX="680.0" layoutY="402.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Save State" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="loadStateButton" layoutX="680.0" layoutY="482.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Load State" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="loadPluginButton" layoutX="680.0" layoutY="562.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Load Plugin" textAlignment="CENTER" wrapText="true" />
       <Pane layoutX="718.0" layoutY="800.0" prefHeight="76.0" prefWidth="116.0" style="-fx-background-color: lightgray;">
          <children>
             <TextFlow layoutX="2.0" layoutY="14.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: lightgray;" textAlignment="CENTER">

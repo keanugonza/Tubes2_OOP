@@ -4,3 +4,39 @@ AnchorPane{
     -fx-background-image: url("/StardewValley.png");
     -fx-background-size: cover;
 }
+
+GridPane{
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+activeDeck{
+    -fx-background-color: rgba(0,0,0);
+}
+
+Text{
+    -fx-font-family: "Arcade Classic";
+    -fx-font-size: 14;
+    -fx-text-fill: yellow;
+}
+
+Button {
+    -fx-font-family: "Arcade Classic";
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-width: 4;
+    -fx-font-size: 16;
+    -fx-fill-width: true;
+    -fx-fit-to-width: true;
+    -fx-border-color: skyblue;
+}
+
+CardComponent{
+    --block-text-color: white;
+    -fx-border-color: black;
+    -fx-background-color: skyblue;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-font-size: 14;
+    -fx-font-family: "Arcade Classic";
+}

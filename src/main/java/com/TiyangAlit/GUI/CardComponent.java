@@ -5,7 +5,6 @@ import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Ladang.Ladang;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.ImageView;
@@ -15,9 +14,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.util.Objects;
 
@@ -41,24 +38,23 @@ public class CardComponent extends AnchorPane {
 
         this.prefHeight(80);
         this.prefWidth(66);
-        this.setStyle("-fx-border-color: black; -fx-border-radius: 15; -fx-background-color: lightgray; -fx-background-radius: 15;");
         this.maxHeight(80);
         this.maxWidth(66);
 
         this.imageURL = imageURL;
         this.image = new ImageView(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(imageURL))));
-        this.image.setFitHeight(80);
-        this.image.setFitWidth(80);
-        this.image.setLayoutX(5);
+        this.image.setFitHeight(70);
+        this.image.setFitWidth(70);
+        this.image.setLayoutX(12);
         this.image.setLayoutY(10);
         this.getChildren().add(this.image);
 
 
         this.text =  new Text(description);
-        this.text.setLayoutX(15);
-        this.text.setLayoutY(105);
+        this.text.setLayoutX(4);
+        this.text.setLayoutY(95);
         this.text.setTextAlignment(TextAlignment.valueOf("CENTER"));
-        this.text.setWrappingWidth(65);
+        this.text.setWrappingWidth(82);
         this.getChildren().add(this.text);
 
         this.setOnMousePressed(e ->{

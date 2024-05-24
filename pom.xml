@@ -29,7 +29,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.TiyangAlit.GUI.GUI</mainClass>
+                    <mainClass>com.TiyangAlit.GUI.MainGUI</mainClass>
                 </configuration>
             </plugin>
             <plugin>
