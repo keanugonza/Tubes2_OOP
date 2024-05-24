@@ -59,4 +59,20 @@ public abstract class Entity extends Kartu implements Harvestable, Target {
 
     // Lain-lain
     public void updateStatus() { this.status = (this.bobot >= this.bobotHarvest); }
+
+    // Method to display and count all effects applied to the entity
+    public String displayAndCountEffects() {
+        StringBuilder effectsDisplay = new StringBuilder();
+        int count = 0;
+        for (HashMap.Entry<String, Integer> entry : this.effects.entrySet()) {
+            int value = entry.getValue();
+            if (value > 0) {
+                count += value;
+                for (int i = 0; i < value; i++) {
+                    effectsDisplay.append(entry.getKey()).append(" ");
+                }
+            }
+        }
+        return count + " " + effectsDisplay.toString().trim().toUpperCase();
+    }
 }

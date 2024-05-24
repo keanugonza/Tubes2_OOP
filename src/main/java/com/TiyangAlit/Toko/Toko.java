@@ -11,6 +11,7 @@ import com.TiyangAlit.Toko.TokoException.InvalidProdukTokoException;
 import com.TiyangAlit.Toko.TokoException.NoSuchProdukOnToko;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Toko {
     private final HashMap<Produk, Integer> mapData;
@@ -41,11 +42,24 @@ public class Toko {
         this.mapData.put(Jagung, 0);
         this.mapData.put(Labu, 0);
         this.mapData.put(Stroberi, 0);
-
     }
 
     public HashMap<Produk, Integer> getData() {
         return mapData;
+    }
+
+    public int getSize() {
+        return getData().size();
+    }
+
+    public int getLength() {
+        int count = 0;
+        for (Map.Entry<Produk, Integer> entry : mapData.entrySet()) {
+            if (entry.getValue() > 0) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public void tambahKartu(Kartu kartu) throws Exception {

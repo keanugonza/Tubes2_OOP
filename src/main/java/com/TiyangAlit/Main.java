@@ -6,18 +6,20 @@ import com.TiyangAlit.Factory.EntityFactory.TanamanFactory.TanamanFactory;
 import com.TiyangAlit.Factory.ItemFactory.ItemFactory;
 import com.TiyangAlit.Factory.KartuFactory;
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukHewanFactory;
+import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukTanamanFactory;
+import com.TiyangAlit.Game.Game;
+import com.TiyangAlit.Game.Simpan;
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Karnivora;
 import com.TiyangAlit.Kartu.Entity.Tanaman.Tanaman;
 import com.TiyangAlit.Kartu.Item.Item;
-import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukHewan;
+import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukTanaman;
+import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Player.Player;
+import com.TiyangAlit.Toko.Toko;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.io.File;
+import java.io.FileWriter;
 /*
  *  CARA RUN:
  *  - mvn clean package
@@ -27,15 +29,18 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Player player1 = new Player("player1");
+        Player player2 = new Player("player2");
 
         // Bikin factory
         KartuFactory produkHewanFactory = new ProdukHewanFactory();
+        KartuFactory produkTanamanFactory = new ProdukTanamanFactory();
         KartuFactory karnivoraFactory = new KarnivoraFactory();
         KartuFactory itemFactory = new ItemFactory();
         KartuFactory tanamanFactory = new TanamanFactory();
 
         // Bikin kartu
         ProdukHewan susu = (ProdukHewan) produkHewanFactory.createKartu("Susu");
+        Produk DagingDomba = (ProdukHewan) produkHewanFactory.createKartu("Daging Domba");
         Karnivora hiuDarat = (Karnivora) karnivoraFactory.createKartu("Hiu Darat");
         Tanaman jagung = (Tanaman) tanamanFactory.createKartu("Biji Jagung");
         Item accelerate = (Item) itemFactory.createKartu("Accelerate");
@@ -49,7 +54,7 @@ public class Main {
             player1.place(0, 0, hiuDarat);  // Hiu1
             player1.place(1, 0, hiuDarat);  // Hiu2
             player1.place(2, 0, jagung); // Biji Jagung
-            player1.getLadang().displayLadang();
+//            player1.getLadang().displayLadang();
             for (int i = 0; i < 7; i++)
                 player1.place(0, 0, susu);  // Kasih 7 susu ke Hiu1
             player1.place(1, 0, accelerate);    // Accelerate hiu2
@@ -58,39 +63,47 @@ public class Main {
             player1.place(1, 0, delay);         // Delay hiu2
             player1.place(1, 0, trap);          // Trap hiu2
 
-            System.out.println("Asset Jagung: " + player1.getLadang().getData().getEl(2, 0).getImage());
-            for (int i = 0; i < 7; i++)
-                player1.place(2, 0, accelerate); // Accelerate jagung 7 kali
-            System.out.println("Asset Jagung: " + player1.getLadang().getData().getEl(2, 0).getImage());
+            // Display the locations and details of cards in the ladang
+            System.out.println(player1.getLadang().getLocationCardNameBobotItemsApplied());
 
-            System.out.println("Berat Hiu1: " + player1.getLadang().getData().getEl(0, 0).getBobot());
-            System.out.println("Berat Hiu1: " + player1.getLadang().getData().getEl(0, 0).getBobot());
-            System.out.println("Efek Hiu2: " + player1.getLadang().getData().getEl(1, 0).getEffects());
-            System.out.println("Asset Hiu2: " + player1.getLadang().getData().getEl(1, 0).getImage());
+//          SIMPAN MUAT BROOOOOOOO
+            File myObj = new File("bojonem.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
 
-            player1.panen(0,0); // Panen Hiu1
+            File mbahe = new File("mbahem.txt");
+            if (mbahe.createNewFile()) {
+                System.out.println("File created: " + mbahe.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
 
-            player1.getDeckAktif().displayDeck();
-            player1.place(1, 0, instantHarvest); // Panen Hiu2
-            player1.getDeckAktif().displayDeck();
+            Game game = new Game();
 
-            player1.getLadang().displayLadang();
+            Toko toko = new Toko();
+            toko.tambahKartu(susu);
+            toko.tambahKartu(susu);
+            toko.tambahKartu(DagingDomba);
+            toko.tambahKartu(DagingDomba);
+            toko.tambahKartu(DagingDomba);
+            toko.tambahKartu(DagingDomba);
 
-            System.out.print("DECK AKTIV : ");
-            player1.getDeckAktif().displayDeck();
-            System.out.print("DECK PASIV : ");
-            player1.getDeckPasif().displayDeck();
+            Simpan.saveGameState(game, toko, "bojonem.txt");
+            toko.printMapData();
 
-            List<Kartu> lisCard = new ArrayList<>();
+            player1.getDeckAktif().addKartu(susu);
+            player1.getDeckAktif().addKartu(hiuDarat);
+            player1.getDeckAktif().addKartu(susu);
+            player1.getDeckAktif().addKartu(hiuDarat);
+            System.out.println(player1.getDeckAktif().getLocationAndCardName());
 
-            lisCard = player1.shuffleKartu(4);
-            player1.moveFromShuffle_to_Aktif(lisCard, lisCard.get(0));
-            player1.getDeckAktif().displayDeck();
+            Simpan.savePlayer(player1,"mbahem.txt");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        Path currRelativePath = Paths.get("");
-//        String currAbsolutePathString = currRelativePath.toAbsolutePath().toString();
-//        System.out.println("Current absolute path is - " + currAbsolutePathString);
     }
 }

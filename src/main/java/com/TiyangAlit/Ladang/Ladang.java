@@ -143,6 +143,19 @@ public class Ladang {
         return (Produk) factory.createKartu(entity.getProduk());
     }
 
+    public int getJumlahKartu() {
+        int count = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (this.data.getEl(i, j) != null) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+
     // Next Turn
     public void tambahUmur() {
         // Tambah umur semua tanaman dalam ladang
@@ -154,6 +167,30 @@ public class Ladang {
                 this.data.setEl(i, j, currentEntity);
             }
         }
+    }
+
+    // Output lokasi_kartu and kartu in ladang
+    public String getLocationCardNameBobotItemsApplied() {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                Entity currentEntity = this.data.getEl(i, j);
+                if (currentEntity != null) {
+                    char row = (char) ('A' + i);
+                    String location = row + String.format("%02d", j + 1);
+                    String effectsDisplay = currentEntity.displayAndCountEffects();
+                    result.append(location)
+                            .append(" ")
+                            .append(currentEntity.getNama())
+                            .append(" ")
+                            .append(currentEntity.getBobot())
+                            .append(" ")
+                            .append(effectsDisplay)
+                            .append("\n");
+                }
+            }
+        }
+        return result.toString();
     }
 
     // TESTING

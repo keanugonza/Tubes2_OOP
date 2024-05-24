@@ -6,6 +6,9 @@ import com.TiyangAlit.Factory.KartuFactory;
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukHewanFactory;
 import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukHewan;
 
+import java.io.File;
+import java.io.FileWriter;
+
 public class Test_Toko {
     public static void main(String[] args) {
         // Bikin factory
@@ -24,6 +27,9 @@ public class Test_Toko {
             toko.ambilKartu(susu);
             System.out.println("========================");
             toko.printMapData();
+
+            File file = new File("D:\\OneDrive - Institut Teknologi Bandung\\COLLEGE\\SEMESTER 4\\Pemrograman Berorientasi Objek\\Tubes\\Tubes2\\Tubes2_OOP\\src\\main\\java\\com\\TiyangAlit\\Game\\bapakmu.txt");
+            FileWriter fw = new FileWriter(file);
         } catch (Exception e) {
             e.printStackTrace();
         }
