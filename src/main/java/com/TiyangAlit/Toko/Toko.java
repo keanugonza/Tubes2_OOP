@@ -62,6 +62,15 @@ public class Toko {
         return count;
     }
 
+    public int getJumlah(Kartu kartu) {
+        for (Map.Entry<Produk, Integer> entry : mapData.entrySet()) {
+            if (entry.getKey().equals(kartu)) {
+                return entry.getValue();
+            }
+        }
+        return 0;
+    }
+
     public void tambahKartu(Kartu kartu) throws Exception {
         if (kartu instanceof Produk produk) {
             Integer currentCount = mapData.get(produk);
