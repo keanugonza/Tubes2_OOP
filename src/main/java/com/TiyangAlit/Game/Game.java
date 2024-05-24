@@ -21,14 +21,14 @@ public class Game {
      */
 
     // Getter & Setter
-    public Player[] getPlayers() { return players; }
-    public int getCurrentPlayerIdx() { return currentPlayerIdx; }
-    public Player getCurrentPlayer() { return currentPlayer; }
-    public Player getEnemyPlayer() { return (players[currentPlayerIdx == 0 ? 1 : 0]); }
-    public int getTurnCnt() { return turnCnt; }
-    public Toko getToko() { return toko; }
+    public static Player[] getPlayers() { return players; }
+    public static int getCurrentPlayerIdx() { return currentPlayerIdx; }
+    public static Player getCurrentPlayer() { return currentPlayer; }
+    public static Player getEnemyPlayer() { return (players[currentPlayerIdx == 0 ? 1 : 0]); }
+    public static int getTurnCnt() { return turnCnt; }
+    public static Toko getToko() { return toko; }
 
-    public void setCurrentPlayerIdx(int val) { currentPlayerIdx = val; }
-    public void setCurrentPlayer(Player val) { currentPlayer = val; }
-    public void incTurnCnt() { turnCnt++; }
+    public static void setCurrentPlayerIdx(int val) { currentPlayerIdx = val; }
+    public static void setCurrentPlayer(Player val) { currentPlayer = val; }
+    public static void incTurnCnt() { turnCnt++; }
 }
