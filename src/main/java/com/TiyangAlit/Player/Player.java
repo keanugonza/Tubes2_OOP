@@ -47,6 +47,10 @@ public class Player {
     public void addUang(int amt) { this.uang += amt; }
     public void reduceUang(int amt) { this.uang -= amt; }
 
+    public void setUang(int amt) {
+        this.uang = amt;
+    }
+
     // Lain-lain
     @Override
     public boolean equals(Object obj) {

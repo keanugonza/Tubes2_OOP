@@ -27,6 +27,10 @@ public abstract class Deck {
     public int getMaxSize() { return this.maxSize; }
     public int getSize() { return this.deck.size(); }
 
+    public void setSize(int size) {
+//        this.getSize() = size;
+    }
+
     public void addKartu(Kartu kartu) throws DeckFullException {
         if (this.deck.size() == this.maxSize)
             throw new DeckFullException("Deck sudah penuh.");

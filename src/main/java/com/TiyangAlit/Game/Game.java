@@ -27,6 +27,9 @@ public class Game {
     public static Player getEnemyPlayer() { return (players[currentPlayerIdx == 0 ? 1 : 0]); }
     public static int getTurnCnt() { return turnCnt; }
     public static Toko getToko() { return toko; }
+    public static void setTurnCnt(int count) {
+        turnCnt = count;
+    }
 
     public static void setCurrentPlayerIdx(int val) { currentPlayerIdx = val; }
     public static void setCurrentPlayer(Player val) { currentPlayer = val; }

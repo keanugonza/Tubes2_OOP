@@ -31,6 +31,10 @@ public class DeckPasif extends Deck {
     // Getter & Setter
     public Kartu getKartu(int idx) { return getDeck().get(idx); }
 
+    public void setDeckRandomly() {
+
+    }
+
 //    public void displayBarNgocok() {
 //        for (int i = 0; i < 4; i++) {
 //            Kartu kartu = getKartu(i);

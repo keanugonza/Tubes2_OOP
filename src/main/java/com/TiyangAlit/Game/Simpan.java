@@ -1,5 +1,7 @@
 package com.TiyangAlit.Game;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
@@ -21,10 +23,11 @@ public class Simpan {
         return this.FILE_NAME;
     }
 
-    public static void saveGameState(Game game, Toko toko, String FILE_NAME) {
+    public static void saveGameState(String FILE_NAME) {
         try {
+            Toko toko = Game.getToko();
             FileWriter fileWriter = new FileWriter(FILE_NAME);
-            int turnCount = game.getTurnCnt();
+            int turnCount = Game.getTurnCnt();
             fileWriter.write(String.valueOf(turnCount) + "\n");
             System.out.println("Turn count saved to " + FILE_NAME);
             System.out.println("Piro : " + turnCount);
@@ -45,11 +48,12 @@ public class Simpan {
         }
     }
 
-    public static void savePlayer(Player player, String FILE_NAME) {
+    public static void savePlayer(String FILE_NAME) {
         try {
+            Player player = Game.getCurrentPlayer();
             FileWriter fileWriter = new FileWriter(FILE_NAME);
             fileWriter.write(player.getUang() + "\n");
-            fileWriter.write(player.getDeckAktif().getKartuCount() + player.getDeckPasif().getKartuCount() + "\n");
+            fileWriter.write(player.getDeckPasif().getKartuCount() + "\n");
             fileWriter.write(player.getDeckAktif().getKartuCount() + "\n");
 
             StringBuilder result = new StringBuilder();
@@ -73,6 +77,7 @@ public class Simpan {
             e.printStackTrace();
         }
     }
+
 
 
 }
