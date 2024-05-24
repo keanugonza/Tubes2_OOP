@@ -1,13 +1,12 @@
 package com.TiyangAlit.GUI;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,7 +17,7 @@ public class SceneController {
     static Stage stage;
     static Scene scene;
 
-    public static void SwitchToShop(Event event) throws IOException {
+    public static void SwitchToShop(javafx.scene.input.MouseEvent event) throws IOException {
         InputStream shopPageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shop.fxml");
         FXMLLoader shopPageLoader = new FXMLLoader();
         root = shopPageLoader.load(shopPageFxml);
@@ -29,7 +28,7 @@ public class SceneController {
         stage.show();
     }
 
-    public static void SwitchToHome(ActionEvent event) throws IOException {
+    public static void SwitchToHome(javafx.scene.input.MouseEvent event) throws IOException {
         InputStream homePageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Home.fxml");
         FXMLLoader homePageLoader = new FXMLLoader();
         root = homePageLoader.load(homePageFxml);
@@ -43,7 +42,7 @@ public class SceneController {
         GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladang, MainGUI.deck);
     }
 
-    public static void SwitchToEnemyField(ActionEvent event) throws IOException {
+    public static void SwitchToEnemyField(javafx.scene.input.MouseEvent event) throws IOException {
         InputStream enemyFieldFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/EnemyField.fxml");
         FXMLLoader enemyFieldLoader = new FXMLLoader();
         root = enemyFieldLoader.load(enemyFieldFxml);

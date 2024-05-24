@@ -79,7 +79,7 @@
          </font></Text>
       <Button fx:id="nextButton" layoutX="680.0" layoutY="54.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Next" textAlignment="CENTER" />
       <Button fx:id="ladangkuButton" layoutX="680.0" layoutY="162.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Ladangku" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="ladangLawanButton" layoutX="666.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="198.0" text="Ladang Lawan" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="ladangLawanButton" layoutX="666.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#ToEnemyField" prefHeight="40.0" prefWidth="198.0" text="Ladang Lawan" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="tokoButton" layoutX="680.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#ToShop" prefHeight="40.0" prefWidth="170.0" text="Toko" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="saveStateButton" layoutX="680.0" layoutY="402.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Save State" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="loadStateButton" layoutX="680.0" layoutY="482.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Load State" textAlignment="CENTER" wrapText="true" />

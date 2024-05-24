@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,11 +32,11 @@ public class HomeController implements Initializable {
     public GridPane cardGrid;
     public GridPane activeDeck;
 
-    public void ToShop(ActionEvent actionEvent) throws IOException {
+    public void ToShop(javafx.scene.input.MouseEvent actionEvent) throws IOException {
         SceneController.SwitchToShop(actionEvent);
     }
 
-    public void ToEnemyField(ActionEvent actionEvent) throws IOException {
+    public void ToEnemyField(javafx.scene.input.MouseEvent actionEvent) throws IOException {
         SceneController.SwitchToEnemyField(actionEvent);
     }
 

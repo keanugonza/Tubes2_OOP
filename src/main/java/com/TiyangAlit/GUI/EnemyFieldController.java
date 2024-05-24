@@ -6,11 +6,11 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,11 +33,11 @@ public class EnemyFieldController implements Initializable {
     public GridPane enemyGrid;
     public GridPane activeDeck;
 
-    public void ToShop(ActionEvent actionEvent) throws IOException {
+    public void ToShop(javafx.scene.input.MouseEvent actionEvent) throws IOException {
         SceneController.SwitchToShop(actionEvent);
     }
 
-    public void ToHome(ActionEvent actionEvent) throws IOException {
+    public void ToHome(javafx.scene.input.MouseEvent actionEvent) throws IOException {
         SceneController.SwitchToHome(actionEvent);
     }
 
