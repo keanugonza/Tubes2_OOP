@@ -75,4 +75,26 @@ public abstract class Entity extends Kartu implements Harvestable, Target {
         }
         return count + " " + effectsDisplay.toString().trim().toUpperCase();
     }
+
+    public String displayEffect(){
+        StringBuilder result = new StringBuilder();
+        int idx = 0;
+        for (HashMap.Entry<String, Integer> entry : effects.entrySet()) {
+            if (entry.getValue() > 0) {
+                if(idx != 0){
+                    result.append(", ");
+                }
+                result.append(entry.getKey()).append(" (").append(entry.getValue()).append(")");
+                idx++;
+            }
+
+        }
+        return result.toString();
+    }
+
+    public String displayBobot(){
+        StringBuilder result = new StringBuilder();
+        result.append(this.bobot).append(" (").append(this.bobotHarvest).append(")");
+        return result.toString();
+    }
 }

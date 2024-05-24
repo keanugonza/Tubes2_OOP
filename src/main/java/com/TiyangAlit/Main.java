@@ -58,6 +58,7 @@ public class Main {
             for (int i = 0; i < 7; i++)
                 player1.place(0, 0, susu,player1.getLadang());  // Kasih 7 susu ke Hiu1
             player1.place(1, 0, accelerate, player1.getLadang());    // Accelerate hiu2
+            player1.place(1, 0, accelerate, player1.getLadang());    // Accelerate hiu2
             player1.place(1, 0, protect, player1.getLadang());       // Protect hiu2
             player1.place(1, 0, destroy, player1.getLadang());       // Destroy hiu2 (gagal karena ada protect)
             player1.place(1, 0, delay, player1.getLadang());         // Delay hiu2

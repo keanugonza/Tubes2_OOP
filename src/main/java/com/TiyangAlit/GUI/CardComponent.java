@@ -2,6 +2,7 @@ package com.TiyangAlit.GUI;
 
 import com.TiyangAlit.Deck.Deck;
 import com.TiyangAlit.Kartu.Entity.Entity;
+import com.TiyangAlit.Kartu.Entity.Tanaman.Tanaman;
 import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Ladang.Ladang;
 import com.TiyangAlit.Player.Player;
@@ -117,14 +118,21 @@ public class CardComponent extends AnchorPane {
                 textFlow.setTextAlignment(TextAlignment.valueOf("CENTER"));
                 textFlow.getChildren().add(newText);
 
-                Text newText2 = new Text("Belum guys");
+                Text newText2 = new Text();
+                if(this.kartu instanceof Entity){
+                    if(this.kartu instanceof Tanaman){
+                        newText2 = new Text("Umur: " +((Entity) this.kartu).displayBobot());
+                    } else{
+                        newText2 = new Text("Berat : " + ((Entity) this.kartu).displayBobot());
+                    }
+                }
                 newText2.setLayoutX(23);
                 newText2.setLayoutY(110);
                 newText2.setWrappingWidth(290);
 
                 Text newText3 = new Text();
                 if(this.kartu instanceof Entity){
-                    newText3 = new Text(((Entity) this.kartu).displayAndCountEffects());
+                    newText3 = new Text(((Entity) this.kartu).displayEffect());
                 }
                 newText3.setLayoutX(23);
                 newText3.setLayoutY(140);
