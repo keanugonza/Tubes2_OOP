@@ -1,9 +1,11 @@
 package com.TiyangAlit.GUI;
 
 import com.TiyangAlit.Deck.Deck;
+import com.TiyangAlit.Game.Game;
 import com.TiyangAlit.Kartu.Entity.Entity;
 import com.TiyangAlit.Kartu.Entity.Tanaman.Tanaman;
 import com.TiyangAlit.Kartu.Kartu;
+import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.Ladang;
 import com.TiyangAlit.Player.Player;
 import javafx.scene.Scene;
@@ -33,7 +35,7 @@ public class CardComponent extends AnchorPane {
     public Kartu kartu;
     public boolean cancelDrag;
 
-    public CardComponent(String imageURL, String description, GridPane GridLadang, GridPane GridDeck, Ladang ladang, Deck deck, Kartu kartu, int row, int col) {
+    public CardComponent(String imageURL, String description, GridPane GridLadang, GridPane GridDeck, Ladang ladang, Deck deck, Kartu kartu, int row, int col, boolean isToko, boolean isDeck) {
 
         this.description = description;
         this.kartu = kartu;
@@ -60,105 +62,130 @@ public class CardComponent extends AnchorPane {
         this.text.setWrappingWidth(82);
         this.getChildren().add(this.text);
 
-        this.setOnMousePressed(e ->{
-            System.out.println("Pressed");
-            this.toFront();
-            this.cancelDrag = false;
-            this.startX = e.getSceneX() - this.getTranslateX();
-            this.startY = e.getSceneY() - this.getTranslateY();
-        });
+        if(!isToko){
+            this.setOnMousePressed(e ->{
+                System.out.println("Pressed");
+                this.toFront();
+                this.cancelDrag = false;
+                this.startX = e.getSceneX() - this.getTranslateX();
+                this.startY = e.getSceneY() - this.getTranslateY();
+            });
 
-        this.setOnMouseDragged(e ->{
-            this.cancelDrag = true;
-            this.setTranslateX(e.getSceneX() - this.startX);
-            this.setTranslateY(e.getSceneY() - this.startY);
-        });
+            this.setOnMouseDragged(e ->{
+                this.cancelDrag = true;
+                this.setTranslateX(e.getSceneX() - this.startX);
+                this.setTranslateY(e.getSceneY() - this.startY);
+            });
 
-        this.setOnMouseClicked(e -> {
-            if(!this.cancelDrag) {
-                Stage onTop = new Stage();
-                onTop.initOwner(this.getScene().getWindow());
-                onTop.initModality(Modality.WINDOW_MODAL);
+            this.setOnMouseClicked(e -> {
+                if(!this.cancelDrag) {
+                    Stage onTop = new Stage();
+                    onTop.initOwner(this.getScene().getWindow());
+                    onTop.initModality(Modality.WINDOW_MODAL);
 
-                AnchorPane newPane = new AnchorPane();
-                newPane.setPrefHeight(248);
-                newPane.setPrefWidth(500);
-                newPane.setStyle("-fx-border-color: black; -fx-border-radius: 2;");
+                    AnchorPane newPane = new AnchorPane();
+                    newPane.setPrefHeight(248);
+                    newPane.setPrefWidth(500);
+                    newPane.setStyle("-fx-border-color: black; -fx-border-radius: 2;");
 
-                Button newButton = new Button();
-                newButton.setText("Kembali");
-                newButton.setLayoutX(23);
-                newButton.setLayoutY(15);
-                newButton.setOnMouseClicked(ev -> {
-                    onTop.close();
-                });
-
-                Button newButton2 = new Button();
-                newButton2.setText("Panen");
-                newButton2.setLayoutX(222);
-                newButton2.setLayoutY(196);
-
-                newButton2.setOnMouseClicked( event -> {
-                    try {
-                        MainGUI.currentPlayer.panen(row,col);
-                        GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
-                        GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
+                    Button newButton = new Button();
+                    newButton.setText("Kembali");
+                    newButton.setLayoutX(23);
+                    newButton.setLayoutY(15);
+                    newButton.setOnMouseClicked(ev -> {
                         onTop.close();
-                    } catch (Exception ex) {
-                        System.out.println(ex.getMessage());
+                    });
+
+                    if(ladang.getPemilikLadang().equals(Game.getCurrentPlayer())){
+                            Button newButton2 = new Button();
+                            newButton2.setLayoutX(222);
+                            newButton2.setLayoutY(196);
+                        if(!isDeck){
+                            newButton2.setText("Panen");
+                            newButton2.setOnMouseClicked( event -> {
+                                try {
+                                    MainGUI.currentPlayer.panen(row,col);
+                                    GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
+                                    GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
+                                    onTop.close();
+                                } catch (Exception ex) {
+                                    System.out.println(ex.getMessage());
+                                }
+                            });
+                            if(this.kartu instanceof Entity){
+                                if(!((Entity) this.kartu).getStatus()){
+                                    newButton2.setDisable(true);
+                                }
+                            }
+                            newPane.getChildren().add(newButton2);
+                        } else{
+                            newButton2.setText("Jual");
+                            newButton2.setOnMouseClicked( event -> {
+                                try {
+                                    MainGUI.currentPlayer.jual(this.kartu, Game.getToko());
+                                    GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
+                                    GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
+                                    onTop.close();
+                                } catch (Exception ex) {
+                                    System.out.println(ex.getMessage());
+                                }
+                            });
+                            if(this.kartu instanceof Produk){
+                                newPane.getChildren().add(newButton2);
+                            }
+                        }
                     }
-                });
 
-                Text newText = new Text(this.description);
-                newText.setFont(new Font("Arial", 20));
 
-                TextFlow textFlow = new TextFlow();
-                textFlow.setPrefWidth(500);
-                textFlow.setLayoutY(30);
-                textFlow.setTextAlignment(TextAlignment.valueOf("CENTER"));
-                textFlow.getChildren().add(newText);
+                    Text newText = new Text(this.description);
+                    newText.setFont(new Font("Arial", 20));
 
-                Text newText2 = new Text();
-                if(this.kartu instanceof Entity){
-                    if(this.kartu instanceof Tanaman){
-                        newText2 = new Text("Umur: " +((Entity) this.kartu).displayBobot());
-                    } else{
-                        newText2 = new Text("Berat : " + ((Entity) this.kartu).displayBobot());
+                    TextFlow textFlow = new TextFlow();
+                    textFlow.setPrefWidth(500);
+                    textFlow.setLayoutY(30);
+                    textFlow.setTextAlignment(TextAlignment.valueOf("CENTER"));
+                    textFlow.getChildren().add(newText);
+
+                    Text newText2 = new Text();
+                    if(this.kartu instanceof Entity){
+                        if(this.kartu instanceof Tanaman){
+                            newText2 = new Text("Umur: " +((Entity) this.kartu).displayBobot());
+                        } else{
+                            newText2 = new Text("Berat : " + ((Entity) this.kartu).displayBobot());
+                        }
                     }
+                    newText2.setLayoutX(23);
+                    newText2.setLayoutY(110);
+                    newText2.setWrappingWidth(290);
+
+                    Text newText3 = new Text();
+                    if(this.kartu instanceof Entity){
+                        newText3 = new Text("Efek: " + ((Entity) this.kartu).displayEffect());
+                    }
+                    newText3.setLayoutX(23);
+                    newText3.setLayoutY(140);
+                    newText3.setWrappingWidth(310);
+
+
+                    ImageView newImage = new ImageView(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(this.imageURL))));
+                    newImage.setFitHeight(121);
+                    newImage.setFitWidth(116);
+                    newImage.setLayoutX(362);
+                    newImage.setLayoutY(66);
+
+                    newPane.getChildren().add(newButton);
+                    newPane.getChildren().add(textFlow);
+                    newPane.getChildren().add(newText2);
+                    newPane.getChildren().add(newText3);
+                    newPane.getChildren().add(newImage);
+
+
+                    Scene newScene = new Scene(newPane);
+                    onTop.setScene(newScene);
+                    onTop.setResizable(false);
+                    onTop.showAndWait();
                 }
-                newText2.setLayoutX(23);
-                newText2.setLayoutY(110);
-                newText2.setWrappingWidth(290);
-
-                Text newText3 = new Text();
-                if(this.kartu instanceof Entity){
-                    newText3 = new Text(((Entity) this.kartu).displayEffect());
-                }
-                newText3.setLayoutX(23);
-                newText3.setLayoutY(140);
-                newText3.setWrappingWidth(310);
-
-
-                ImageView newImage = new ImageView(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(this.imageURL))));
-                newImage.setFitHeight(121);
-                newImage.setFitWidth(116);
-                newImage.setLayoutX(362);
-                newImage.setLayoutY(66);
-
-                newPane.getChildren().add(newButton);
-                newPane.getChildren().add(newButton2);
-                newPane.getChildren().add(textFlow);
-                newPane.getChildren().add(newText2);
-                newPane.getChildren().add(newText3);
-                newPane.getChildren().add(newImage);
-
-
-                Scene newScene = new Scene(newPane);
-                onTop.setScene(newScene);
-                onTop.setResizable(false);
-                onTop.showAndWait();
-            }
-        });
-
+            });
+        }
     }
 }

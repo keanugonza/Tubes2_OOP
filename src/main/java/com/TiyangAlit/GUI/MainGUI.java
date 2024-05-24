@@ -77,9 +77,8 @@ public class MainGUI extends Application{
             scene.getStylesheets().add(MainGUI.CSSUrl);
 
             // ----------------  GAME ----------------
-            Game game = new Game();
-            MainGUI.currentPlayer = game.getCurrentPlayer();
-            MainGUI.enemyPlayer = game.getEnemyPlayer();
+            MainGUI.currentPlayer = Game.getCurrentPlayer();
+            MainGUI.enemyPlayer = Game.getEnemyPlayer();
             System.out.println("Enemy Player: " + enemyPlayer.getNama());
             // Bikin Player dan Toko
 

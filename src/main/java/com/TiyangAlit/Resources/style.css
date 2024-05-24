@@ -1,8 +1,18 @@
 AnchorPane{
     -fx-background-color: yellow;
     -fx-alignment: center;
-    -fx-background-image: url("/StardewValley.png");
+    -fx-background-color: cornflowerblue;
     -fx-background-size: cover;
+}
+
+shopGrid{
+    -fx-background-color: navy;
+}
+
+ShopComponent{
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
 }
 
 GridPane{

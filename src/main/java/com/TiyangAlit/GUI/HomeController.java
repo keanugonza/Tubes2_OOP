@@ -40,6 +40,10 @@ public class HomeController implements Initializable {
         SceneController.SwitchToEnemyField(actionEvent);
     }
 
+    public void ToNext(javafx.scene.input.MouseEvent actionEvent) throws IOException {
+        SceneController.SwitchPlayer(actionEvent);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        System.out.println("Hello World");

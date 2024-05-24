@@ -1,5 +1,6 @@
 package com.TiyangAlit.GUI;
 
+import com.TiyangAlit.Deck.Deck;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,6 +16,7 @@ public class ShopController implements Initializable {
     @FXML
     public GridPane shopGrid;
     public Button shopBackButton;
+    public GridPane activeDeck;
 
     public void ToHome(javafx.scene.input.MouseEvent actionEvent) throws IOException {
         SceneController.SwitchToHome(actionEvent);
@@ -22,6 +24,10 @@ public class ShopController implements Initializable {
 
     public void ToEnemyField(javafx.scene.input.MouseEvent actionEvent) throws IOException {
         SceneController.SwitchToEnemyField(actionEvent);
+    }
+
+    public void ToNext(javafx.scene.input.MouseEvent actionEvent) throws IOException {
+        SceneController.SwitchPlayer(actionEvent);
     }
 
     @Override
