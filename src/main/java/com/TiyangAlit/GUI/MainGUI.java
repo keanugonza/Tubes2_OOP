@@ -9,6 +9,7 @@ import com.TiyangAlit.Factory.ItemFactory.ItemFactory;
 import com.TiyangAlit.Factory.KartuFactory;
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukHewanFactory;
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukTanamanFactory;
+import com.TiyangAlit.Game.Game;
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Herbivora;
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Karnivora;
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Omnivora;
@@ -18,7 +19,6 @@ import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukHewan;
 import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukTanaman;
 import com.TiyangAlit.Ladang.Ladang;
 import com.TiyangAlit.Player.Player;
-import com.TiyangAlit.Toko.Toko;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -35,11 +35,14 @@ import java.util.Objects;
 
 public class MainGUI extends Application{
 
-    static Ladang ladang;
-    static Deck deck;
+    static Ladang ladangPlayer;
+    static Ladang ladangEnemy;
+    static Deck deckPlayer;
+    static Deck deckEnemy;
     static HomeController controlerHome;
-    static ShopController controlerShop;
     static String CSSUrl;
+    static Player currentPlayer;
+    static Player enemyPlayer;
 
     public static void main(String[] args) {
         launch(args);
@@ -48,6 +51,8 @@ public class MainGUI extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         try{
+
+
             // Bikin icon dan judul aplikasi
             InputStream stream  = new FileInputStream("src/main/java/com/TiyangAlit/Resources/StardewValley.png");
             Image image = new Image(stream);
@@ -62,16 +67,21 @@ public class MainGUI extends Application{
             InputStream shopPageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shop.fxml");
             FXMLLoader shopPageLoader = new FXMLLoader();
 
+            InputStream enemyFieldFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/EnemyField.fxml");
+            FXMLLoader enemyFieldLoader = new FXMLLoader();
+
             Scene scene = new Scene(root);
 
             // Ambil CSS Eksternal
             MainGUI.CSSUrl = Objects.requireNonNull(this.getClass().getResource("/style.css")).toExternalForm();
             scene.getStylesheets().add(MainGUI.CSSUrl);
 
+            // ----------------  GAME ----------------
+            Game game = new Game();
+            MainGUI.currentPlayer = game.getCurrentPlayer();
+            MainGUI.enemyPlayer = game.getEnemyPlayer();
+            System.out.println("Enemy Player: " + enemyPlayer.getNama());
             // Bikin Player dan Toko
-            Player player1 = new Player("player1");
-            Player player2 = new Player("player2");
-            Toko toko = new Toko();
 
 //          Bikin factory
             KartuFactory herbivoraFactory = new HerbivoraFactory();
@@ -98,48 +108,54 @@ public class MainGUI extends Application{
             ProdukHewan la = (ProdukHewan) produkHewanFactory.createKartu("Susu");
             Item acc = (Item) itemFactory.createKartu("Accelerate");
             Item del = (Item) itemFactory.createKartu("Delay");
-
+            Item inst = (Item) itemFactory.createKartu("Instant Harvest");
+            Item prot = (Item) itemFactory.createKartu("Protect");
             // mengisi ladang dan deck player
             try {
                 System.out.println("helo");
                 // Player 1
-                player1.place(0, 0, hiuDarat, player1.getLadang());  // Hiu1
-                player1.place(0, 1, hiuDarat, player1.getLadang());  // Hiu2
-                player1.place(0, 2, bijiJagung, player1.getLadang());
-                player1.place(0, 3, bijiJagung, player1.getLadang());
-                player1.place(0, 4, kuda, player1.getLadang());
-                player1.getDeckAktif().addKartu(acc);
-                player1.getDeckAktif().addKartu(acc);
-                player1.getDeckAktif().addKartu(acc);
-                player1.getDeckAktif().addKartu(acc);
-                player1.getDeckAktif().addKartu(del);
-                player1.getDeckAktif().addKartu(del);
+                MainGUI.currentPlayer.place(0, 0, hiuDarat, MainGUI.currentPlayer.getLadang());  // Hiu1
+                MainGUI.currentPlayer.place(0, 1, hiuDarat, MainGUI.currentPlayer.getLadang());  // Hiu2
+                MainGUI.currentPlayer.place(0, 2, bijiJagung, MainGUI.currentPlayer.getLadang());
+                MainGUI.currentPlayer.place(0, 3, bijiJagung, MainGUI.currentPlayer.getLadang());
+                MainGUI.currentPlayer.place(0, 4, kuda, MainGUI.currentPlayer.getLadang());
+                MainGUI.currentPlayer.getDeckAktif().addKartu(hiuDarat);
+                MainGUI.currentPlayer.getDeckAktif().addKartu(inst);
+                MainGUI.currentPlayer.getDeckAktif().addKartu(prot);
+                MainGUI.currentPlayer.getDeckAktif().addKartu(del);
+                MainGUI.currentPlayer.getDeckAktif().addKartu(acc);
+//                MainGUI.currentPlayer.getDeckAktif().addKartu(inst);
+                MainGUI.currentPlayer.getDeckAktif().addKartu(inst);
 
                 // Player 2
-                player2.place(0, 0, hiuDarat, player1.getLadang());  // Hiu1
-                player2.place(0, 1, hiuDarat, player1.getLadang());  // Hiu2
-                player2.place(0, 2, bijiJagung, player1.getLadang());
-                player2.place(0, 3, bijiJagung, player1.getLadang());
-                player2.place(0, 4, kuda, player1.getLadang());
-                player2.getDeckAktif().addKartu(acc);
-                player2.getDeckAktif().addKartu(acc);
-                player2.getDeckAktif().addKartu(acc);
-                player2.getDeckAktif().addKartu(acc);
-                player2.getDeckAktif().addKartu(del);
-                player2.getDeckAktif().addKartu(del);
+                MainGUI.enemyPlayer.place(3, 3, hiuDarat, MainGUI.enemyPlayer.getLadang());  // Hiu1
+                MainGUI.enemyPlayer.place(0, 1, hiuDarat, MainGUI.enemyPlayer.getLadang());  // Hiu2
+                MainGUI.enemyPlayer.place(0, 2, bijiJagung, MainGUI.enemyPlayer.getLadang());
+                MainGUI.enemyPlayer.place(0, 3, bijiJagung, MainGUI.enemyPlayer.getLadang());
+                MainGUI.enemyPlayer.place(0, 4, kuda, MainGUI.enemyPlayer.getLadang());
+                MainGUI.enemyPlayer.getDeckAktif().addKartu(hiuDarat);
+                MainGUI.enemyPlayer.getDeckAktif().addKartu(acc);
+                MainGUI.enemyPlayer.getDeckAktif().addKartu(acc);
+                MainGUI.enemyPlayer.getDeckAktif().addKartu(acc);
+                MainGUI.enemyPlayer.getDeckAktif().addKartu(del);
+                MainGUI.enemyPlayer.getDeckAktif().addKartu(del);
+                System.out.println("------------------------------------");
+                MainGUI.enemyPlayer.getLadang().displayLadang();
+                System.out.println("------------------------------------");
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 
-            MainGUI.ladang = player1.getLadang();
-            MainGUI.deck = player1.getDeckAktif();
+            MainGUI.ladangPlayer = MainGUI.currentPlayer.getLadang();
+            MainGUI.deckPlayer = MainGUI.currentPlayer.getDeckAktif();
+            MainGUI.ladangEnemy = MainGUI.enemyPlayer.getLadang();
+            MainGUI.deckEnemy = MainGUI.enemyPlayer.getDeckAktif();
 
             MainGUI.controlerHome = homePageLoader.getController();
-            MainGUI.controlerShop = shopPageLoader.getController();
 
-            GridController.FillLadang(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, ladang, deck);
-            GridController.FillDeck(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, ladang, deck);
+            GridController.FillLadang(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+            GridController.FillDeck(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
 
             stage.setResizable(false);
             stage.setScene(scene);

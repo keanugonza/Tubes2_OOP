@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,8 +37,8 @@ public class SceneController {
         scene.getStylesheets().add(MainGUI.CSSUrl);
         stage.setScene(scene);
         stage.show();
-        GridController.FillLadang(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladang, MainGUI.deck);
-        GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladang, MainGUI.deck);
+        GridController.FillLadang(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+        GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
     }
 
     public static void SwitchToEnemyField(javafx.scene.input.MouseEvent event) throws IOException {
@@ -52,7 +51,7 @@ public class SceneController {
         scene.getStylesheets().add(MainGUI.CSSUrl);
         stage.setScene(scene);
         stage.show();
-        GridController.FillLadang(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, MainGUI.ladang, MainGUI.deck);
-        GridController.FillDeck(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, MainGUI.ladang, MainGUI.deck);
+        GridController.FillLadang(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, MainGUI.ladangEnemy, MainGUI.deckPlayer);
+        GridController.FillDeck(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, MainGUI.ladangEnemy, MainGUI.deckPlayer);
     }
 }

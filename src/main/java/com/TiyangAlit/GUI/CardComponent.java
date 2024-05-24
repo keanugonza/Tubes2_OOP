@@ -1,8 +1,10 @@
 package com.TiyangAlit.GUI;
 
 import com.TiyangAlit.Deck.Deck;
+import com.TiyangAlit.Kartu.Entity.Entity;
 import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Ladang.Ladang;
+import com.TiyangAlit.Player.Player;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -95,6 +97,17 @@ public class CardComponent extends AnchorPane {
                 newButton2.setLayoutX(222);
                 newButton2.setLayoutY(196);
 
+                newButton2.setOnMouseClicked( event -> {
+                    try {
+                        MainGUI.currentPlayer.panen(row,col);
+                        GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
+                        GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
+                        onTop.close();
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                });
+
                 Text newText = new Text(this.description);
                 newText.setFont(new Font("Arial", 20));
 
@@ -104,12 +117,15 @@ public class CardComponent extends AnchorPane {
                 textFlow.setTextAlignment(TextAlignment.valueOf("CENTER"));
                 textFlow.getChildren().add(newText);
 
-                Text newText2 = new Text("Berat : 5 (15)");
+                Text newText2 = new Text("Belum guys");
                 newText2.setLayoutX(23);
                 newText2.setLayoutY(110);
                 newText2.setWrappingWidth(290);
 
-                Text newText3 = new Text("Item Aktif : Accelerate (1), Delay(1), Protect(1), Trap(1)");
+                Text newText3 = new Text();
+                if(this.kartu instanceof Entity){
+                    newText3 = new Text(((Entity) this.kartu).displayAndCountEffects());
+                }
                 newText3.setLayoutX(23);
                 newText3.setLayoutY(140);
                 newText3.setWrappingWidth(310);

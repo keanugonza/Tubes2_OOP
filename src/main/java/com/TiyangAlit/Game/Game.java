@@ -33,6 +33,14 @@ public class Game {
     public Player[] getPlayers() { return this.players; }
     public int getCurrentPlayerIdx() { return this.currentPlayerIdx; }
     public Player getCurrentPlayer() { return this.currentPlayer; }
+    public Player getEnemyPlayer() {
+        if(this.currentPlayerIdx == 0) {
+            return this.players[1];
+        } else{
+            return this.players[0];
+        }
+
+    }
     public int getTurnCnt() { return this.turnCnt; }
     public Toko getToko() { return this.toko; }
 

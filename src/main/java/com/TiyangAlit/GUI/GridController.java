@@ -1,9 +1,11 @@
 package com.TiyangAlit.GUI;
 
 import com.TiyangAlit.Deck.Deck;
+import com.TiyangAlit.Deck.DeckExceptions.DeckFullException;
 import com.TiyangAlit.Kartu.Entity.Entity;
 import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Ladang.Ladang;
+import com.TiyangAlit.Ladang.LadangExceptions.InvalidKartuException;
 import com.TiyangAlit.Ladang.Matrix;
 import com.TiyangAlit.Toko.Toko;
 import javafx.scene.layout.GridPane;
@@ -80,7 +82,7 @@ public class GridController {
                             newCard.setTranslateY(0);
                         } else{
                             try{
-                                ladang.place(finalRowCount,finalColCount,newCard.kartu);
+                                MainGUI.currentPlayer.place(finalRowCount,finalColCount,newCard.kartu, ladang);
                                 ladang.remove(temprow, tempcol);
                                 GridController.FillLadang(GridLadang,GridDeck, ladang, deck);
                                 ladang.displayLadang();
@@ -115,17 +117,20 @@ public class GridController {
                         newCard.setTranslateY(0);
                     } else{
                         try{
-                            ladang.place(finalRowCount,finalColCount,newCard.kartu);
                             deck.removeKartu(newCard.kartu);
-                            GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
-                            GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
-                            ladang.displayLadang();
-                            deck.displayDeck();
+                            MainGUI.currentPlayer.place(finalRowCount,finalColCount,newCard.kartu, ladang);
                         } catch(Exception ex){
+                            try {
+                                deck.addKartu(newCard.kartu);
+                            } catch (Exception ignored) { }
                             newCard.setTranslateX(0);
                             newCard.setTranslateY(0);
-                            System.out.println(ex.getMessage());
+                            System.out.println("ini dari filldeck :" + ex.getMessage());
                         }
+                        GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
+                        GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
+                        ladang.displayLadang();
+                        deck.displayDeck();
                     }
                 });
 

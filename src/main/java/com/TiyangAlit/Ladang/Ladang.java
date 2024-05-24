@@ -98,7 +98,9 @@ public class Ladang {
                 try {
                     item.apply(entity);
                     this.pemilikLadang.panen(row, col);
-                } catch (Exception ignored) { }
+                } catch (Exception ignored) {
+                    System.out.println(ignored.getMessage());
+                }
             }
             case "Delay" -> {
                 // Kurangi bobot kartu jika tidak memiliki efek protect.
