@@ -45,11 +45,51 @@ public abstract class Deck {
             this.deck.add(kartu);
     }
 
+    private int parsePosition(String pos) {
+        if (pos.length() != 3) {
+            throw new IllegalArgumentException("Invalid position format: " + pos);
+        }
+
+        char row = pos.charAt(0);
+        if (row < 'A' || row > 'Z') {
+            throw new IllegalArgumentException("Invalid row character: " + row);
+        }
+
+        int rowIndex = row - 'A';
+
+        int columnIndex;
+        try {
+            columnIndex = Integer.parseInt(pos.substring(1)) - 1;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid column number: " + pos.substring(1));
+        }
+
+        if (columnIndex != 0) {
+            throw new IllegalArgumentException("Column number must be 01: " + pos.substring(1));
+        }
+
+        return rowIndex;
+    }
+
+    public void addKartuToPosisi(Kartu kartu, String pos) throws DeckFullException {
+        // Parse the position string
+        int index = parsePosition(pos);
+
+        if (index < 0 || index > this.deck.size()) {
+            throw new IndexOutOfBoundsException("Invalid position: " + pos);
+        }
+
+        if (this.deck.size() == this.maxSize) {
+            throw new DeckFullException("Deck sudah penuh.");
+        }
+
+        this.deck.add(index, kartu);
+    }
+
     public void removeKartu(Kartu kartu) { this.deck.remove(kartu); }
 
     public void removeKartuByIdx(int idx) { this.deck.remove(idx); }
 
-    // Lain-lain
     public boolean deckContains(Kartu kartu) { return this.deck.contains(kartu); }
 
     public boolean isFull() { return this.deck.size() == this.maxSize; }
@@ -58,17 +98,14 @@ public abstract class Deck {
         return this.deck.size();
     }
 
-    // Get all Kartu in the deck
     public ArrayList<Kartu> getAllKartu() { return new ArrayList<>(this.deck); }
 
-    // TESTING
     public void displayDeck() {
         for (Kartu kartu : this.deck)
             System.out.print(kartu.getNama() + ", ");
         System.out.println();
     }
 
-    // Get location and card name
     public String getLocationAndCardName() {
         StringBuilder result = new StringBuilder();
         int rowIndex = 0;

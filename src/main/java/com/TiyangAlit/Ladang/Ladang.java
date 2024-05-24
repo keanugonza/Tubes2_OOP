@@ -204,4 +204,49 @@ public class Ladang {
             System.out.println();
         }
     }
+
+    // New Method
+    public void addCardToLadang(String location, Entity cardName, int bobot) throws Exception {
+        int[] indices = parseLocation(location);
+        int row = indices[0];
+        int col = indices[1];
+
+        if (isIndexInvalid(row, col))
+            throw new LadangInvalidIndexException("Index ("  + row + ", " + col + ") invalid.");
+        if (isFullSlot(row, col))
+            throw new LadangSlotFullException("Slot ladang (" + row + ", " + col + ") sudah penuh.");
+
+//        FoF fof = new FoF();
+//        KartuFactory factory = fof.createFactory(cardName);
+//
+//        Entity entity = (Entity) factory.createKartu(cardName);
+        cardName.setBobot(bobot);
+        this.data.setEl(row, col, cardName);
+    }
+
+    private int[] parseLocation(String location) {
+        if (location.length() != 3) {
+            throw new IllegalArgumentException("Invalid location format: " + location);
+        }
+
+        char rowChar = location.charAt(0);
+        if (rowChar < 'A' || rowChar > 'D') {
+            throw new IllegalArgumentException("Invalid row character: " + rowChar);
+        }
+
+        int row = rowChar - 'A';
+
+        int col;
+        try {
+            col = Integer.parseInt(location.substring(1)) - 1;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid column number: " + location.substring(1));
+        }
+
+        if (col < 0 || col >= 5) {
+            throw new IllegalArgumentException("Column number must be between 01 and 05: " + location.substring(1));
+        }
+
+        return new int[]{row, col};
+    }
 }

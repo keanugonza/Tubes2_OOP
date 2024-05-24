@@ -102,7 +102,7 @@ public class Main {
             player1.getDeckAktif().addKartu(hiuDarat);
             System.out.println(player1.getDeckAktif().getLocationAndCardName());
 
-            Simpan.savePlayer(player1,"mbahem.txt");
+//            Simpan.savePlayer(player1,"mbahem.txt");
 
 //            Game gembrot = new Game();
             Toko ngedol = new Toko();
