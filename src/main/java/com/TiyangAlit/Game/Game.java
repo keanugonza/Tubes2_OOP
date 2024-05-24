@@ -3,60 +3,44 @@ package com.TiyangAlit.Game;
 import com.TiyangAlit.Player.Player;
 import com.TiyangAlit.Toko.Toko;
 
-
-import java.util.Scanner;
-
 public class Game {
     /*
      *  ATTRIBUTES
      */
-    private final Player[] players = new Player[]{
+    private static final Player[] players = new Player[]{
             new Player("player1"),
             new Player("player2"),
     };
-    private int currentPlayerIdx;
-    private Player currentPlayer;
-    private int turnCnt;
-    private Toko toko;
+    private static int currentPlayerIdx = 0;
+    private static Player currentPlayer = players[currentPlayerIdx];
+    private static int turnCnt = 1;
+    private static final Toko toko = new Toko();
 
     /*
-     *  ATTRIBUTES
+     *  METHODS
      */
-    public Game() {
-        this.currentPlayerIdx = 0;
-        this.currentPlayer = this.players[this.currentPlayerIdx];
-        this.turnCnt = 1;
-        this.toko = new Toko();
-    }
 
     // Getter & Setter
-    public Player[] getPlayers() { return this.players; }
-    public int getCurrentPlayerIdx() { return this.currentPlayerIdx; }
-    public Player getCurrentPlayer() { return this.currentPlayer; }
-    public Player getEnemyPlayer() {
-        if(this.currentPlayerIdx == 0) {
-            return this.players[1];
-        } else{
-            return this.players[0];
-        }
+    public static Player[] getPlayers() { return players; }
+    public static int getCurrentPlayerIdx() { return currentPlayerIdx; }
+    public static Player getCurrentPlayer() { return currentPlayer; }
+    public static Player getEnemyPlayer() { return (players[currentPlayerIdx == 0 ? 1 : 0]); }
+    public static int getTurnCnt() { return turnCnt; }
+    public static Toko getToko() { return toko; }
 
-    }
-    public int getTurnCnt() { return this.turnCnt; }
-    public Toko getToko() { return this.toko; }
+    public static void setCurrentPlayerIdx(int val) { currentPlayerIdx = val; }
+    public static void setCurrentPlayer(Player val) { currentPlayer = val; }
+    public static void incTurnCnt() { turnCnt++; }
 
-    public void setCurrentPlayerIdx(int currentPlayerIdx) { this.currentPlayerIdx = currentPlayerIdx; }
-    public void setCurrentPlayer(Player currentPlayer) { this.currentPlayer = currentPlayer; }
-    public void incTurnCnt() { this.turnCnt++; }
+    // Perintah
+    public static void NEXT() {
+        // Ganti giliran
+        setCurrentPlayerIdx(currentPlayerIdx == 0 ? 1 : 0);
+        setCurrentPlayer(players[currentPlayerIdx]);
+        incTurnCnt();
 
-    // Baca perintah
-    public void start() {
-        Scanner scanner = new Scanner(System.in);  // Testing, ganti kalo udah ada UI
-
-        Perintah perintah = new Perintah();
-        while (this.turnCnt <= 20) {
-            String input = scanner.nextLine();
-            if (input.equals("NEXT"))
-                perintah.NEXT(this);
-        }
+        // Tambah umur tanaman
+        for (Player player : players)
+            player.getLadang().tambahUmur();
     }
 }
