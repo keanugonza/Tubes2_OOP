@@ -7,11 +7,7 @@ import com.TiyangAlit.Kartu.Entity.Tanaman.Tanaman;
 import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.Ladang;
-import com.TiyangAlit.Player.Player;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,9 +27,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 

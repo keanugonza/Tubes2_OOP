@@ -1,19 +1,13 @@
 package com.TiyangAlit.GUI;
 
 import com.TiyangAlit.Deck.Deck;
-import com.TiyangAlit.Deck.Jenis.DeckPasif;
 import com.TiyangAlit.Game.Game;
 import com.TiyangAlit.Kartu.Entity.Entity;
 import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.Ladang;
-import com.TiyangAlit.Ladang.LadangExceptions.InvalidKartuException;
-import com.TiyangAlit.Ladang.LadangExceptions.LadangSlotFullException;
 import com.TiyangAlit.Ladang.Matrix;
-import com.TiyangAlit.Main;
 import com.TiyangAlit.Toko.Toko;
-import javafx.scene.Node;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -200,13 +194,13 @@ public class GridController {
             int col = ColRow[1];
             System.out.println(row);
             System.out.println(col);
-            CardComponent newCard = new CardComponent(kartu.getImage(), kartu.getNama(),MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, null, GridDeck, GridShuffle,null, MainGUI.currentPlayer.getDeckAktif(), kartu, row, col, false,false, shuffleResult);
+            CardComponent newCard = new CardComponent(kartu.getImage(), kartu.getNama(), MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, null, GridDeck, GridShuffle,null, MainGUI.currentPlayer.getDeckAktif(), kartu, row, col, false,false, shuffleResult);
             newCard.setOnMouseClicked(e -> {
                 try {
                     MainGUI.currentPlayer.moveFromShuffle_to_Aktif(shuffleResult, kartu);
                     MainGUI.currentPlayer.getDeckAktif().displayDeck();
                     GridController.FillShuffle(owner, stage, GridLadang, GridDeck, GridShuffle, shuffleResult);
-                    GridController.FillDeck(GridLadang,GridDeck,MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin,MainGUI.ladangPlayer, MainGUI.deckPlayer);
+                    GridController.FillDeck(GridLadang,GridDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
                     if(MainGUI.currentPlayer.getDeckAktif().isFull() || shuffleResult.isEmpty()){
                         stage.close();
                         owner.getScene().getRoot().setEffect(null);

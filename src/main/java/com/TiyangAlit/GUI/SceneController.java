@@ -1,6 +1,5 @@
 package com.TiyangAlit.GUI;
 
-import com.TiyangAlit.Deck.Jenis.DeckPasif;
 import com.TiyangAlit.Game.Game;
 import com.TiyangAlit.Kartu.Kartu;
 import javafx.fxml.FXMLLoader;
@@ -44,7 +43,7 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
         GridController.FillToko(shopController.shopGrid);
-        GridController.FillDeck(null, shopController.activeDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin,MainGUI.ladangPlayer, MainGUI.deckPlayer);
+        GridController.FillDeck(null, shopController.activeDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
     }
 
     public static void SwitchToHome(javafx.scene.input.MouseEvent event) throws IOException {
