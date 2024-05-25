@@ -64,6 +64,8 @@ public class Muat {
 
     public static void muat_gameState() {
         String filePath = getPath("gamestate.txt");
+        filePath = filePath.replace('\\', '/');
+
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             // <CURRENT_TURN>
             String line = reader.readLine();
@@ -130,12 +132,12 @@ public class Muat {
                     factory = new KarnivoraFactory();
                 else if (Arrays.stream(OmnivoraFactory.listOmnivora).anyMatch(s -> s.contains(namaKartu)))
                     factory = new OmnivoraFactory();
-                else if (Arrays.stream(TanamanFactory.listTanaman).anyMatch(s -> s.contains(namaKartu)))
-                    factory = new TanamanFactory();
+                else if (Arrays.stream(ProdukTanamanFactory.listProdukTanaman).anyMatch(s -> s.contains(namaKartu)))
+                    factory = new ProdukTanamanFactory();
                 else if (Arrays.stream(ProdukHewanFactory.listProdukHewan).anyMatch(s -> s.contains(namaKartu)))
                     factory = new ProdukHewanFactory();
                 else
-                    factory = new ProdukTanamanFactory();
+                    factory = new TanamanFactory();
                 Kartu kartu = factory.createKartu(namaKartu);
 
                 currentPlayer.getDeckAktif().addKartu(kartu);

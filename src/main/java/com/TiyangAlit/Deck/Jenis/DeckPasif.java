@@ -140,12 +140,12 @@ public class DeckPasif extends Deck {
                 factory = new KarnivoraFactory();
             else if (Arrays.stream(OmnivoraFactory.listOmnivora).anyMatch(s -> s.contains(randomValue)))
                 factory = new OmnivoraFactory();
-            else if (Arrays.stream(TanamanFactory.listTanaman).anyMatch(s -> s.contains(randomValue)))
-                factory = new TanamanFactory();
+            else if (Arrays.stream(ProdukTanamanFactory.listProdukTanaman).anyMatch(s -> s.contains(randomValue)))
+                factory = new ProdukTanamanFactory();
             else if (Arrays.stream(ProdukHewanFactory.listProdukHewan).anyMatch(s -> s.contains(randomValue)))
                 factory = new ProdukHewanFactory();
             else
-                factory = new ProdukTanamanFactory();
+                factory = new TanamanFactory();
             Kartu kartu = factory.createKartu(randomValue);
 
             addKartu(kartu);
