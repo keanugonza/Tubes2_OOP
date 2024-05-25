@@ -32,7 +32,7 @@ public class Player {
     public Player(String nama) {
         this.nama = nama;
         this.ladang = new Ladang(this);
-        this.uang = 100000;
+        this.uang = 0;
         this.deckAktif = new DeckAktif();
         this.deckPasif = new DeckPasif();
     }
