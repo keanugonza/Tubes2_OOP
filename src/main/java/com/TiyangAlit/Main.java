@@ -8,7 +8,7 @@ import com.TiyangAlit.Factory.KartuFactory;
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukHewanFactory;
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukTanamanFactory;
 import com.TiyangAlit.Game.Game;
-import com.TiyangAlit.Game.Muat;
+//import com.TiyangAlit.Game.Muat;
 import com.TiyangAlit.Game.Simpan;
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Karnivora;
 import com.TiyangAlit.Kartu.Entity.Tanaman.Tanaman;
@@ -93,7 +93,7 @@ public class Main {
             toko.tambahKartu(DagingDomba);
             toko.tambahKartu(DagingDomba);
 
-            Simpan.saveGameState( "bojonem.txt");
+//            Simpan.saveGameState( "bojonem.txt");
             toko.printMapData();
 
             player1.getDeckAktif().addKartu(susu);
@@ -106,7 +106,7 @@ public class Main {
 
 //            Game gembrot = new Game();
             Toko ngedol = new Toko();
-            Muat.loadGameState("bojonem.txt");
+//            Muat.loadGameState("bojonem.txt");
             System.out.println(Game.getTurnCnt());
 
         } catch (Exception e) {
