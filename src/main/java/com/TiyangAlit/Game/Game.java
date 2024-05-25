@@ -1,5 +1,6 @@
 package com.TiyangAlit.Game;
 
+import com.TiyangAlit.Game.GameExceptions.GameSelesaiException;
 import com.TiyangAlit.Game.Muat.Muat;
 import com.TiyangAlit.Player.Player;
 import com.TiyangAlit.Toko.Toko;
@@ -16,6 +17,11 @@ public class Game {
     private static Player currentPlayer = players[currentPlayerIdx];
     private static int turnCnt = 1;
     private static Toko toko = new Toko();
+
+    static {
+        players[0].getDeckPasif().initDeck();
+        players[1].getDeckPasif().initDeck();
+    }
 
     /*
      *  METHODS
@@ -48,7 +54,7 @@ public class Game {
         toko = new Toko();
     }
 
-    public static void NEXT() {
+    public static void NEXT() throws GameSelesaiException {
         // Ganti giliran
         setCurrentPlayerIdx(currentPlayerIdx == 0 ? 1 : 0);
         setCurrentPlayer(players[currentPlayerIdx]);
@@ -57,6 +63,11 @@ public class Game {
         // Tambah umur tanaman
         for (Player player : players)
             player.getLadang().tambahUmur();
+
+        if (turnCnt == 21) {
+            Player pemenang = STOP();
+            throw new GameSelesaiException(pemenang.getNama() + "menang!");
+        }
     }
 
     public static void MUAT() {
@@ -65,5 +76,16 @@ public class Game {
         Muat.muat_gameState();
         Muat.muat_player("player1");
         Muat.muat_player("player2");
+    }
+
+    public static Player STOP() {
+        // Panggil kalo turnCnt == 21
+
+        Player pemenang = null;
+        if (players[0].getUang() > players[1].getUang())
+            pemenang = players[0];
+        else if (players[1].getUang() > players[0].getUang())
+            pemenang = players[1];
+        return pemenang;
     }
 }
