@@ -68,14 +68,19 @@ public class MainGUI extends Application{
             controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
 
             InputStream shopFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shop.fxml");
-            Parent shopRoot = homePageLoader.load(shopFxml);
             FXMLLoader shopLoader = new FXMLLoader();
+            Parent shopRoot = shopLoader.load(shopFxml);
             MainGUI.shopController = shopLoader.getController();
-
+//
             InputStream enemyFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/EnemyField.fxml");
-            Parent enemyRoot = homePageLoader.load(shopFxml);
             FXMLLoader enemyLoader = new FXMLLoader();
-            MainGUI.shopController = shopLoader.getController();
+            Parent enemyRoot = enemyLoader.load(enemyFxml);
+            MainGUI.enemyFieldController = enemyLoader.getController();
+//
+            InputStream shuffleFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shuffle.fxml");
+            FXMLLoader shuffleLoader = new FXMLLoader();
+            Parent shuffleRoot = shuffleLoader.load(shuffleFxml);
+            MainGUI.shuffleController = shuffleLoader.getController();
 
             Scene scene = new Scene(root);
 

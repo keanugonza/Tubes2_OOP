@@ -87,7 +87,7 @@ public class CardComponent extends AnchorPane {
                 try {
                     MainGUI.currentPlayer.moveFromShuffle_to_Aktif(shuffleResult, this.kartu);
                     MainGUI.currentPlayer.getDeckAktif().displayDeck();
-                    GridController.FillShuffle(this.getScene().getRoot().);
+                    GridController.FillShuffle(MainGUI.shuffleController.shufflePopup);
                     GridController.FillDeck(GridLadang,GridDeck,MainGUI.ladangPlayer, MainGUI.deckPlayer);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());

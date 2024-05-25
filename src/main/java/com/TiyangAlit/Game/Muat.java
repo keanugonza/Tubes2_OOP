@@ -86,7 +86,7 @@ public class Muat {
 
             // BACA JUMLAH GULDEN
             int guldens = Integer.parseInt(reader.readLine().trim());
-            player.setUang(guldens);
+//            player.setUang(guldens);
 
             // BACA JUMLAH DECK
             int deckSize = Integer.parseInt(reader.readLine().trim());
