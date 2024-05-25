@@ -14,6 +14,8 @@ import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.LadangExceptions.*;
 import com.TiyangAlit.Player.Player;
 
+import java.util.HashMap;
+
 public class Ladang {
     /*
      *  ATTRIBUTES
@@ -57,6 +59,7 @@ public class Ladang {
                 throw new LadangSlotFullException("Slot ladang (" + row + ", " + col + ") sudah penuh.");
 
             int oldBobot = ((Entity) obj).getBobot();
+            HashMap<String, Integer> oldEffects = ((Entity) obj).getEffects();
 
             FoF fof = new FoF();
             KartuFactory factory = fof.createFactory(obj.getClass());
@@ -69,6 +72,7 @@ public class Ladang {
 
             if (entity != null) {
                 entity.setBobot(oldBobot);
+                entity.setEffects(oldEffects);
                 this.data.setEl(row, col, entity);
             }
         } else {

@@ -45,7 +45,7 @@ public abstract class Deck {
             this.deck.add(kartu);
     }
 
-    private int parsePosition(String pos) {
+    public static int parsePosition(String pos) {
         if (pos.length() != 3) {
             throw new IllegalArgumentException("Invalid position format: " + pos);
         }

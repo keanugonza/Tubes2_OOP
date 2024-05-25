@@ -8,14 +8,14 @@ public class Game {
     /*
      *  ATTRIBUTES
      */
-    private static final Player[] players = new Player[]{
+    private static Player[] players = new Player[]{
             new Player("player1"),
             new Player("player2"),
     };
     private static int currentPlayerIdx = 0;
     private static Player currentPlayer = players[currentPlayerIdx];
     private static int turnCnt = 1;
-    private static final Toko toko = new Toko();
+    private static Toko toko = new Toko();
 
     /*
      *  METHODS
@@ -37,6 +37,17 @@ public class Game {
     public static void incTurnCnt() { turnCnt++; }
 
     // Perintah
+    public static void RESET() {
+        players = new Player[]{
+                new Player("player1"),
+                new Player("player2"),
+        };
+        currentPlayerIdx = 0;
+        currentPlayer = players[currentPlayerIdx];
+        turnCnt = 1;
+        toko = new Toko();
+    }
+
     public static void NEXT() {
         // Ganti giliran
         setCurrentPlayerIdx(currentPlayerIdx == 0 ? 1 : 0);
@@ -49,6 +60,10 @@ public class Game {
     }
 
     public static void MUAT() {
+        RESET();
+
         Muat.muat_gameState();
+        Muat.muat_player("player1");
+        Muat.muat_player("player2");
     }
 }

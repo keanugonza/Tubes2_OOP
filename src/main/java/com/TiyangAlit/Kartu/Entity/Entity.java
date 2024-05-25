@@ -47,6 +47,7 @@ public abstract class Entity extends Kartu implements Harvestable, Target {
     }
     public void setStatus(boolean status) { this.status = status; }
     public void addEffect(String effect) { this.effects.put(effect, this.effects.get(effect) + 1); }
+    public void setEffects(HashMap<String, Integer> effects) { this.effects = effects; }
     public void addBobot(int bobot) {
         this.bobot += bobot;
         updateStatus();
