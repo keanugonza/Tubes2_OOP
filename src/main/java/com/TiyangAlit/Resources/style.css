@@ -25,13 +25,17 @@ activeDeck{
 }
 
 Text{
-    -fx-font-family: "Arcade Classic";
+    -fx-font-family: "Continuum Medium";
     -fx-font-size: 14;
     -fx-text-fill: yellow;
 }
 
+Label{
+    -fx-font-family: "Continuum Medium";
+}
+
 Button {
-    -fx-font-family: "Arcade Classic";
+    -fx-font-family: "Continuum Medium";
     -fx-background-radius: 8;
     -fx-border-radius: 8;
     -fx-border-width: 4;
@@ -48,5 +52,5 @@ CardComponent{
     -fx-border-radius: 15;
     -fx-background-radius: 15;
     -fx-font-size: 14;
-    -fx-font-family: "Arcade Classic";
+    -fx-font-family: "Continuum Medium";
 }

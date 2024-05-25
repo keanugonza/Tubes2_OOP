@@ -1,15 +1,21 @@
 package com.TiyangAlit.GUI;
 
 import com.TiyangAlit.Deck.Deck;
+import com.TiyangAlit.Deck.Jenis.DeckPasif;
 import com.TiyangAlit.Game.Game;
 import com.TiyangAlit.Kartu.Entity.Entity;
 import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.Ladang;
+import com.TiyangAlit.Ladang.LadangExceptions.InvalidKartuException;
+import com.TiyangAlit.Ladang.LadangExceptions.LadangSlotFullException;
 import com.TiyangAlit.Ladang.Matrix;
+import com.TiyangAlit.Main;
 import com.TiyangAlit.Toko.Toko;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class GridController {
@@ -74,7 +80,7 @@ public class GridController {
                     final int temprow = i;
                     final int tempcol = j;
                     Entity card = ladang.getData().getEl(i, j);
-                    CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, ladang, deck, card, i,j, false, false);
+                    CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, ladang, deck, card, i,j, false,false, null);
                     newCard.setOnMouseReleased(e -> {
                         int[] Position = new GridController().getColRowFromPosition(GridLadang, e.getSceneX(), e.getSceneY());
                         int finalRowCount = Position[0];
@@ -91,6 +97,13 @@ public class GridController {
                             } catch(Exception ex){
                                 newCard.setTranslateX(0);
                                 newCard.setTranslateY(0);
+                                if(finalRowCount != temprow || finalColCount != tempcol){
+                                    try {
+                                        SceneController.Popup(e, GridLadang.getScene().getWindow(), ex.getMessage());
+                                    } catch (IOException exc) {
+                                        System.out.println(exc.getMessage());
+                                    }
+                                }
                             }
                         }
                     });
@@ -106,7 +119,7 @@ public class GridController {
         for(int i = 0; i < deck.getSize(); i++){
             try{
                 Kartu card =  deck.getDeck().get(i);
-                CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, ladang, deck, card, i, 0, false, true);
+                CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, ladang, deck, card, i, 0, false,true, null);
                 GridDeck.add(newCard, i,0);
                 if(GridLadang != null){
                     newCard.setOnMouseReleased(e -> {
@@ -128,7 +141,11 @@ public class GridController {
                                 } catch (Exception ignored) { }
                                 newCard.setTranslateX(0);
                                 newCard.setTranslateY(0);
-                                System.out.println("ini dari filldeck :" + ex.getMessage());
+                                try {
+                                    SceneController.Popup(e, GridLadang.getScene().getWindow(), ex.getMessage());
+                                } catch (IOException exc) {
+                                    System.out.println(exc.getMessage());
+                                }
                             }
                             GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
                             GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
@@ -149,9 +166,9 @@ public class GridController {
         }
     }
 
-    public static int[] indexToColRow(int i){
-        int col = i % 3;
-        int row = i / 3;
+    public static int[] indexToColRow(int i, int colMax){
+        int col = i % colMax;
+        int row = i / colMax;
         return new int[]{row, col};
     }
 
@@ -161,17 +178,30 @@ public class GridController {
         Toko toko = Game.getToko();
         for(Map.Entry<Produk, Integer> entry: toko.getData().entrySet()){
             Produk currProduk = entry.getKey();
-            int[] ColRow = GridController.indexToColRow(i);
+            int[] ColRow = GridController.indexToColRow(i, 3);
             int row = ColRow[0];
             int col = ColRow[1];
-            CardComponent newCard = new CardComponent(currProduk.getImage(), currProduk.getNama(), GridToko, null, null, null, currProduk, row, col, true, false);
+            CardComponent newCard = new CardComponent(currProduk.getImage(), currProduk.getNama(), GridToko, null, null, null, currProduk, row, col, true,false, null);
             ShopComponent newshopcard = new ShopComponent(newCard);
             GridToko.add(newshopcard, col, row);
             i++;
-            newCard.setOnMouseReleased(e -> {
-                newCard.setTranslateX(0);
-                newCard.setTranslateY(0);
-            });
+        }
+    }
+
+    public static void FillShuffle(GridPane GridShuffle){
+        int i = 0;
+        GridShuffle.getChildren().clear();
+        DeckPasif Deckpasif = MainGUI.currentPlayer.getDeckPasif();
+        List<Kartu> shuffleResult = Deckpasif.shuffleKartu();
+        for(Kartu kartu : shuffleResult){
+            int[] ColRow = GridController.indexToColRow(i, 2);
+            int row = ColRow[0];
+            int col = ColRow[1];
+            System.out.println(row);
+            System.out.println(col);
+            CardComponent newCard = new CardComponent(kartu.getImage(), kartu.getNama(),null, null, null,null, kartu, row, col, false,false, shuffleResult);
+            GridShuffle.add(newCard, col, row);
+            i++;
         }
     }
 }

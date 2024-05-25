@@ -1,13 +1,32 @@
 package com.TiyangAlit.GUI;
 
 import com.TiyangAlit.Game.Game;
+import com.TiyangAlit.Kartu.Entity.Entity;
+import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Player.Player;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +61,7 @@ public class SceneController {
         scene.getStylesheets().add(MainGUI.CSSUrl);
         stage.setScene(scene);
         stage.show();
+        controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
         GridController.FillLadang(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
         GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
     }
@@ -56,6 +76,7 @@ public class SceneController {
         scene.getStylesheets().add(MainGUI.CSSUrl);
         stage.setScene(scene);
         stage.show();
+        controllerEnemyField.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
         GridController.FillLadang(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, MainGUI.ladangEnemy, MainGUI.deckPlayer);
         GridController.FillDeck(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, MainGUI.ladangEnemy, MainGUI.deckPlayer);
     }
@@ -70,9 +91,12 @@ public class SceneController {
         scene.getStylesheets().add(MainGUI.CSSUrl);
         stage.setScene(scene);
         stage.show();
+
         System.out.println("cur :" + MainGUI.currentPlayer);
         System.out.println("enemy: " + MainGUI.enemyPlayer);
         Game.NEXT();
+
+        controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
         MainGUI.currentPlayer = Game.getCurrentPlayer();
         MainGUI.enemyPlayer = Game.getEnemyPlayer();
         MainGUI.ladangPlayer = MainGUI.currentPlayer.getLadang();
@@ -81,5 +105,66 @@ public class SceneController {
         MainGUI.deckEnemy = MainGUI.enemyPlayer.getDeckAktif();
         GridController.FillLadang(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
         GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+        if(!MainGUI.currentPlayer.getDeckAktif().isFull()){
+            SceneController.ShufflePopUp(event, scene.getWindow());
+        }
+    }
+
+    public static void Popup(MouseEvent event, Window owner, String message) throws IOException {
+
+        Stage onTop = new Stage(StageStyle.TRANSPARENT);
+        onTop.setY(owner.getY() + 400);
+        onTop.setX(owner.getX() + 200);
+        onTop.initOwner(owner);
+        onTop.initModality(Modality.APPLICATION_MODAL);
+        owner.getScene().getRoot().setEffect(new GaussianBlur());
+
+        onTop.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if(!newValue){
+                onTop.close();
+                owner.getScene().getRoot().setEffect(null);
+            }
+        });
+
+        VBox newPane = new VBox(5);
+        newPane.setPrefHeight(140);
+        newPane.setPrefWidth(500);
+        newPane.setStyle("-fx-border-color: black; -fx-border-radius: 2;");
+        newPane.setPadding(new Insets(5,5,5,5));
+
+        Label label = new Label(message);
+        label.setFont(new Font("Continuum Medium", 20));
+        label.setWrapText(true);
+        label.setTextAlignment(TextAlignment.valueOf("CENTER"));
+        label.setTextFill(Paint.valueOf("red"));
+        newPane.setAlignment(Pos.CENTER);
+        newPane.getChildren().add(label);
+
+        Scene newScene = new Scene(newPane);
+        onTop.setScene(newScene);
+        onTop.setResizable(false);
+        onTop.showAndWait();
+    }
+
+    public static void ShufflePopUp(MouseEvent event, Window owner) throws IOException {
+        Stage onTop = new Stage(StageStyle.TRANSPARENT);
+        onTop.setY(owner.getY() + 400);
+        onTop.setX(owner.getX() + 200);
+        onTop.initOwner(owner);
+        onTop.initModality(Modality.WINDOW_MODAL);
+        owner.getScene().getRoot().setEffect(new GaussianBlur());
+
+        InputStream shuffleFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shuffle.fxml");
+        FXMLLoader shuffleLoader = new FXMLLoader();
+        root = shuffleLoader.load(shuffleFxml);
+        ShuffleController controllerShuffle = shuffleLoader.getController();
+
+        GridController.FillShuffle(controllerShuffle.shufflePopup);
+
+        Scene shuffleScene = new Scene(root);
+        onTop.setScene(shuffleScene);
+        shuffleScene.getStylesheets().add(MainGUI.CSSUrl);
+        onTop.setResizable(false);
+        onTop.showAndWait();
     }
 }

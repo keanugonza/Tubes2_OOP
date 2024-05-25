@@ -8,19 +8,32 @@ import com.TiyangAlit.Kartu.Kartu;
 import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Ladang.Ladang;
 import com.TiyangAlit.Player.Player;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 import java.util.Objects;
 
 public class CardComponent extends AnchorPane {
@@ -35,7 +48,7 @@ public class CardComponent extends AnchorPane {
     public Kartu kartu;
     public boolean cancelDrag;
 
-    public CardComponent(String imageURL, String description, GridPane GridLadang, GridPane GridDeck, Ladang ladang, Deck deck, Kartu kartu, int row, int col, boolean isToko, boolean isDeck) {
+    public CardComponent(String imageURL, String description, GridPane GridLadang, GridPane GridDeck, Ladang ladang, Deck deck, Kartu kartu, int row, int col, boolean isToko, boolean isDeck, List<Kartu> shuffleResult) {
 
         this.description = description;
         this.kartu = kartu;
@@ -62,7 +75,27 @@ public class CardComponent extends AnchorPane {
         this.text.setWrappingWidth(82);
         this.getChildren().add(this.text);
 
-        if(!isToko){
+        if(shuffleResult != null){
+            this.hoverProperty().addListener((observable, oldValue, newValue) -> {
+                if(newValue){
+                    this.setStyle("-fx-background-color: green");
+                } else{
+                    this.setStyle("-fx-background-color: skyblue");
+                }
+            });
+            this.setOnMouseClicked(e -> {
+                try {
+                    MainGUI.currentPlayer.moveFromShuffle_to_Aktif(shuffleResult, this.kartu);
+                    MainGUI.currentPlayer.getDeckAktif().displayDeck();
+                    GridController.FillShuffle(this.getScene().getRoot().);
+                    GridController.FillDeck(GridLadang,GridDeck,MainGUI.ladangPlayer, MainGUI.deckPlayer);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            });
+        }
+
+        if(!isToko && GridLadang != null){
             this.setOnMousePressed(e ->{
                 System.out.println("Pressed");
                 this.toFront();
@@ -79,9 +112,20 @@ public class CardComponent extends AnchorPane {
 
             this.setOnMouseClicked(e -> {
                 if(!this.cancelDrag) {
-                    Stage onTop = new Stage();
-                    onTop.initOwner(this.getScene().getWindow());
-                    onTop.initModality(Modality.WINDOW_MODAL);
+                    Stage onTop = new Stage(StageStyle.TRANSPARENT);
+                    Window owner = this.getScene().getWindow();
+                    onTop.setY(owner.getY() + 400);
+                    onTop.setX(owner.getX() + 200);
+                    onTop.initOwner(owner);
+                    onTop.initModality(Modality.APPLICATION_MODAL);
+                    owner.getScene().getRoot().setEffect(new GaussianBlur());
+
+                    onTop.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                        if(!newValue){
+                            onTop.close();
+                            owner.getScene().getRoot().setEffect(null);
+                        }
+                    });
 
                     AnchorPane newPane = new AnchorPane();
                     newPane.setPrefHeight(248);
@@ -90,10 +134,12 @@ public class CardComponent extends AnchorPane {
 
                     Button newButton = new Button();
                     newButton.setText("Kembali");
+                    newButton.setFont(new Font("Continuum Medium", 15));
                     newButton.setLayoutX(23);
                     newButton.setLayoutY(15);
                     newButton.setOnMouseClicked(ev -> {
                         onTop.close();
+                        owner.getScene().getRoot().setEffect(null);
                     });
 
                     if(ladang.getPemilikLadang().equals(Game.getCurrentPlayer())){
@@ -109,7 +155,22 @@ public class CardComponent extends AnchorPane {
                                     GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
                                     onTop.close();
                                 } catch (Exception ex) {
-                                    System.out.println(ex.getMessage());
+                                    VBox newPane2 = new VBox(5);
+                                    newPane2.setPrefHeight(140);
+                                    newPane2.setPrefWidth(500);
+                                    newPane2.setStyle("-fx-border-color: black; -fx-border-radius: 2;");
+
+                                    Label label = new Label(ex.getMessage());
+                                    label.setFont(new Font("Continuum Medium", 20));
+                                    label.setWrapText(true);
+                                    label.setTextAlignment(TextAlignment.valueOf("CENTER"));
+                                    label.setTextFill(Paint.valueOf("red"));
+                                    newPane2.setAlignment(Pos.CENTER);
+                                    newPane2.getChildren().add(label);
+
+                                    Scene newScene = new Scene(newPane2);
+                                    onTop.setScene(newScene);
+                                    onTop.setResizable(false);
                                 }
                             });
                             if(this.kartu instanceof Entity){
@@ -120,14 +181,21 @@ public class CardComponent extends AnchorPane {
                             newPane.getChildren().add(newButton2);
                         } else{
                             newButton2.setText("Jual");
+                            newButton2.setFont(new Font("Continuum Medium", 15));
                             newButton2.setOnMouseClicked( event -> {
                                 try {
                                     MainGUI.currentPlayer.jual(this.kartu, Game.getToko());
                                     GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
                                     GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
                                     onTop.close();
+                                    owner.getScene().getRoot().setEffect(null);
                                 } catch (Exception ex) {
-                                    System.out.println(ex.getMessage());
+                                    try {
+                                        onTop.close();
+                                        SceneController.Popup(event, owner, ex.getMessage());
+                                    } catch (IOException exc) {
+                                        System.out.println(exc.getMessage());
+                                    }
                                 }
                             });
                             if(this.kartu instanceof Produk){
@@ -138,7 +206,7 @@ public class CardComponent extends AnchorPane {
 
 
                     Text newText = new Text(this.description);
-                    newText.setFont(new Font("Arial", 20));
+                    newText.setFont(new Font("Continuum Medium", 25));
 
                     TextFlow textFlow = new TextFlow();
                     textFlow.setPrefWidth(500);
@@ -154,6 +222,7 @@ public class CardComponent extends AnchorPane {
                             newText2 = new Text("Berat : " + ((Entity) this.kartu).displayBobot());
                         }
                     }
+                    newText2.setFont(new Font("Continuum Medium", 17));
                     newText2.setLayoutX(23);
                     newText2.setLayoutY(110);
                     newText2.setWrappingWidth(290);
@@ -162,6 +231,7 @@ public class CardComponent extends AnchorPane {
                     if(this.kartu instanceof Entity){
                         newText3 = new Text("Efek: " + ((Entity) this.kartu).displayEffect());
                     }
+                    newText3.setFont(new Font("Continuum Medium", 17));
                     newText3.setLayoutX(23);
                     newText3.setLayoutY(140);
                     newText3.setWrappingWidth(310);

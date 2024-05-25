@@ -1,12 +1,13 @@
 package com.TiyangAlit.GUI;
 
 import com.TiyangAlit.Game.Game;
-import com.TiyangAlit.Kartu.Entity.Entity;
 import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Toko.Toko;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 public class ShopComponent extends AnchorPane {
 
@@ -46,6 +47,12 @@ public class ShopComponent extends AnchorPane {
                     MainGUI.currentPlayer.beli((Produk)this.card.kartu, toko);
                     SceneController.SwitchToShop(e);
                 } catch (Exception ex) {
+                    try {
+                        System.out.println("MASUK CUY");
+                        SceneController.Popup(e, this.getScene().getWindow(),ex.getMessage());
+                    } catch (IOException exc) {
+                        System.out.println(exc.getMessage());
+                    }
                     System.out.println(ex.getMessage());
                 }
             });

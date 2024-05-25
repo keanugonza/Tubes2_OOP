@@ -47,10 +47,6 @@ public class Player {
     public void addUang(int amt) { this.uang += amt; }
     public void reduceUang(int amt) { this.uang -= amt; }
 
-    public void setUang(int amt) {
-        this.uang = amt;
-    }
-
     // Lain-lain
     @Override
     public boolean equals(Object obj) {
@@ -111,12 +107,12 @@ public class Player {
             toko.ambilKartu(produk);
             this.uang -= produk.getHarga();
         }catch (InvalidProdukTokoException e){
-            System.out.println();
+            throw new InvalidProdukTokoException("Terjadi Kesalahan Pada Produk Toko");
         } catch (NoSuchProdukOnToko e){
-            System.out.println("Produk tidak ada di toko");
             this.deckAktif.removeKartu(produk);
+            throw new NoSuchProdukOnToko("Produk tidak ada di Toko");
         } catch (DeckFullException e){
-            System.out.println("Deck penuh");
+            throw new DeckFullException("Deck Penuh");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

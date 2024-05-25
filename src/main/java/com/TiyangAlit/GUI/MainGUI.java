@@ -27,7 +27,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Objects;
@@ -40,6 +39,9 @@ public class MainGUI extends Application{
     static Deck deckPlayer;
     static Deck deckEnemy;
     static HomeController controlerHome;
+    static ShopController shopController;
+    static ShuffleController shuffleController;
+    static EnemyFieldController enemyFieldController;
     static String CSSUrl;
     static Player currentPlayer;
     static Player enemyPlayer;
@@ -52,7 +54,6 @@ public class MainGUI extends Application{
     public void start(Stage stage) throws Exception {
         try{
 
-
             // Bikin icon dan judul aplikasi
             InputStream stream  = new FileInputStream("src/main/java/com/TiyangAlit/Resources/StardewValley.png");
             Image image = new Image(stream);
@@ -63,12 +64,18 @@ public class MainGUI extends Application{
             InputStream homePageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Home.fxml");
             FXMLLoader homePageLoader = new FXMLLoader();
             Parent root = homePageLoader.load(homePageFxml);
+            MainGUI.controlerHome = homePageLoader.getController();
+            controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
 
-            InputStream shopPageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shop.fxml");
-            FXMLLoader shopPageLoader = new FXMLLoader();
+            InputStream shopFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shop.fxml");
+            Parent shopRoot = homePageLoader.load(shopFxml);
+            FXMLLoader shopLoader = new FXMLLoader();
+            MainGUI.shopController = shopLoader.getController();
 
-            InputStream enemyFieldFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/EnemyField.fxml");
-            FXMLLoader enemyFieldLoader = new FXMLLoader();
+            InputStream enemyFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/EnemyField.fxml");
+            Parent enemyRoot = homePageLoader.load(shopFxml);
+            FXMLLoader enemyLoader = new FXMLLoader();
+            MainGUI.shopController = shopLoader.getController();
 
             Scene scene = new Scene(root);
 
@@ -123,7 +130,6 @@ public class MainGUI extends Application{
                 MainGUI.currentPlayer.getDeckAktif().addKartu(prot);
                 MainGUI.currentPlayer.getDeckAktif().addKartu(del);
                 MainGUI.currentPlayer.getDeckAktif().addKartu(acc);
-//                MainGUI.currentPlayer.getDeckAktif().addKartu(inst);
                 MainGUI.currentPlayer.getDeckAktif().addKartu(inst);
 
                 // Player 2
@@ -138,9 +144,6 @@ public class MainGUI extends Application{
                 MainGUI.enemyPlayer.getDeckAktif().addKartu(acc);
                 MainGUI.enemyPlayer.getDeckAktif().addKartu(del);
                 MainGUI.enemyPlayer.getDeckAktif().addKartu(del);
-                System.out.println("------------------------------------");
-                MainGUI.enemyPlayer.getLadang().displayLadang();
-                System.out.println("------------------------------------");
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -151,7 +154,6 @@ public class MainGUI extends Application{
             MainGUI.ladangEnemy = MainGUI.enemyPlayer.getLadang();
             MainGUI.deckEnemy = MainGUI.enemyPlayer.getDeckAktif();
 
-            MainGUI.controlerHome = homePageLoader.getController();
 
             GridController.FillLadang(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
             GridController.FillDeck(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);

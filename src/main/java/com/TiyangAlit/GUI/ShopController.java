@@ -4,6 +4,7 @@ import com.TiyangAlit.Deck.Deck;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
@@ -14,8 +15,8 @@ import java.util.ResourceBundle;
 public class ShopController implements Initializable {
 
     @FXML
+    public Label headerToko;
     public GridPane shopGrid;
-    public Button shopBackButton;
     public GridPane activeDeck;
 
     public void ToHome(javafx.scene.input.MouseEvent actionEvent) throws IOException {
