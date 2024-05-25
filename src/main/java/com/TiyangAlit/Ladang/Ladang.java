@@ -183,12 +183,12 @@ public class Ladang {
             for (int j = 0; j < 5; j++) {
                 Entity currentEntity = this.data.getEl(i, j);
                 if (currentEntity != null) {
-                    char row = (char) ('A' + i);
-                    String location = row + String.format("%02d", j + 1);
+                    char row = (char) ('A' + j);
+                    String location = row + String.format("%02d", i + 1);
                     String effectsDisplay = currentEntity.displayAndCountEffects();
                     result.append(location)
                             .append(" ")
-                            .append(currentEntity.getNama())
+                            .append(currentEntity.getNama().toUpperCase().replace(" ", "_"))
                             .append(" ")
                             .append(currentEntity.getBobot())
                             .append(" ")

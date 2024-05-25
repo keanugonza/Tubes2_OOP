@@ -51,7 +51,7 @@ public class Simpan {
                 result.append(row)
                         .append(String.format("%02d", column))
                         .append(" ")
-                        .append(player.getDeckAktif().getDeck().get(i).getNama())
+                        .append(player.getDeckAktif().getDeck().get(i).getNama().toUpperCase().replace(" ", "_"))
                         .append("\n");
                 rowIndex++;
             }
@@ -82,7 +82,7 @@ public class Simpan {
                 result.append(row)
                         .append(String.format("%02d", column))
                         .append(" ")
-                        .append(player.getDeckAktif().getDeck().get(i).getNama())
+                        .append(player.getDeckAktif().getDeck().get(i).getNama().toUpperCase().replace(" ", "_"))
                         .append("\n");
                 rowIndex++;
             }
