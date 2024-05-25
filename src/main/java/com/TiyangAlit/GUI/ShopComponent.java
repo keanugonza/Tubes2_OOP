@@ -45,7 +45,8 @@ public class ShopComponent extends AnchorPane {
             buyButton.setOnMouseClicked(e -> {
                 try {
                     MainGUI.currentPlayer.beli((Produk)this.card.kartu, toko);
-                    SceneController.SwitchToShop(e);
+                    SceneController newSceneController = new SceneController();
+                    newSceneController.SwitchToShop(e);
                 } catch (Exception ex) {
                     try {
                         System.out.println("MASUK CUY");

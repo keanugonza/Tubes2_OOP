@@ -12,8 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Objects;
 
 
@@ -35,17 +33,14 @@ public class MainGUI extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         try{
-
             // Bikin icon dan judul aplikasi
-            InputStream stream  = new FileInputStream("src/main/java/com/TiyangAlit/Resources/StardewValley.png");
-            Image image = new Image(stream);
+            Image image = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/StardewValley.png")));
             stage.getIcons().add(image);
             stage.setTitle("Stardew Valley");
 
             // Load FXML dan Setup Home Page
-            InputStream homePageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Home.fxml");
             FXMLLoader homePageLoader = new FXMLLoader();
-            Parent root = homePageLoader.load(homePageFxml);
+            Parent root = homePageLoader.load(this.getClass().getResourceAsStream("/Home.fxml"));
             MainGUI.controlerHome = homePageLoader.getController();
             controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
             controlerHome.player1Coin.setText(String.valueOf(Game.getCurrentPlayer().getUang()));
@@ -74,13 +69,13 @@ public class MainGUI extends Application{
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
-            SceneController.ShufflePopUp(scene.getWindow(), controlerHome.cardGrid, controlerHome.activeDeck);
+            SceneController newSceneController = new SceneController();
+            newSceneController.ShufflePopUp(scene.getWindow(), controlerHome.cardGrid, controlerHome.activeDeck);
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
             stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
         }catch (Exception e){
-            throw new Exception("ERROR");
+            throw new Exception(e.getMessage());
         }
-
     }
 
 }

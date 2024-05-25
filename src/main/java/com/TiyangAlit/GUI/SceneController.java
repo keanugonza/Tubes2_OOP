@@ -32,10 +32,9 @@ public class SceneController {
     static Stage stage;
     static Scene scene;
 
-    public static void SwitchToShop(javafx.scene.input.MouseEvent event) throws IOException {
-        InputStream shopPageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shop.fxml");
+    public void SwitchToShop(javafx.scene.input.MouseEvent event) throws IOException {
         FXMLLoader shopPageLoader = new FXMLLoader();
-        root = shopPageLoader.load(shopPageFxml);
+        root = shopPageLoader.load(this.getClass().getResourceAsStream("/Shop.fxml"));
         ShopController shopController = shopPageLoader.getController();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -46,10 +45,9 @@ public class SceneController {
         GridController.FillDeck(null, shopController.activeDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
     }
 
-    public static void SwitchToHome(javafx.scene.input.MouseEvent event) throws IOException {
-        InputStream homePageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Home.fxml");
+    public void SwitchToHome(javafx.scene.input.MouseEvent event) throws IOException {
         FXMLLoader homePageLoader = new FXMLLoader();
-        root = homePageLoader.load(homePageFxml);
+        root = homePageLoader.load(this.getClass().getResourceAsStream("/Home.fxml"));
         HomeController controlerHome = homePageLoader.getController();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -63,10 +61,9 @@ public class SceneController {
         GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, controlerHome.player1Coin, controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
     }
 
-    public static void SwitchToEnemyField(javafx.scene.input.MouseEvent event) throws IOException {
-        InputStream enemyFieldFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/EnemyField.fxml");
+    public void SwitchToEnemyField(javafx.scene.input.MouseEvent event) throws IOException {
         FXMLLoader enemyFieldLoader = new FXMLLoader();
-        root = enemyFieldLoader.load(enemyFieldFxml);
+        root = enemyFieldLoader.load(this.getClass().getResourceAsStream("/EnemyField.fxml"));
         EnemyFieldController controllerEnemyField = enemyFieldLoader.getController();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -80,11 +77,10 @@ public class SceneController {
         GridController.FillDeck(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, controllerEnemyField.player1Coin, controllerEnemyField.player2Coin, MainGUI.ladangEnemy, MainGUI.deckPlayer);
     }
 
-    public static void SwitchPlayer(javafx.scene.input.MouseEvent event, boolean Load){
+    public void SwitchPlayer(javafx.scene.input.MouseEvent event, boolean Load){
         try{
-            InputStream homePageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Home.fxml");
             FXMLLoader homePageLoader = new FXMLLoader();
-            root = homePageLoader.load(homePageFxml);
+            root = homePageLoader.load(this.getClass().getResourceAsStream("/Home.fxml"));
             HomeController controlerHome = homePageLoader.getController();
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -110,7 +106,8 @@ public class SceneController {
             controlerHome.player1Coin.setText(String.valueOf(Game.getPlayers()[0].getUang()));
             controlerHome.player2Coin.setText(String.valueOf(Game.getPlayers()[1].getUang()));
             if(!MainGUI.currentPlayer.getDeckAktif().isFull()){
-                SceneController.ShufflePopUp(scene.getWindow(), controlerHome.cardGrid, controlerHome.activeDeck);
+                SceneController newSceneController = new SceneController();
+                newSceneController.ShufflePopUp(scene.getWindow(), controlerHome.cardGrid, controlerHome.activeDeck);
             }
         } catch (Exception e){
             System.out.println(e.getMessage());
@@ -153,11 +150,10 @@ public class SceneController {
         onTop.showAndWait();
     }
 
-    public static void ShufflePopUp( Window owner, GridPane GridLadang, GridPane GridDeck){
+    public void ShufflePopUp( Window owner, GridPane GridLadang, GridPane GridDeck){
         try{
-            InputStream shuffleFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shuffle.fxml");
             FXMLLoader shuffleLoader = new FXMLLoader();
-            root = shuffleLoader.load(shuffleFxml);
+            root = shuffleLoader.load(this.getClass().getResourceAsStream("/Shuffle.fxml"));
             ShuffleController shuffleController = shuffleLoader.getController();
 
             Stage onTop = new Stage(StageStyle.TRANSPARENT);

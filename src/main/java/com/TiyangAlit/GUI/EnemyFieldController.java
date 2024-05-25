@@ -34,15 +34,18 @@ public class EnemyFieldController implements Initializable {
     public GridPane activeDeck;
 
     public void ToShop(javafx.scene.input.MouseEvent actionEvent) throws IOException {
-        SceneController.SwitchToShop(actionEvent);
+        SceneController newSceneController = new SceneController();
+        newSceneController.SwitchToShop(actionEvent);
     }
 
     public void ToHome(javafx.scene.input.MouseEvent actionEvent) throws IOException {
-        SceneController.SwitchToHome(actionEvent);
+        SceneController newSceneController = new SceneController();
+        newSceneController.SwitchToHome(actionEvent);
     }
 
     public void ToNext(javafx.scene.input.MouseEvent actionEvent) throws IOException {
-        SceneController.SwitchPlayer(actionEvent, false);
+        SceneController newSceneController = new SceneController();
+        newSceneController.SwitchPlayer(actionEvent, false);
     }
 
     @Override

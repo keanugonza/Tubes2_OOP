@@ -30,15 +30,18 @@ public class HomeController implements Initializable {
     public GridPane activeDeck;
 
     public void ToShop(javafx.scene.input.MouseEvent actionEvent) throws IOException {
-        SceneController.SwitchToShop(actionEvent);
+        SceneController newSceneController = new SceneController();
+        newSceneController.SwitchToShop(actionEvent);
     }
 
     public void ToEnemyField(javafx.scene.input.MouseEvent actionEvent) throws IOException {
-        SceneController.SwitchToEnemyField(actionEvent);
+        SceneController newSceneController = new SceneController();
+        newSceneController.SwitchToEnemyField(actionEvent);
     }
 
     public void ToNext(javafx.scene.input.MouseEvent actionEvent) throws Exception {
-        SceneController.SwitchPlayer(actionEvent, false);
+        SceneController newSceneController = new SceneController();
+        newSceneController.SwitchPlayer(actionEvent, false);
     }
 
     @Override
@@ -48,7 +51,8 @@ public class HomeController implements Initializable {
         });
 
         loadStateButton.setOnMouseClicked(e -> {
-            SceneController.SwitchPlayer(e, true);
+            SceneController newSceneController = new SceneController();
+            newSceneController.SwitchPlayer(e, true);
         });
     }
 }
