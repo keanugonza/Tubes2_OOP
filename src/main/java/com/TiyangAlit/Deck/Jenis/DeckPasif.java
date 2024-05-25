@@ -119,6 +119,8 @@ public class DeckPasif extends Deck {
         String[] kartuProdukTanaman = ProdukTanamanFactory.listProdukTanaman;
         allKartu.addAll(Arrays.asList(kartuProdukTanaman));
 
+        allKartu.remove("Beruang");
+
         // Asumsi amt <= 40
         if (amt == 40) {
             initDeck();
