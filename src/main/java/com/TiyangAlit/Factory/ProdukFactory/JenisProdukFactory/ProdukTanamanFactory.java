@@ -8,6 +8,9 @@ public class ProdukTanamanFactory extends ProdukFactory {
     /*
      *  ATTRIBUTES
      */
+
+    public final static String[] listProdukTanaman = new String[]{"Jagung", "Labu", "Stroberi"};
+
     static {
         mapHarga.put("Jagung", 150);
         mapHarga.put("Labu", 500);

@@ -8,6 +8,8 @@ public class KarnivoraFactory extends EntityFactory {
     /*
      *  ATTRIBUTES
      */
+    public final static String[] listKarnivora = new String[]{"Hiu Darat"};
+
     static {
         mapBobotHarvest.put("Hiu Darat", 20);
 

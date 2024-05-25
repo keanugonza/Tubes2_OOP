@@ -8,6 +8,8 @@ public class TanamanFactory extends EntityFactory {
     /*
      *  ATTRIBUTES
      */
+    public final static String[] listTanaman = new String[]{"Biji Jagung","Biji Labu","Biji Stroberi"};
+
     static {
         mapBobotHarvest.put("Biji Jagung", 3);
         mapBobotHarvest.put("Biji Labu", 5);

@@ -8,6 +8,9 @@ public class HerbivoraFactory extends EntityFactory {
     /*
      *  ATTRIBUTES
      */
+
+    public final static String[] listHerbivora = new String[]{"Sapi", "Domba", "Kuda"};
+
     static {
         mapBobotHarvest.put("Sapi", 10);
         mapBobotHarvest.put("Domba", 12);

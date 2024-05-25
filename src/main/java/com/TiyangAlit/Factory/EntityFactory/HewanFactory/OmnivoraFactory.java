@@ -8,6 +8,8 @@ public class OmnivoraFactory extends EntityFactory {
     /*
      *  ATTRIBUTES
      */
+    public final static String[] listOmnivora = new String[]{"Ayam","Beruang"};
+
     static {
         mapBobotHarvest.put("Ayam", 5);
         mapBobotHarvest.put("Beruang", 25);
