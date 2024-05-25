@@ -181,7 +181,9 @@ public class SceneController {
             shuffleScene.getStylesheets().add(MainGUI.CSSUrl);
             shuffleController.reshuffle.setOnMouseClicked(e -> {
                 try {
+                    System.out.println("INININININI      " + shuffleResult.get().size());
                     shuffleResult.set(MainGUI.currentPlayer.shuffleKartu(shuffleResult.get().size()));
+                    System.out.println("INININININI" + shuffleResult.get().size());
                     GridController.FillShuffle(owner,onTop, GridLadang, GridDeck,shuffleController.shufflePopup, shuffleResult.get());
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());

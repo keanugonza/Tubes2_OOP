@@ -74,8 +74,14 @@ public class Player {
     public List<Kartu> shuffleKartu(int jumlah){
         List<Kartu> list = this.deckPasif.shuffleKartu();
         if (this.deckAktif.getSLotKosong() < list.size()){
-            return list.subList(0, this.deckAktif.getSLotKosong());
+            if(this.deckAktif.getSLotKosong() < jumlah){
+
+                return list.subList(0, this.deckAktif.getSLotKosong());
+            } else{
+                return list.subList(0, jumlah);
+            }
         }else{
+            System.out.println("AMAN");
             return list.subList(0, jumlah);
         }
     }

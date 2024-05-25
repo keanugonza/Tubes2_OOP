@@ -198,6 +198,7 @@ public class GridController {
             newCard.setOnMouseClicked(e -> {
                 try {
                     MainGUI.currentPlayer.moveFromShuffle_to_Aktif(shuffleResult, kartu);
+                    System.out.println("nahhhhh" + shuffleResult.size());
                     MainGUI.currentPlayer.getDeckAktif().displayDeck();
                     GridController.FillShuffle(owner, stage, GridLadang, GridDeck, GridShuffle, shuffleResult);
                     GridController.FillDeck(GridLadang,GridDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
