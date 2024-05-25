@@ -49,7 +49,7 @@ public class CardComponent extends AnchorPane {
     public Kartu kartu;
     public boolean cancelDrag;
 
-    public CardComponent(String imageURL, String description, GridPane GridLadang, GridPane GridDeck, GridPane GridShuffle, Ladang ladang, Deck deck, Kartu kartu, int row, int col, boolean isToko, boolean isDeck, List<Kartu> shuffleResult) {
+    public CardComponent(String imageURL, String description, Text Player1Coin, Text Player2Coin, GridPane GridLadang, GridPane GridDeck, GridPane GridShuffle, Ladang ladang, Deck deck, Kartu kartu, int row, int col, boolean isToko, boolean isDeck, List<Kartu> shuffleResult) {
 
         this.description = description;
         this.kartu = kartu;
@@ -141,8 +141,8 @@ public class CardComponent extends AnchorPane {
                             newButton2.setOnMouseClicked( event -> {
                                 try {
                                     MainGUI.currentPlayer.panen(row,col);
-                                    GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
-                                    GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
+                                    GridController.FillDeck(GridLadang, GridDeck, Player1Coin, Player2Coin, ladang, deck);
+                                    GridController.FillLadang(GridLadang, GridDeck, Player1Coin, Player2Coin, ladang, deck);
                                     owner.getScene().getRoot().setEffect(null);
                                     onTop.close();
                                 } catch (Exception ex) {
@@ -176,8 +176,10 @@ public class CardComponent extends AnchorPane {
                             newButton2.setOnMouseClicked( event -> {
                                 try {
                                     MainGUI.currentPlayer.jual(this.kartu, Game.getToko());
-                                    GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
-                                    GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
+                                    GridController.FillDeck(GridLadang, GridDeck, Player1Coin, Player2Coin,ladang, deck);
+                                    GridController.FillLadang(GridLadang, GridDeck,Player1Coin, Player2Coin, ladang, deck);
+                                    Player1Coin.setText(String.valueOf(MainGUI.currentPlayer.getUang()));
+                                    Player2Coin.setText(String.valueOf(MainGUI.enemyPlayer.getUang()));
                                     onTop.close();
                                     owner.getScene().getRoot().setEffect(null);
                                 } catch (Exception ex) {

@@ -83,7 +83,6 @@
       <Button fx:id="tokoButton" layoutX="680.0" layoutY="322.0" mnemonicParsing="false" onMouseClicked="#ToShop" prefHeight="40.0" prefWidth="170.0" text="Toko" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="saveStateButton" layoutX="680.0" layoutY="402.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Save State" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="loadStateButton" layoutX="680.0" layoutY="482.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Load State" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="loadPluginButton" layoutX="680.0" layoutY="562.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="170.0" text="Load Plugin" textAlignment="CENTER" wrapText="true" />
       <Pane layoutX="718.0" layoutY="800.0" prefHeight="76.0" prefWidth="116.0" style="-fx-background-color: lightgray;">
          <children>
             <TextFlow layoutX="2.0" layoutY="14.0" prefHeight="26.0" prefWidth="112.0" style="-fx-background-color: lightgray;" textAlignment="CENTER">

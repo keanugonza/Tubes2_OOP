@@ -44,7 +44,7 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
         GridController.FillToko(shopController.shopGrid);
-        GridController.FillDeck(null, shopController.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+        GridController.FillDeck(null, shopController.activeDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin,MainGUI.ladangPlayer, MainGUI.deckPlayer);
     }
 
     public static void SwitchToHome(javafx.scene.input.MouseEvent event) throws IOException {
@@ -58,8 +58,10 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
         controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
-        GridController.FillLadang(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
-        GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+        controlerHome.player1Coin.setText(String.valueOf(MainGUI.currentPlayer.getUang()));
+        controlerHome.player2Coin.setText(String.valueOf(MainGUI.enemyPlayer.getUang()));
+        GridController.FillLadang(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+        GridController.FillDeck(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
     }
 
     public static void SwitchToEnemyField(javafx.scene.input.MouseEvent event) throws IOException {
@@ -73,8 +75,10 @@ public class SceneController {
         stage.setScene(scene);
         stage.show();
         controllerEnemyField.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
-        GridController.FillLadang(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, MainGUI.ladangEnemy, MainGUI.deckPlayer);
-        GridController.FillDeck(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, MainGUI.ladangEnemy, MainGUI.deckPlayer);
+        controllerEnemyField.player1Coin.setText(String.valueOf(MainGUI.currentPlayer.getUang()));
+        controllerEnemyField.player2Coin.setText(String.valueOf(MainGUI.enemyPlayer.getUang()));
+        GridController.FillLadang(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, controllerEnemyField.player1Coin, controllerEnemyField.player2Coin, MainGUI.ladangEnemy, MainGUI.deckPlayer);
+        GridController.FillDeck(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, controllerEnemyField.player1Coin, controllerEnemyField.player2Coin, MainGUI.ladangEnemy, MainGUI.deckPlayer);
     }
 
     public static void SwitchPlayer(javafx.scene.input.MouseEvent event, boolean Load){
@@ -104,8 +108,8 @@ public class SceneController {
             MainGUI.deckPlayer = MainGUI.currentPlayer.getDeckAktif();
             MainGUI.ladangEnemy = MainGUI.enemyPlayer.getLadang();
             MainGUI.deckEnemy = MainGUI.enemyPlayer.getDeckAktif();
-            GridController.FillLadang(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
-            GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+            GridController.FillLadang(controlerHome.cardGrid, controlerHome.activeDeck, controlerHome.player1Coin, controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+            GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, controlerHome.player1Coin, controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
             if(!MainGUI.currentPlayer.getDeckAktif().isFull()){
                 SceneController.ShufflePopUp(scene.getWindow(), controlerHome.cardGrid, controlerHome.activeDeck);
             }

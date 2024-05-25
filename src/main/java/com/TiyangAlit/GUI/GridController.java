@@ -15,6 +15,7 @@ import com.TiyangAlit.Toko.Toko;
 import javafx.scene.Node;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -75,7 +76,7 @@ public class GridController {
         return new int[]{row, col};
     }
 
-    public static void FillLadang(GridPane GridLadang, GridPane GridDeck, Ladang ladang, Deck deck){
+    public static void FillLadang(GridPane GridLadang, GridPane GridDeck, Text Player1Coin, Text Player2Coin, Ladang ladang, Deck deck){
         ladang.displayLadang();
         GridLadang.getChildren().clear();
         for(int i = 0; i < 4; i++){
@@ -84,7 +85,7 @@ public class GridController {
                     final int temprow = i;
                     final int tempcol = j;
                     Entity card = ladang.getData().getEl(i, j);
-                    CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, null, ladang, deck, card, i,j, false,false, null);
+                    CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), Player1Coin, Player2Coin, GridLadang, GridDeck, null, ladang, deck, card, i,j, false,false, null);
                     newCard.setOnMouseReleased(e -> {
                         int[] Position = new GridController().getColRowFromPosition(GridLadang, e.getSceneX(), e.getSceneY());
                         int finalRowCount = Position[0];
@@ -96,7 +97,7 @@ public class GridController {
                             try{
                                 MainGUI.currentPlayer.place(finalRowCount,finalColCount,newCard.kartu, ladang);
                                 ladang.remove(temprow, tempcol);
-                                GridController.FillLadang(GridLadang,GridDeck, ladang, deck);
+                                GridController.FillLadang(GridLadang,GridDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, ladang, deck);
                                 ladang.displayLadang();
                             } catch(Exception ex){
                                 newCard.setTranslateX(0);
@@ -117,13 +118,13 @@ public class GridController {
         }
     }
 
-    public static void FillDeck(GridPane GridLadang, GridPane GridDeck, Ladang ladang, Deck deck){
+    public static void FillDeck(GridPane GridLadang, GridPane GridDeck, Text Player1Coin, Text Player2Coin, Ladang ladang, Deck deck){
         deck.displayDeck();
         GridDeck.getChildren().clear();
         for(int i = 0; i < deck.getSize(); i++){
             try{
                 Kartu card =  deck.getDeck().get(i);
-                CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, null, ladang, deck, card, i, 0, false,true, null);
+                CardComponent newCard = new CardComponent(card.getImage(), card.getNama(),Player1Coin, Player2Coin, GridLadang, GridDeck, null, ladang, deck, card, i, 0, false,true, null);
                 GridDeck.add(newCard, i,0);
                 if(GridLadang != null){
                     newCard.setOnMouseReleased(e -> {
@@ -149,8 +150,8 @@ public class GridController {
                                     System.out.println(exc.getMessage());
                                 }
                             }
-                            GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
-                            GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
+                            GridController.FillLadang(GridLadang, GridDeck, Player1Coin, Player2Coin, ladang, deck);
+                            GridController.FillDeck(GridLadang, GridDeck, Player1Coin, Player2Coin, ladang, deck);
                             ladang.displayLadang();
                             deck.displayDeck();
                         }
@@ -183,7 +184,7 @@ public class GridController {
             int[] ColRow = GridController.indexToColRow(i, 3);
             int row = ColRow[0];
             int col = ColRow[1];
-            CardComponent newCard = new CardComponent(currProduk.getImage(), currProduk.getNama(), GridToko, null, null, null, null, currProduk, row, col, true,false, null);
+            CardComponent newCard = new CardComponent(currProduk.getImage(), currProduk.getNama(), MainGUI.controlerHome.player1Coin , MainGUI.controlerHome.player2Coin , GridToko, null, null, null, null, currProduk, row, col, true,false, null);
             ShopComponent newshopcard = new ShopComponent(newCard);
             GridToko.add(newshopcard, col, row);
             i++;
@@ -199,13 +200,13 @@ public class GridController {
             int col = ColRow[1];
             System.out.println(row);
             System.out.println(col);
-            CardComponent newCard = new CardComponent(kartu.getImage(), kartu.getNama(),null, GridDeck, GridShuffle,null, MainGUI.currentPlayer.getDeckAktif(), kartu, row, col, false,false, shuffleResult);
+            CardComponent newCard = new CardComponent(kartu.getImage(), kartu.getNama(),MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, null, GridDeck, GridShuffle,null, MainGUI.currentPlayer.getDeckAktif(), kartu, row, col, false,false, shuffleResult);
             newCard.setOnMouseClicked(e -> {
                 try {
                     MainGUI.currentPlayer.moveFromShuffle_to_Aktif(shuffleResult, kartu);
                     MainGUI.currentPlayer.getDeckAktif().displayDeck();
                     GridController.FillShuffle(owner, stage, GridLadang, GridDeck, GridShuffle, shuffleResult);
-                    GridController.FillDeck(GridLadang,GridDeck,MainGUI.ladangPlayer, MainGUI.deckPlayer);
+                    GridController.FillDeck(GridLadang,GridDeck,MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin,MainGUI.ladangPlayer, MainGUI.deckPlayer);
                     if(MainGUI.currentPlayer.getDeckAktif().isFull() || shuffleResult.isEmpty()){
                         stage.close();
                         owner.getScene().getRoot().setEffect(null);

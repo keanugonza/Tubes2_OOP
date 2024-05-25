@@ -1,6 +1,7 @@
 package com.TiyangAlit.GUI;
 
 import com.TiyangAlit.Game.Game;
+import com.TiyangAlit.Game.Simpan;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -25,7 +26,6 @@ public class HomeController implements Initializable {
     public Button tokoButton;
     public Button saveStateButton;
     public Button loadStateButton;
-    public Button loadPluginButton;
     public GridPane cardGrid;
     public GridPane activeDeck;
 
@@ -44,7 +44,7 @@ public class HomeController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         saveStateButton.setOnMouseClicked(e -> {
-
+            Simpan.simpan();
         });
 
         loadStateButton.setOnMouseClicked(e -> {

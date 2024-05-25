@@ -48,6 +48,8 @@ public class MainGUI extends Application{
             Parent root = homePageLoader.load(homePageFxml);
             MainGUI.controlerHome = homePageLoader.getController();
             controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
+            controlerHome.player1Coin.setText(String.valueOf(Game.getCurrentPlayer().getUang()));
+            controlerHome.player2Coin.setText(String.valueOf(Game.getEnemyPlayer().getUang()));
 
             Scene scene = new Scene(root);
 
@@ -66,8 +68,8 @@ public class MainGUI extends Application{
             MainGUI.deckEnemy = MainGUI.enemyPlayer.getDeckAktif();
 
 
-            GridController.FillLadang(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
-            GridController.FillDeck(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+            GridController.FillLadang(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+            GridController.FillDeck(MainGUI.controlerHome.cardGrid, MainGUI.controlerHome.activeDeck, MainGUI.controlerHome.player1Coin, MainGUI.controlerHome.player2Coin, MainGUI.ladangPlayer, MainGUI.deckPlayer);
 
             stage.setResizable(false);
             stage.setScene(scene);

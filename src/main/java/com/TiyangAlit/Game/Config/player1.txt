@@ -1,6 +1,10 @@
-500
-39
-1
-A01 BERUANG
-1
-B02 DOMBA 5 3 ACCELERATE DELAY PROTECT
+101000
+32
+3
+A01 Susu
+B01 Susu
+C01 Susu
+3
+A01 Biji Stroberi 2 0 
+A02 Biji Stroberi 0 0 
+A03 Biji Jagung 0 0 
