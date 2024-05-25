@@ -1,7 +1,6 @@
 package com.TiyangAlit.GUI;
 
-import com.TiyangAlit.Game.Game;
-import com.TiyangAlit.Game.Simpan;
+import com.TiyangAlit.Game.Simpan.Simpan;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -28,6 +27,7 @@ public class HomeController implements Initializable {
     public Button loadStateButton;
     public GridPane cardGrid;
     public GridPane activeDeck;
+    public Text deckNumber;
 
     public void ToShop(javafx.scene.input.MouseEvent actionEvent) throws IOException {
         SceneController newSceneController = new SceneController();

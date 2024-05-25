@@ -73,6 +73,7 @@ public class MainGUI extends Application{
             newSceneController.ShufflePopUp(scene.getWindow(), controlerHome.cardGrid, controlerHome.activeDeck);
             Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
             stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+            controlerHome.deckNumber.setText(String.valueOf(Game.getCurrentPlayer().getDeckPasif().getSize()));
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

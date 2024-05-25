@@ -9,18 +9,15 @@ import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukHewanFactor
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukTanamanFactory;
 import com.TiyangAlit.Game.Game;
 //import com.TiyangAlit.Game.Muat;
-import com.TiyangAlit.Game.Simpan;
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Karnivora;
 import com.TiyangAlit.Kartu.Entity.Tanaman.Tanaman;
 import com.TiyangAlit.Kartu.Item.Item;
 import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukHewan;
-import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukTanaman;
 import com.TiyangAlit.Kartu.Produk.Produk;
 import com.TiyangAlit.Player.Player;
 import com.TiyangAlit.Toko.Toko;
 
 import java.io.File;
-import java.io.FileWriter;
 /*
  *  CARA RUN:
  *  - mvn clean package

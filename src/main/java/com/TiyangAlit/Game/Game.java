@@ -66,7 +66,10 @@ public class Game {
 
         if (turnCnt == 21) {
             Player pemenang = STOP();
-            throw new GameSelesaiException(pemenang.getNama() + "menang!");
+            if(pemenang == null){
+                throw new GameSelesaiException("Berakhir seri!!!");
+            }
+            throw new GameSelesaiException(pemenang.getNama() + " menang!");
         }
     }
 

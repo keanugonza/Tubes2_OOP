@@ -1,5 +1,6 @@
 package com.TiyangAlit.GUI;
 
+import com.TiyangAlit.Game.Simpan.Simpan;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -29,9 +30,9 @@ public class EnemyFieldController implements Initializable {
     public Button tokoButton;
     public Button saveStateButton;
     public Button loadStateButton;
-    public Button loadPluginButton;
     public GridPane enemyGrid;
     public GridPane activeDeck;
+    public Text deckNumber;
 
     public void ToShop(javafx.scene.input.MouseEvent actionEvent) throws IOException {
         SceneController newSceneController = new SceneController();
@@ -50,6 +51,13 @@ public class EnemyFieldController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        System.out.println("Hello World");
+        saveStateButton.setOnMouseClicked(e -> {
+            Simpan.simpan();
+        });
+
+        loadStateButton.setOnMouseClicked(e -> {
+            SceneController newSceneController = new SceneController();
+            newSceneController.SwitchPlayer(e, true);
+        });
     }
 }

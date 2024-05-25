@@ -1,6 +1,7 @@
 package com.TiyangAlit.GUI;
 
 import com.TiyangAlit.Game.Game;
+import com.TiyangAlit.Game.GameExceptions.GameSelesaiException;
 import com.TiyangAlit.Kartu.Kartu;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -36,6 +37,7 @@ public class SceneController {
         FXMLLoader shopPageLoader = new FXMLLoader();
         root = shopPageLoader.load(this.getClass().getResourceAsStream("/Shop.fxml"));
         ShopController shopController = shopPageLoader.getController();
+        shopController.deckNumber.setText(String.valueOf(Game.getCurrentPlayer().getDeckPasif().getSize()));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(MainGUI.CSSUrl);
@@ -49,6 +51,7 @@ public class SceneController {
         FXMLLoader homePageLoader = new FXMLLoader();
         root = homePageLoader.load(this.getClass().getResourceAsStream("/Home.fxml"));
         HomeController controlerHome = homePageLoader.getController();
+        controlerHome.deckNumber.setText(String.valueOf(Game.getCurrentPlayer().getDeckPasif().getSize()));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(MainGUI.CSSUrl);
@@ -65,6 +68,7 @@ public class SceneController {
         FXMLLoader enemyFieldLoader = new FXMLLoader();
         root = enemyFieldLoader.load(this.getClass().getResourceAsStream("/EnemyField.fxml"));
         EnemyFieldController controllerEnemyField = enemyFieldLoader.getController();
+        controllerEnemyField.deckNumber.setText(String.valueOf(Game.getCurrentPlayer().getDeckPasif().getSize()));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         scene.getStylesheets().add(MainGUI.CSSUrl);
@@ -89,10 +93,13 @@ public class SceneController {
             stage.show();
 
             if(!Load){
-                Game.NEXT();
+                try{
+                    Game.NEXT();
+                } catch(GameSelesaiException gg){
+                    SceneController.Popup(null,scene.getWindow(),gg.getMessage());
+                }
             } else{
                 Game.MUAT();
-
             }
 
             controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
@@ -110,6 +117,7 @@ public class SceneController {
                 SceneController newSceneController = new SceneController();
                 newSceneController.ShufflePopUp(scene.getWindow(), controlerHome.cardGrid, controlerHome.activeDeck);
             }
+            controlerHome.deckNumber.setText(String.valueOf(Game.getCurrentPlayer().getDeckPasif().getSize()));
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
