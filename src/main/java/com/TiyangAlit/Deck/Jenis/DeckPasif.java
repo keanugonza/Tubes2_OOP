@@ -1,6 +1,7 @@
 package com.TiyangAlit.Deck.Jenis;
 
 import com.TiyangAlit.Deck.Deck;
+import com.TiyangAlit.Deck.DeckExceptions.DeckFullException;
 import com.TiyangAlit.Factory.EntityFactory.HewanFactory.HerbivoraFactory;
 import com.TiyangAlit.Factory.EntityFactory.HewanFactory.KarnivoraFactory;
 import com.TiyangAlit.Factory.EntityFactory.HewanFactory.OmnivoraFactory;
@@ -11,9 +12,7 @@ import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukHewanFactor
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukTanamanFactory;
 import com.TiyangAlit.Kartu.Kartu;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class DeckPasif extends Deck {
     /*
@@ -96,7 +95,30 @@ public class DeckPasif extends Deck {
         } catch (Exception ignored) { }
     }
 
-    public void initDeck(int amt) {
+    public void initDeck(int amt) throws DeckFullException {
+        Random rand = new Random();
+        int randomIndex;
+
+        List<String> allKartu = new ArrayList<>();
+
+        String[] kartuHerbivora = HerbivoraFactory.listHerbivora;
+        allKartu.addAll(Arrays.asList(kartuHerbivora));
+
+        String[] kartuKarnivora = KarnivoraFactory.listKarnivora;
+        allKartu.addAll(Arrays.asList(kartuKarnivora));
+
+        String[] kartuOmnivora = OmnivoraFactory.listOmnivora;
+        allKartu.addAll(Arrays.asList(kartuOmnivora));
+
+        String[] kartuItem = ItemFactory.listItem;
+        allKartu.addAll(Arrays.asList(kartuItem));
+
+        String[] kartuProdukHewan = ProdukHewanFactory.listProdukHewan;
+        allKartu.addAll(Arrays.asList(kartuProdukHewan));
+
+        String[] kartuProdukTanaman = ProdukTanamanFactory.listProdukTanaman;
+        allKartu.addAll(Arrays.asList(kartuProdukTanaman));
+
         // Asumsi amt <= 40
         if (amt == 40) {
             initDeck();
@@ -104,7 +126,27 @@ public class DeckPasif extends Deck {
         }
 
         for (int i = 0; i < amt; i++) {
-            // TODO: Implement, add kartu random (kecuali beruang)
+            randomIndex = rand.nextInt(allKartu.size());
+            String randomValue = allKartu.get(randomIndex);
+
+            KartuFactory factory;
+            if (Arrays.stream(ItemFactory.listItem).anyMatch(s -> s.contains(randomValue)))
+                factory = new ItemFactory();
+            else if (Arrays.stream(HerbivoraFactory.listHerbivora).anyMatch(s -> s.contains(randomValue)))
+                factory = new HerbivoraFactory();
+            else if (Arrays.stream(KarnivoraFactory.listKarnivora).anyMatch(s -> s.contains(randomValue)))
+                factory = new KarnivoraFactory();
+            else if (Arrays.stream(OmnivoraFactory.listOmnivora).anyMatch(s -> s.contains(randomValue)))
+                factory = new OmnivoraFactory();
+            else if (Arrays.stream(TanamanFactory.listTanaman).anyMatch(s -> s.contains(randomValue)))
+                factory = new TanamanFactory();
+            else if (Arrays.stream(ProdukHewanFactory.listProdukHewan).anyMatch(s -> s.contains(randomValue)))
+                factory = new ProdukHewanFactory();
+            else
+                factory = new ProdukTanamanFactory();
+            Kartu kartu = factory.createKartu(randomValue);
+
+            addKartu(kartu);
         }
     }
 }
