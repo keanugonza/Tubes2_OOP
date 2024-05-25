@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="955.0" prefWidth="1029.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TiyangAlit.GUI.ShopController">
+<AnchorPane prefHeight="955.0" prefWidth="1029.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.TiyangAlit.GUI.ShopController">
    <children>
       <Label fx:id="headerToko" ellipsisString="" layoutX="356.0" layoutY="52.0" text="Toko">
          <font>

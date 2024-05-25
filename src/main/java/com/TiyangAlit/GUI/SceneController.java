@@ -92,6 +92,7 @@ public class SceneController {
                 Game.NEXT();
             } else{
                 Game.MUAT();
+
             }
 
             controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));

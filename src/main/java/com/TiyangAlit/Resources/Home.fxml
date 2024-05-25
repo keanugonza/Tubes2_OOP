@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TiyangAlit.GUI.HomeController">
+<AnchorPane prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.TiyangAlit.GUI.HomeController">
    <children>
       <Pane layoutX="14.0" layoutY="131.0" prefHeight="816.0" prefWidth="666.0">
          <children>

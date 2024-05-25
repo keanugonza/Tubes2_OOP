@@ -76,6 +76,8 @@ public class Game {
         Muat.muat_gameState();
         Muat.muat_player("player1");
         Muat.muat_player("player2");
+        System.out.println("testoi8");
+        Game.getCurrentPlayer().getLadang().displayLadang();
     }
 
     public static Player STOP() {

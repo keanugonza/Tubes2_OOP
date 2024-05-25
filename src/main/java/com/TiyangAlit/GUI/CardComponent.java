@@ -27,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -149,7 +150,6 @@ public class CardComponent extends AnchorPane {
                                     label.setFont(new Font("Continuum Medium", 20));
                                     label.setWrapText(true);
                                     label.setTextAlignment(TextAlignment.valueOf("CENTER"));
-                                    label.setTextFill(Paint.valueOf("red"));
                                     newPane2.setAlignment(Pos.CENTER);
                                     newPane2.getChildren().add(label);
 

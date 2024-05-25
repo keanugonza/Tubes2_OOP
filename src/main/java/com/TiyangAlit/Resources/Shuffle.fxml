@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="395.0" prefWidth="338.0" style="-fx-background-radius: 30; -fx-background-color: ligthgray; -fx-border-radius: 30;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TiyangAlit.GUI.ShuffleController">
+<AnchorPane prefHeight="395.0" prefWidth="338.0" style="-fx-background-radius: 30; -fx-background-color: ligthgray; -fx-border-radius: 30;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.TiyangAlit.GUI.ShuffleController">
    <children>
       <AnchorPane prefHeight="396.0" prefWidth="341.0" style="-fx-background-color: lightgray;">
          <children>

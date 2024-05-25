@@ -25,7 +25,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class Muat {
     /*
@@ -43,9 +42,8 @@ public class Muat {
      *  METHODS
      */
     public static String getPath(String filename) {
-        Muat muatku = new Muat();
-        return Objects.requireNonNull(muatku.getClass().getResource("/" + filename)).toExternalForm();
-//        return String.valueOf(currRelativePath.toAbsolutePath());
+        System.out.println(System.getProperty("user.dir"));
+        return "src/main/java/com/TiyangAlit/Game/Config/" + filename;
     }
 
     public static String convertNama(String nama) {
