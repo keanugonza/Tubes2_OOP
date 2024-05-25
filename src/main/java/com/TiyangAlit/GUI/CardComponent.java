@@ -10,6 +10,7 @@ import com.TiyangAlit.Ladang.Ladang;
 import com.TiyangAlit.Player.Player;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -48,7 +49,7 @@ public class CardComponent extends AnchorPane {
     public Kartu kartu;
     public boolean cancelDrag;
 
-    public CardComponent(String imageURL, String description, GridPane GridLadang, GridPane GridDeck, Ladang ladang, Deck deck, Kartu kartu, int row, int col, boolean isToko, boolean isDeck, List<Kartu> shuffleResult) {
+    public CardComponent(String imageURL, String description, GridPane GridLadang, GridPane GridDeck, GridPane GridShuffle, Ladang ladang, Deck deck, Kartu kartu, int row, int col, boolean isToko, boolean isDeck, List<Kartu> shuffleResult) {
 
         this.description = description;
         this.kartu = kartu;
@@ -83,21 +84,10 @@ public class CardComponent extends AnchorPane {
                     this.setStyle("-fx-background-color: skyblue");
                 }
             });
-            this.setOnMouseClicked(e -> {
-                try {
-                    MainGUI.currentPlayer.moveFromShuffle_to_Aktif(shuffleResult, this.kartu);
-                    MainGUI.currentPlayer.getDeckAktif().displayDeck();
-                    GridController.FillShuffle(MainGUI.shuffleController.shufflePopup);
-                    GridController.FillDeck(GridLadang,GridDeck,MainGUI.ladangPlayer, MainGUI.deckPlayer);
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
-            });
         }
 
-        if(!isToko && GridLadang != null){
+        if(GridShuffle == null){
             this.setOnMousePressed(e ->{
-                System.out.println("Pressed");
                 this.toFront();
                 this.cancelDrag = false;
                 this.startX = e.getSceneX() - this.getTranslateX();
@@ -153,6 +143,7 @@ public class CardComponent extends AnchorPane {
                                     MainGUI.currentPlayer.panen(row,col);
                                     GridController.FillDeck(GridLadang, GridDeck, ladang, deck);
                                     GridController.FillLadang(GridLadang, GridDeck, ladang, deck);
+                                    owner.getScene().getRoot().setEffect(null);
                                     onTop.close();
                                 } catch (Exception ex) {
                                     VBox newPane2 = new VBox(5);

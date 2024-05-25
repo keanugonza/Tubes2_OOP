@@ -12,7 +12,11 @@ import com.TiyangAlit.Ladang.LadangExceptions.LadangSlotFullException;
 import com.TiyangAlit.Ladang.Matrix;
 import com.TiyangAlit.Main;
 import com.TiyangAlit.Toko.Toko;
+import javafx.scene.Node;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.util.List;
@@ -80,7 +84,7 @@ public class GridController {
                     final int temprow = i;
                     final int tempcol = j;
                     Entity card = ladang.getData().getEl(i, j);
-                    CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, ladang, deck, card, i,j, false,false, null);
+                    CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, null, ladang, deck, card, i,j, false,false, null);
                     newCard.setOnMouseReleased(e -> {
                         int[] Position = new GridController().getColRowFromPosition(GridLadang, e.getSceneX(), e.getSceneY());
                         int finalRowCount = Position[0];
@@ -119,15 +123,13 @@ public class GridController {
         for(int i = 0; i < deck.getSize(); i++){
             try{
                 Kartu card =  deck.getDeck().get(i);
-                CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, ladang, deck, card, i, 0, false,true, null);
+                CardComponent newCard = new CardComponent(card.getImage(), card.getNama(), GridLadang, GridDeck, null, ladang, deck, card, i, 0, false,true, null);
                 GridDeck.add(newCard, i,0);
                 if(GridLadang != null){
                     newCard.setOnMouseReleased(e -> {
                         int[] Position = new GridController().getColRowFromPosition(GridLadang, e.getSceneX(), e.getSceneY());
                         int finalRowCount = Position[0];
                         int finalColCount = Position[1];
-                        System.out.println("finalRowCount: " + finalRowCount);
-                        System.out.println("finalColCount: " + finalColCount);
                         if( finalRowCount == -1 || finalColCount == -1 ){
                             newCard.setTranslateX(0);
                             newCard.setTranslateY(0);
@@ -181,25 +183,37 @@ public class GridController {
             int[] ColRow = GridController.indexToColRow(i, 3);
             int row = ColRow[0];
             int col = ColRow[1];
-            CardComponent newCard = new CardComponent(currProduk.getImage(), currProduk.getNama(), GridToko, null, null, null, currProduk, row, col, true,false, null);
+            CardComponent newCard = new CardComponent(currProduk.getImage(), currProduk.getNama(), GridToko, null, null, null, null, currProduk, row, col, true,false, null);
             ShopComponent newshopcard = new ShopComponent(newCard);
             GridToko.add(newshopcard, col, row);
             i++;
         }
     }
 
-    public static void FillShuffle(GridPane GridShuffle){
+    public static void FillShuffle(Window owner, Stage stage, GridPane GridLadang, GridPane GridDeck, GridPane GridShuffle, List<Kartu> shuffleResult){
         int i = 0;
         GridShuffle.getChildren().clear();
-        DeckPasif Deckpasif = MainGUI.currentPlayer.getDeckPasif();
-        List<Kartu> shuffleResult = Deckpasif.shuffleKartu();
         for(Kartu kartu : shuffleResult){
             int[] ColRow = GridController.indexToColRow(i, 2);
             int row = ColRow[0];
             int col = ColRow[1];
             System.out.println(row);
             System.out.println(col);
-            CardComponent newCard = new CardComponent(kartu.getImage(), kartu.getNama(),null, null, null,null, kartu, row, col, false,false, shuffleResult);
+            CardComponent newCard = new CardComponent(kartu.getImage(), kartu.getNama(),null, GridDeck, GridShuffle,null, MainGUI.currentPlayer.getDeckAktif(), kartu, row, col, false,false, shuffleResult);
+            newCard.setOnMouseClicked(e -> {
+                try {
+                    MainGUI.currentPlayer.moveFromShuffle_to_Aktif(shuffleResult, kartu);
+                    MainGUI.currentPlayer.getDeckAktif().displayDeck();
+                    GridController.FillShuffle(owner, stage, GridLadang, GridDeck, GridShuffle, shuffleResult);
+                    GridController.FillDeck(GridLadang,GridDeck,MainGUI.ladangPlayer, MainGUI.deckPlayer);
+                    if(MainGUI.currentPlayer.getDeckAktif().isFull() || shuffleResult.isEmpty()){
+                        stage.close();
+                        owner.getScene().getRoot().setEffect(null);
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            });
             GridShuffle.add(newCard, col, row);
             i++;
         }

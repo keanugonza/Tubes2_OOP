@@ -1,15 +1,12 @@
 package com.TiyangAlit.GUI;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
+import com.TiyangAlit.Game.Game;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -40,12 +37,18 @@ public class HomeController implements Initializable {
         SceneController.SwitchToEnemyField(actionEvent);
     }
 
-    public void ToNext(javafx.scene.input.MouseEvent actionEvent) throws IOException {
-        SceneController.SwitchPlayer(actionEvent);
+    public void ToNext(javafx.scene.input.MouseEvent actionEvent) throws Exception {
+        SceneController.SwitchPlayer(actionEvent, false);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        System.out.println("Hello World");
+        saveStateButton.setOnMouseClicked(e -> {
+
+        });
+
+        loadStateButton.setOnMouseClicked(e -> {
+            SceneController.SwitchPlayer(e, true);
+        });
     }
 }

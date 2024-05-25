@@ -1,35 +1,31 @@
 package com.TiyangAlit.GUI;
 
+import com.TiyangAlit.Deck.Jenis.DeckPasif;
 import com.TiyangAlit.Game.Game;
-import com.TiyangAlit.Kartu.Entity.Entity;
-import com.TiyangAlit.Kartu.Produk.Produk;
-import com.TiyangAlit.Player.Player;
-import javafx.event.ActionEvent;
+import com.TiyangAlit.Kartu.Kartu;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 
 public class SceneController {
@@ -81,32 +77,40 @@ public class SceneController {
         GridController.FillDeck(controllerEnemyField.enemyGrid, controllerEnemyField.activeDeck, MainGUI.ladangEnemy, MainGUI.deckPlayer);
     }
 
-    public static void SwitchPlayer(javafx.scene.input.MouseEvent event) throws IOException{
-        InputStream homePageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Home.fxml");
-        FXMLLoader homePageLoader = new FXMLLoader();
-        root = homePageLoader.load(homePageFxml);
-        HomeController controlerHome = homePageLoader.getController();
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        scene.getStylesheets().add(MainGUI.CSSUrl);
-        stage.setScene(scene);
-        stage.show();
+    public static void SwitchPlayer(javafx.scene.input.MouseEvent event, boolean Load){
+        try{
+            InputStream homePageFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Home.fxml");
+            FXMLLoader homePageLoader = new FXMLLoader();
+            root = homePageLoader.load(homePageFxml);
+            HomeController controlerHome = homePageLoader.getController();
+            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            scene.getStylesheets().add(MainGUI.CSSUrl);
+            stage.setScene(scene);
+            stage.show();
 
-        System.out.println("cur :" + MainGUI.currentPlayer);
-        System.out.println("enemy: " + MainGUI.enemyPlayer);
-        Game.NEXT();
+            if(!Load){
+                Game.NEXT();
+            } else{
+                Game.MUAT();
+                Game.getCurrentPlayer().getLadang().displayLadang();
+                Game.getCurrentPlayer().getDeckAktif().displayDeck();
+            }
 
-        controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
-        MainGUI.currentPlayer = Game.getCurrentPlayer();
-        MainGUI.enemyPlayer = Game.getEnemyPlayer();
-        MainGUI.ladangPlayer = MainGUI.currentPlayer.getLadang();
-        MainGUI.deckPlayer = MainGUI.currentPlayer.getDeckAktif();
-        MainGUI.ladangEnemy = MainGUI.enemyPlayer.getLadang();
-        MainGUI.deckEnemy = MainGUI.enemyPlayer.getDeckAktif();
-        GridController.FillLadang(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
-        GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
-        if(!MainGUI.currentPlayer.getDeckAktif().isFull()){
-            SceneController.ShufflePopUp(event, scene.getWindow());
+            controlerHome.turnNumber.setText(String.valueOf(Game.getTurnCnt()));
+            MainGUI.currentPlayer = Game.getCurrentPlayer();
+            MainGUI.enemyPlayer = Game.getEnemyPlayer();
+            MainGUI.ladangPlayer = MainGUI.currentPlayer.getLadang();
+            MainGUI.deckPlayer = MainGUI.currentPlayer.getDeckAktif();
+            MainGUI.ladangEnemy = MainGUI.enemyPlayer.getLadang();
+            MainGUI.deckEnemy = MainGUI.enemyPlayer.getDeckAktif();
+            GridController.FillLadang(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+            GridController.FillDeck(controlerHome.cardGrid, controlerHome.activeDeck, MainGUI.ladangPlayer, MainGUI.deckPlayer);
+            if(!MainGUI.currentPlayer.getDeckAktif().isFull()){
+                SceneController.ShufflePopUp(scene.getWindow(), controlerHome.cardGrid, controlerHome.activeDeck);
+            }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 
@@ -146,25 +150,41 @@ public class SceneController {
         onTop.showAndWait();
     }
 
-    public static void ShufflePopUp(MouseEvent event, Window owner) throws IOException {
-        Stage onTop = new Stage(StageStyle.TRANSPARENT);
-        onTop.setY(owner.getY() + 400);
-        onTop.setX(owner.getX() + 200);
-        onTop.initOwner(owner);
-        onTop.initModality(Modality.WINDOW_MODAL);
-        owner.getScene().getRoot().setEffect(new GaussianBlur());
+    public static void ShufflePopUp( Window owner, GridPane GridLadang, GridPane GridDeck){
+        try{
+            InputStream shuffleFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shuffle.fxml");
+            FXMLLoader shuffleLoader = new FXMLLoader();
+            root = shuffleLoader.load(shuffleFxml);
+            ShuffleController shuffleController = shuffleLoader.getController();
 
-        InputStream shuffleFxml = new FileInputStream("src/main/java/com/TiyangAlit/GUI/Shuffle.fxml");
-        FXMLLoader shuffleLoader = new FXMLLoader();
-        root = shuffleLoader.load(shuffleFxml);
-        ShuffleController controllerShuffle = shuffleLoader.getController();
+            Stage onTop = new Stage(StageStyle.TRANSPARENT);
+            onTop.setY(owner.getY() + 400);
+            onTop.setX(owner.getX() + 200);
+            onTop.initOwner(owner);
+            onTop.initModality(Modality.WINDOW_MODAL);
 
-        GridController.FillShuffle(controllerShuffle.shufflePopup);
+            owner.getScene().getRoot().setEffect(new GaussianBlur());
 
-        Scene shuffleScene = new Scene(root);
-        onTop.setScene(shuffleScene);
-        shuffleScene.getStylesheets().add(MainGUI.CSSUrl);
-        onTop.setResizable(false);
-        onTop.showAndWait();
+            AtomicReference<List<Kartu>> shuffleResult = new AtomicReference<>(MainGUI.currentPlayer.shuffleKartu(4));
+
+            GridController.FillShuffle(owner, onTop, GridLadang,GridDeck, shuffleController.shufflePopup, shuffleResult.get());
+
+            Scene shuffleScene = new Scene(root);
+            shuffleScene.getStylesheets().add(MainGUI.CSSUrl);
+            shuffleController.reshuffle.setOnMouseClicked(e -> {
+                try {
+                    shuffleResult.set(MainGUI.currentPlayer.shuffleKartu(shuffleResult.get().size()));
+                    GridController.FillShuffle(owner,onTop, GridLadang, GridDeck,shuffleController.shufflePopup, shuffleResult.get());
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            });
+
+            onTop.setScene(shuffleScene);
+            onTop.setResizable(false);
+            onTop.showAndWait();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

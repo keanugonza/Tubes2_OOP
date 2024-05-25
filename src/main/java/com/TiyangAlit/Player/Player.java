@@ -71,11 +71,8 @@ public class Player {
         ladang.place(row, col, kartu);
     }
 
-    public List<Kartu> shuffleKartu(int jumlah) throws Exception{
+    public List<Kartu> shuffleKartu(int jumlah){
         List<Kartu> list = this.deckPasif.shuffleKartu();
-        if (jumlah > list.size()){
-            throw new Exception("Terlalu banyak jumlahnya");
-        }
         if (this.deckAktif.getSLotKosong() < list.size()){
             return list.subList(0, this.deckAktif.getSLotKosong());
         }else{

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="395.0" prefWidth="338.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TiyangAlit.GUI.ShuffleController">
+<AnchorPane prefHeight="395.0" prefWidth="338.0" style="-fx-background-radius: 30; -fx-background-color: ligthgray; -fx-border-radius: 30;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.TiyangAlit.GUI.ShuffleController">
    <children>
-      <AnchorPane layoutY="1.0" prefHeight="395.0" prefWidth="341.0" style="-fx-background-color: lightgray;">
+      <AnchorPane prefHeight="396.0" prefWidth="341.0" style="-fx-background-color: lightgray;">
          <children>
             <GridPane fx:id="shufflePopup" gridLinesVisible="true" hgap="40.0" layoutX="41.0" prefHeight="334.0" prefWidth="259.0" vgap="40.0">
                <columnConstraints>
@@ -23,6 +24,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </GridPane>
+            <ImageView fx:id="reshuffle" fitHeight="48.0" fitWidth="44.0" layoutX="149.0" layoutY="323.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>

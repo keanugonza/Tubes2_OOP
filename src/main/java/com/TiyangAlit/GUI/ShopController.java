@@ -28,7 +28,7 @@ public class ShopController implements Initializable {
     }
 
     public void ToNext(javafx.scene.input.MouseEvent actionEvent) throws IOException {
-        SceneController.SwitchPlayer(actionEvent);
+        SceneController.SwitchPlayer(actionEvent, false);
     }
 
     @Override
