@@ -1,5 +1,6 @@
 package com.TiyangAlit.Game;
 
+import com.TiyangAlit.Game.Muat.Muat;
 import com.TiyangAlit.Player.Player;
 import com.TiyangAlit.Toko.Toko;
 
@@ -45,5 +46,9 @@ public class Game {
         // Tambah umur tanaman
         for (Player player : players)
             player.getLadang().tambahUmur();
+    }
+
+    public static void MUAT() {
+        Muat.muat_gameState();
     }
 }

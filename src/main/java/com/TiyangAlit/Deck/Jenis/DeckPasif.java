@@ -25,7 +25,6 @@ public class DeckPasif extends Deck {
      */
     public DeckPasif() {
         super(40);
-        initDeck();
     }
 
     // Getter & Setter
@@ -95,5 +94,17 @@ public class DeckPasif extends Deck {
             addKartu(itemFactory.createKartu("Protect"));
             addKartu(itemFactory.createKartu("Trap"));
         } catch (Exception ignored) { }
+    }
+
+    public void initDeck(int amt) {
+        // Asumsi amt <= 40
+        if (amt == 40) {
+            initDeck();
+            return;
+        }
+
+        for (int i = 0; i < amt; i++) {
+            // TODO: Implement, add kartu random (kecuali beruang)
+        }
     }
 }

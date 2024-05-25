@@ -2,9 +2,7 @@ package com.TiyangAlit.Game;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
 import com.TiyangAlit.Deck.DeckExceptions.DeckFullException;
 import com.TiyangAlit.Factory.EntityFactory.HewanFactory.HerbivoraFactory;
@@ -15,7 +13,6 @@ import com.TiyangAlit.Factory.ItemFactory.ItemFactory;
 import com.TiyangAlit.Factory.KartuFactory;
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukHewanFactory;
 import com.TiyangAlit.Factory.ProdukFactory.JenisProdukFactory.ProdukTanamanFactory;
-import com.TiyangAlit.Game.Game;
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Herbivora;
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Karnivora;
 import com.TiyangAlit.Kartu.Entity.Hewan.Jenis.Omnivora;
@@ -24,14 +21,13 @@ import com.TiyangAlit.Kartu.Item.Item;
 import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukHewan;
 import com.TiyangAlit.Kartu.Produk.JenisProduk.ProdukTanaman;
 import com.TiyangAlit.Kartu.Produk.Produk;
-import com.TiyangAlit.Ladang.LadangExceptions.LadangInvalidIndexException;
 import com.TiyangAlit.Player.Player;
 import com.TiyangAlit.Toko.Toko;
 
-public class Muat {
+public class Muat1 {
     private String FILE_NAME;
 
-    public Muat (String FILE_NAME) {
+    public Muat1(String FILE_NAME) {
         this.FILE_NAME = FILE_NAME;
     }
 
